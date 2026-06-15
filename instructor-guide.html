@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instructor Guide &mdash; Nigeria Uyo Mission</title>
+<style>
+  :root{
+    --green:#0b4d2c;
+    --green-dark:#073a20;
+    --gold:#c9a227;
+    --gold-light:#f4e6c1;
+    --cream:#fbf8f1;
+    --ink:#222;
+    --red:#8b1a1a;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family: Georgia, 'Times New Roman', serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.55;
+  }
+  .module-nav{
+    font-family:'Trebuchet MS', sans-serif;
+    background:var(--green-dark);
+    display:flex;
+    justify-content:space-between;
+    padding:.7rem 1.2rem;
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  .module-nav a{ color:var(--gold-light); text-decoration:none; font-size:.85rem; }
+  .module-nav a:hover{ color:#fff; }
+  .module-nav span{ color:#fff; font-weight:bold; font-size:.85rem; }
+
+  header{
+    background:var(--green);
+    color:var(--cream);
+    padding:2.2rem 1.5rem 1.8rem;
+    text-align:center;
+    border-bottom:6px solid var(--gold);
+  }
+  header .eyebrow{
+    font-family:'Trebuchet MS', sans-serif;
+    letter-spacing:.25em;
+    text-transform:uppercase;
+    font-size:.75rem;
+    color:var(--gold-light);
+    margin-bottom:.5rem;
+  }
+  header h1{ margin:0; font-size:1.8rem; font-weight:700; }
+  header p{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.92rem;
+    color:var(--gold-light);
+    margin-top:.6rem;
+    max-width:560px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  main{ max-width:820px; margin:0 auto; padding:1.5rem 1.1rem 4rem; }
+
+  .how-to-use{
+    background:#fff;
+    border:1px solid #e6decf;
+    border-left:5px solid var(--green);
+    border-radius:6px;
+    padding:1.3rem 1.4rem;
+    margin-bottom:1.5rem;
+    font-size:.93rem;
+  }
+  .how-to-use h2{
+    margin-top:0;
+    color:var(--green-dark);
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:1.1rem;
+  }
+  .how-to-use ul{ margin:.4rem 0; padding-left:1.2rem; }
+  .how-to-use li{ margin-bottom:.35rem; }
+
+  .meeting-plan{
+    background:var(--gold-light);
+    border-left:5px solid var(--gold);
+    border-radius:6px;
+    padding:1.2rem 1.4rem;
+    margin-bottom:1.5rem;
+    font-size:.92rem;
+  }
+  .meeting-plan h2{
+    margin-top:0;
+    color:var(--green-dark);
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:1.1rem;
+  }
+  .meeting-plan table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:.88rem;
+    margin-top:.5rem;
+  }
+  .meeting-plan th{
+    background:var(--green);
+    color:var(--gold-light);
+    font-family:'Trebuchet MS', sans-serif;
+    text-align:left;
+    padding:.4rem .6rem;
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+  }
+  .meeting-plan td{
+    padding:.4rem .6rem;
+    border-bottom:1px solid #e6decf;
+    vertical-align:top;
+  }
+  .meeting-plan tr:last-child td{ border-bottom:none; }
+
+  .controls{
+    position:sticky;
+    top:42px;
+    background:var(--cream);
+    z-index:40;
+    padding:1rem 0 .8rem;
+    border-bottom:1px solid #e6decf;
+    margin-bottom:1.2rem;
+  }
+  #search{
+    width:100%;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:1rem;
+    padding:.7rem .9rem;
+    border:1px solid #ccc;
+    border-radius:6px;
+    margin-bottom:.7rem;
+  }
+  .filter-row{ display:flex; gap:.5rem; flex-wrap:wrap; }
+  .filter-btn{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.8rem;
+    padding:.4rem .85rem;
+    border:1px solid var(--green);
+    background:#fff;
+    color:var(--green);
+    border-radius:20px;
+    cursor:pointer;
+  }
+  .filter-btn.active{ background:var(--green); color:#fff; }
+  .result-count{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.8rem;
+    color:#7a7158;
+    margin-top:.6rem;
+  }
+
+  .lesson-group{ margin-bottom:1.8rem; }
+  .lesson-group-title{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.85rem;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--green-dark);
+    border-bottom:2px solid var(--gold);
+    padding-bottom:.3rem;
+    margin-bottom:.8rem;
+  }
+
+  .principle{
+    background:#fff;
+    border:1px solid #e6decf;
+    border-left:5px solid var(--green);
+    border-radius:6px;
+    margin-bottom:.8rem;
+    overflow:hidden;
+  }
+  .principle-head{
+    padding:.85rem 1.1rem;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:.8rem;
+  }
+  .principle-head .title-row{
+    display:flex;
+    flex-direction:column;
+    gap:.2rem;
+  }
+  .principle-head h3{
+    margin:0;
+    font-size:1rem;
+    color:var(--green-dark);
+    font-family:'Trebuchet MS', sans-serif;
+  }
+  .principle-head .timing{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.75rem;
+    color:var(--gold);
+    font-weight:bold;
+  }
+  .principle-head .arrow{
+    color:var(--gold);
+    flex:0 0 auto;
+    transition:transform .2s;
+  }
+  .principle-head.open .arrow{ transform:rotate(90deg); }
+  .principle-body{
+    display:none;
+    padding:0 1.1rem 1.2rem;
+    font-size:.93rem;
+  }
+  .principle-body.open{ display:block; }
+
+  .block{
+    margin-bottom:1rem;
+    padding-bottom:.9rem;
+    border-bottom:1px solid #f0ead9;
+  }
+  .block:last-child{ border-bottom:none; margin-bottom:0; padding-bottom:0; }
+  .block .label{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.7rem;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    display:block;
+    margin-bottom:.35rem;
+    font-weight:bold;
+  }
+  .label-green{ color:var(--green); }
+  .label-gold{ color:var(--gold); }
+  .label-red{ color:var(--red); }
+
+  .block ul{ margin:.3rem 0; padding-left:1.2rem; }
+  .block li{ margin-bottom:.3rem; }
+  .ref{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.78rem;
+    color:#7a7158;
+    font-style:italic;
+  }
+
+  .open-box{
+    background:#f6f3ec;
+    border-left:3px solid var(--green);
+    padding:.7rem .9rem;
+    border-radius:4px;
+    font-size:.92rem;
+    margin-bottom:.5rem;
+  }
+  .open-box .q{
+    font-weight:bold;
+    color:var(--green-dark);
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.85rem;
+    display:block;
+    margin-bottom:.25rem;
+  }
+  .open-box .watch{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.8rem;
+    color:#7a7158;
+    font-style:italic;
+    margin-top:.3rem;
+    display:block;
+  }
+
+  .roleplay-box{
+    background:var(--green-dark);
+    color:var(--gold-light);
+    border-radius:6px;
+    padding:.9rem 1.1rem;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.88rem;
+  }
+  .roleplay-box .rp-title{
+    color:var(--gold);
+    font-weight:bold;
+    display:block;
+    margin-bottom:.4rem;
+    font-size:.85rem;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+  }
+  .roleplay-box p{ margin:.3rem 0; }
+  .roleplay-box .role{ color:var(--gold); font-weight:bold; }
+
+  .instructor-note{
+    background:var(--gold-light);
+    border-left:3px solid var(--gold);
+    padding:.6rem .8rem;
+    border-radius:4px;
+    font-size:.88rem;
+    font-family:'Trebuchet MS', sans-serif;
+  }
+  .instructor-note::before{
+    content:"📌 Instructor: ";
+    font-weight:bold;
+    color:var(--green-dark);
+  }
+
+  .no-results{
+    text-align:center;
+    color:#a99a6f;
+    font-family:'Trebuchet MS', sans-serif;
+    padding:2rem 0;
+  }
+  .source-note{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.8rem;
+    color:#7a7158;
+    text-align:center;
+    margin-top:2.5rem;
+  }
+
+  footer{
+    background:var(--green-dark);
+    color:var(--gold-light);
+    text-align:center;
+    padding:.9rem 1rem;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.8rem;
+    letter-spacing:.04em;
+    margin-top:2rem;
+  }
+  
+</style>
+</head>
+<body>
+
+<div class="module-nav">
+  <a href="index.html">&#8592; Foundations Module</a>
+  <span>Instructor Guide</span>
+  <a href="deep-dive.html">Student Guide &#8594;</a>
+</div>
+
+<header>
+  <div class="eyebrow">Nigeria Uyo Mission &mdash; For Instructors Only</div>
+  <h1>Virtual Meeting Instructor Guide</h1>
+  <p>A facilitator's companion for leading missionaries through all 39 principles.
+     Each entry includes suggested timing, a discussion question to open the group,
+     a role-play scenario to run in pairs, and instructor notes on what to watch for.</p>
+</header>
+
+<main>
+
+  <div class="how-to-use">
+    <h2>How to Use This in a Virtual Meeting</h2>
+    <ul>
+      <li><strong>Before the meeting:</strong> Select 2-4 principles to cover per session based on where your missionaries most need strengthening. Do not try to cover an entire lesson in one meeting.</li>
+      <li><strong>Opening (5 min):</strong> Open with prayer, then briefly state which principles you'll cover and why you chose them today.</li>
+      <li><strong>For each principle (8-12 min):</strong> Ask the discussion question to the group &rarr; hear 2-3 responses &rarr; briefly teach the key points &rarr; run the role-play in pairs (3-4 min) &rarr; debrief together (2 min).</li>
+      <li><strong>Closing (5 min):</strong> Invite missionaries to share one thing they'll apply in their next teaching visit. Close with testimony and prayer.</li>
+      <li><strong>Student Guide:</strong> Missionaries should have their Deep Dive file open during the meeting for reference. They are the student version; this is yours.</li>
+    </ul>
+  </div>
+
+  <div class="meeting-plan">
+    <h2>Sample Meeting Plan (50 minutes)</h2>
+    <table>
+      <tr><th>Time</th><th>Activity</th></tr>
+      <tr><td>0-5 min</td><td>Opening prayer &amp; set the focus</td></tr>
+      <tr><td>5-17 min</td><td>Principle 1: Discussion (4 min) + Role-play (5 min) + Debrief (3 min)</td></tr>
+      <tr><td>17-29 min</td><td>Principle 2: Discussion (4 min) + Role-play (5 min) + Debrief (3 min)</td></tr>
+      <tr><td>29-41 min</td><td>Principle 3: Discussion (4 min) + Role-play (5 min) + Debrief (3 min)</td></tr>
+      <tr><td>41-48 min</td><td>Missionary application sharing (one thing I'll do differently)</td></tr>
+      <tr><td>48-50 min</td><td>Closing testimony + prayer</td></tr>
+    </table>
+  </div>
+
+  <div class="controls">
+    <input type="text" id="search" placeholder="Search by keyword (e.g. 'Godhead', 'repentance', 'tithing')...">
+    <div class="filter-row">
+      <button class="filter-btn active" data-lesson="all">All Lessons</button>
+      <button class="filter-btn" data-lesson="restoration">Restoration (7)</button>
+      <button class="filter-btn" data-lesson="pos">Plan of Salvation (8)</button>
+      <button class="filter-btn" data-lesson="gospel">Gospel of Jesus Christ (7)</button>
+      <button class="filter-btn" data-lesson="discipleship">Lifelong Discipleship (17)</button>
+    </div>
+    <div class="result-count" id="result-count"></div>
+  </div>
+
+  <div id="results"></div>
+  <div class="no-results" id="no-results" style="display:none;">No principles match your search.</div>
+
+  <p class="source-note">For instructor use. Paired with the Deep Dive student guides. Nigeria Uyo Mission.</p>
+
+</main>
+<footer>
+  Developed by <strong>Elder ThankGod Andrew</strong> &mdash; Assistant to the President &mdash; Nigeria Uyo Mission
+</footer>
+<script>
+const data = [
+// ===== LESSON 1: RESTORATION (7) =====
+{lesson:"restoration", lessonLabel:"Lesson 1: The Message of the Restoration",
+  title:"God Is Our Loving Heavenly Father",
+  timing:"10-12 min",
+  keyPoints:[
+    "Three points must land: (1) God's personal love for each investigator, (2) the nature of God — He has a body of flesh and bone and is not an abstract force, (3) the Godhead — three distinct beings, united in purpose, not one person.",
+    "Scriptures from Bible and Book of Mormon only: John 3:16; Matthew 3:16-17; Ether 3:15-16."
+  ],
+  discussion:{
+    q:"Think of a time you taught this principle and the investigator pushed back or seemed confused. What happened, and what did you wish you'd said?",
+    watch:"Listen for missionaries who are skipping this principle to get to the Restoration story faster. That is the most common breakdown here."
+  },
+  roleplay:{
+    setup:"Missionary A teaches 'God Is Our Loving Heavenly Father' to Missionary B (playing an investigator). After 90 seconds, Missionary B raises one of these objections — assigned by the instructor: (a) 'If God loves me, why is my life so hard?' or (b) 'I believe in the Trinity — God is three in one.'",
+    debrief:"Ask the group: Did the missionary stay on this principle, or drift into the Restoration? Did the response to the objection use a scripture? Was it simple enough?"
+  },
+  note:"If missionaries are rushing this principle, remind them: if an investigator doesn't believe God is real and personal, nothing that follows in Lessons 1-4 will have a foundation to land on. This is the ground everything else is built on."
+},
+
+{lesson:"restoration", lessonLabel:"Lesson 1: The Message of the Restoration",
+  title:"God Reveals His Gospel through Prophets &mdash; and It Blesses Families and Individuals",
+  timing:"8-10 min",
+  keyPoints:[
+    "Three sub-points: (1) God's consistent pattern of using prophets, (2) the gospel blesses individuals with direction and peace, (3) the gospel blesses families — stronger relationships, shared values.",
+    "Connect to something the investigator has already shared about their family or personal needs."
+  ],
+  discussion:{
+    q:"How would you explain to an investigator — in 30 seconds — why having a living prophet today actually matters for their life this week?",
+    watch:"Listen for generic answers ('the prophet guides us'). Push missionaries toward concrete, specific examples of recent prophetic counsel that changed something in daily life."
+  },
+  roleplay:{
+    setup:"Missionary A teaches this principle to Missionary B (investigator). Missionary B's response: 'I believe in God — what difference would a prophet make for my family that I can't already figure out on my own?' Missionary A must respond without introducing any new principle.",
+    debrief:"Did they give a concrete example or a general statement? Did they ask a follow-up question to understand the investigator's family situation?"
+  },
+  note:"This principle is often taught as doctrine without pastoral connection. Coach missionaries to find out what the investigator's actual family need or personal struggle is before they teach — so the blessing feels personal, not generic."
+},
+
+{lesson:"restoration", lessonLabel:"Lesson 1: The Message of the Restoration",
+  title:"God Reveals His Gospel through Prophets",
+  timing:"10 min",
+  keyPoints:[
+    "Three things: (1) who a prophet is — called and authorized by God, (2) the role and power of prophets — teach truth, warn, guide, (3) the importance of listening to them — safety comes from heeding.",
+    "Key pattern to establish: God restores the gospel through a prophet every time it is lost. This pattern makes Joseph Smith an extension of scripture, not an exception."
+  ],
+  discussion:{
+    q:"What do you think is the hardest part of helping someone who already has a strong pastor or spiritual leader accept the idea of a living prophet?",
+    watch:"Listen for dismissiveness ('investigators just need to pray about it'). The real skill is helping someone see the prophetic pattern without making their current spiritual leader feel diminished."
+  },
+  roleplay:{
+    setup:"Missionary B (investigator) says: 'I have a pastor I trust completely — why would I need to follow a prophet from America?' Missionary A responds using the pattern of prophets from Amos 3:7 and the scriptural examples of how God has always operated this way.",
+    debrief:"Did they avoid comparing their prophet to the investigator's pastor? Did they use the pattern (not just Joseph Smith's claim alone)?"
+  },
+  note:"Missionaries who have strong personal testimonies of the prophet sometimes over-rely on their testimony here without establishing the doctrinal pattern first. Testimony supports the pattern; it doesn't replace it."
+},
+
+{lesson:"restoration", lessonLabel:"Lesson 1: The Message of the Restoration",
+  title:"Jesus Christ's Earthly Ministry and the Establishment of His Church",
+  timing:"10 min",
+  keyPoints:[
+    "Three points: (1) who Jesus is — Son of God, prophesied, (2) His compassionate ministry and how He related to people, (3) He called Apostles, gave them authority, and established His Church.",
+    "The compassion element is often skipped — it matters because it makes the apostasy feel like a real loss."
+  ],
+  discussion:{
+    q:"If you had two minutes to help someone feel who Jesus actually is — not just who He was theologically — what would you say or share?",
+    watch:"Listen for missionaries who go straight to doctrine ('He is the Son of God, He atoned for us') without first helping the investigator feel Jesus's character and compassion. Both matter."
+  },
+  roleplay:{
+    setup:"Missionary A teaches the compassionate ministry of Christ — using one specific scriptural moment (e.g., 3 Nephi 17:5-9) — to Missionary B. Missionary B responds: 'I already believe in Jesus. My church teaches about Him too.' Missionary A must respond in a way that connects to the next principle (apostasy) without rushing there.",
+    debrief:"Did they affirm the investigator's existing faith in Christ? Did they plant the seed of what was lost without saying it yet?"
+  },
+  note:"This principle is the hinge of the entire lesson. The apostasy only feels significant if the investigator already values what was lost. Do not rush past the ministry of Christ."
+},
+
+{lesson:"restoration", lessonLabel:"Lesson 1: The Message of the Restoration",
+  title:"The Apostasy",
+  timing:"10 min",
+  keyPoints:[
+    "Three points: (1) apostasy was prophesied — not a surprise, (2) after the Apostles died, authority and truth were lost from the earth, (3) sincere people of faith were not to blame — the loss was structural, not moral.",
+    "Frame this as loss, not accusation. The Restoration is only good news if the apostasy is felt as a real problem first."
+  ],
+  discussion:{
+    q:"How do you teach the apostasy in a way that doesn't make an investigator feel their family's faith or their current church is being attacked?",
+    watch:"Two failure modes: (a) missionaries who avoid the apostasy entirely, making the Restoration seem unnecessary; (b) missionaries who present it bluntly and create defensiveness. Both undermine the lesson."
+  },
+  roleplay:{
+    setup:"Missionary B (investigator) responds to teaching about the apostasy: 'So you're saying my grandmother's entire life of faith was wasted?' Missionary A must respond with compassion, without backing away from the doctrine.",
+    debrief:"Did they affirm sincere faith while holding the doctrinal position? Did they frame it as a restoration of something lost, not a condemnation of those who came before?"
+  },
+  note:"This is one of the most culturally sensitive principles in the entire four lessons. In Nigeria specifically, where church identity and family heritage are deeply connected, this principle requires particular care. Do not skip the sensitivity coaching."
+},
+
+{lesson:"restoration", lessonLabel:"Lesson 1: The Message of the Restoration",
+  title:"The Restoration of the Gospel through Joseph Smith",
+  timing:"12 min",
+  keyPoints:[
+    "Three elements: (1) the First Vision — what happened, in Joseph's own words, (2) what was restored — priesthood authority and the fulness of the gospel, (3) this is a continuation of God's pattern, not something new or strange.",
+    "Missionaries should be able to describe the First Vision clearly in their own words, connecting it to James 1:5."
+  ],
+  discussion:{
+    q:"What part of the Restoration story do your investigators find hardest to believe, and how do you currently respond to that?",
+    watch:"Listen for missionaries who tell the First Vision story as a historical narrative without bearing personal testimony during or after. The story plus testimony is what lands."
+  },
+  roleplay:{
+    setup:"Missionary A shares the First Vision to Missionary B. Missionary B asks: 'How is this different from anyone else today claiming to see a vision?' Missionary A responds using the pattern of prophets already established (previous principle) and connects it to what was restored.",
+    debrief:"Did they use the pattern? Did they bear testimony? Did they invite a response from the 'investigator'?"
+  },
+  note:"Missionaries who have memorized Joseph Smith—History 1:16-17 have a significant advantage here. If they haven't memorized it yet, make this a group challenge for the next meeting."
+},
+
+{lesson:"restoration", lessonLabel:"Lesson 1: The Message of the Restoration",
+  title:"The Book of Mormon and Praying to Know the Truth",
+  timing:"10 min",
+  keyPoints:[
+    "Three points: (1) the Book of Mormon as a second witness of Christ — not a replacement for the Bible, (2) reading, pondering, and praying with real intent is the method — not just a formality, (3) the Holy Ghost confirms truth through feelings of peace and clarity."
+  ],
+  discussion:{
+    q:"When you invite investigators to pray about the Book of Mormon, what do you tell them to actually *look for* as an answer? Be specific.",
+    watch:"Missionaries who give vague answers ('just pray and you'll know') are not equipping investigators. The answer should describe what a Holy Ghost communication actually feels like — peace, clarity, a quiet assurance."
+  },
+  roleplay:{
+    setup:"Missionary A extends the invitation to pray about the Book of Mormon to Missionary B. Missionary B responds: 'I've prayed before and never felt anything — why would this be different?' Missionary A responds without dismissing the experience.",
+    debrief:"Did they validate the past experience? Did they explain what to look for, specifically? Did they connect it to James 1:5 or Moroni 10:3-5?"
+  },
+  note:"This is the capstone of Lesson 1 and the hinge to everything that follows. A confirmed witness here is the open door to Lessons 2-4. Give it full time, don't rush because it's last."
+},
+
+// ===== LESSON 2: PLAN OF SALVATION (8) =====
+{lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation",
+  title:"Premortal Life",
+  timing:"8-10 min",
+  keyPoints:[
+    "Three points: (1) we lived with God as spirit children before this life, (2) Jesus Christ was chosen as Savior in the grand council, (3) coming to earth was a step forward in eternal progression, not an accident.",
+    "Connect to identity: knowing where we came from changes how we see our own worth."
+  ],
+  discussion:{
+    q:"How does teaching premortal life change the way an investigator might see themselves — their worth, their struggles, their potential?",
+    watch:"Listen for missionaries who present this as abstract doctrine. The identity application is what makes it meaningful."
+  },
+  roleplay:{
+    setup:"Missionary B says: 'I don't remember any premortal life — how can something I can't remember affect who I am now?' Missionary A responds using the identity angle without over-explaining the doctrine.",
+    debrief:"Did they keep it personal and connected to identity rather than listing doctrinal facts?"
+  },
+  note:"This principle is especially powerful for investigators who struggle with low self-worth or a sense of purposelessness. Be prepared to make that connection explicitly."
+},
+
+{lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation",
+  title:"The Creation",
+  timing:"6-8 min",
+  keyPoints:[
+    "Three points: (1) the earth was created by Jesus Christ under the Father's direction, (2) creation was purposeful — a place prepared for us, (3) the beauty and order of creation reflect God's character.",
+    "This is a brief but important principle — don't skip it or missionaries will leave a gap in the Plan of Salvation's timeline."
+  ],
+  discussion:{
+    q:"Why do you think some missionaries skip this principle? What does it add when it's taught?",
+    watch:"The goal is a short, well-placed principle — not a long creation narrative. Coach brevity with clarity."
+  },
+  roleplay:{
+    setup:"Missionary A teaches the Creation in under 2 minutes to Missionary B. Missionary B asks: 'If Jesus created the earth, how was He later born as a baby?' Missionary A gives a simple, clear response.",
+    debrief:"Was the explanation simple and accurate? Did the missionary stay calm with the question rather than getting flustered?"
+  },
+  note:"This principle is commonly skipped. Remind missionaries it answers a real investigator confusion about who created the earth and how Christ relates to that — which comes up."
+},
+
+{lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation",
+  title:"The Fall of Adam and Eve",
+  timing:"10 min",
+  keyPoints:[
+    "Three points: (1) the Fall was a transgression, not sin the way we typically use that word, (2) it was a necessary step — without it we couldn't be born or grow, (3) it opened the door to both joy and sorrow, and to agency.",
+    "Key scripture: 2 Nephi 2:25 — 'Adam fell that men might be; and men are, that they might have joy.'"
+  ],
+  discussion:{
+    q:"How do you explain that the Fall was 'good' without making it sound like God wanted Adam and Eve to disobey Him?",
+    watch:"This is a genuine doctrinal tension. Missionaries who can't articulate the distinction between transgression and sin, or why it was necessary, will struggle to teach it clearly."
+  },
+  roleplay:{
+    setup:"Missionary B (investigator) says: 'In my church we're taught that the Fall was the original sin that corrupted all of humanity — are you saying that's wrong?' Missionary A responds carefully.",
+    debrief:"Did they avoid dismissing the investigator's existing belief while still teaching the doctrinal difference? Did they use 2 Nephi 2:25?"
+  },
+  note:"This principle is frequently taught too quickly. Give it adequate time — the connection to agency and mortality (next principle) depends on it being understood."
+},
+
+{lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation",
+  title:"Our Life on Earth",
+  timing:"10 min",
+  keyPoints:[
+    "Three points: (1) earth life is for receiving a body, gaining experience, and using agency, (2) God has not left us alone — He provides the Holy Ghost, prophets, prayer, and the gospel, (3) trials are part of growth, not evidence that God is absent.",
+    "This principle is most powerful when connected to something the investigator is currently facing."
+  ],
+  discussion:{
+    q:"When an investigator says 'if God loves me, why is my life so hard right now,' what do you say? Let's hear two or three different approaches.",
+    watch:"Watch for missionaries who rush to explain (fix the theology) rather than acknowledge the pain first. Feeling heard is what makes the doctrinal explanation land."
+  },
+  roleplay:{
+    setup:"Missionary B (investigator, currently going through a difficult situation — assign: job loss, sick child, or family conflict) asks: 'Why would God let this happen to me if I'm trying to do what's right?' Missionary A must acknowledge first, then connect gently to this principle.",
+    debrief:"Did they lead with empathy before explanation? Did they avoid making it sound like the trial is a punishment?"
+  },
+  note:"This principle is a pastoral moment as much as a doctrinal one. Missionaries who are trained to 'deliver content' will struggle here. Coach them to slow down and listen before they teach."
+},
+
+{lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation",
+  title:"The Atonement of Jesus Christ",
+  timing:"12 min",
+  keyPoints:[
+    "Three aspects — teach only the one or two most relevant to this person: (1) forgiveness of sin through repentance, (2) resurrection for all — death is not the end, (3) healing of pain, sorrow, and infirmity — Christ understands personally.",
+    "Do not try to cover all three in one conversation. This is the most common drift point in Lesson 2."
+  ],
+  discussion:{
+    q:"Of the three aspects of the Atonement (forgiveness, resurrection, healing of pain), which one do your investigators most need to hear right now, and why?",
+    watch:"Missionaries who cover all three every time are drifting from Section 1's core skill. This is the exact principle to apply 'one principle at a time' to."
+  },
+  roleplay:{
+    setup:"Missionary A is assigned ONE aspect of the Atonement to teach (assigned by the instructor). Missionary B (investigator) responds with a question that pulls toward another aspect (e.g., they're assigned forgiveness, but the investigator asks about resurrection). Missionary A must acknowledge and park the second question, returning to the one aspect assigned.",
+    debrief:"Did they stay focused on one aspect? Did they acknowledge the other question and park it for a future visit?"
+  },
+  note:"This is the highest-value principle in Lesson 2 and the most commonly taught poorly — either too superficially or with too many threads at once. Give it full time and make the role-play about focus, not content."
+},
+
+{lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation",
+  title:"The Spirit World",
+  timing:"8 min",
+  keyPoints:[
+    "Three points: (1) death is not the end — spirits continue to live, (2) the spirit world is a place of continued learning and opportunity, (3) those who didn't receive the gospel in mortality have a chance to receive it there.",
+    "Sensitive for investigators who have recently lost someone — approach gently."
+  ],
+  discussion:{
+    q:"What's the most comforting thing about the spirit world doctrine, in your view? How do you help an investigator feel that comfort rather than just receive it as information?",
+    watch:"Listen for missionaries who explain the spirit world without connecting it to the investigator's own experience of loss or grief. The doctrine is comforting — make sure the comfort reaches the person."
+  },
+  roleplay:{
+    setup:"Missionary B (investigator) says: 'My mother died last year before she ever heard about your church. Is it too late for her?' Missionary A responds using the spirit world principle with warmth and hope.",
+    debrief:"Did they answer with warmth before doctrine? Did they give the investigator hope without making promises they shouldn't make?"
+  },
+  note:"This principle should never be rushed past. For investigators processing grief, it can be the most meaningful moment of the entire lesson. Create space for emotion."
+},
+
+{lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation",
+  title:"The Resurrection, Salvation, and Exaltation",
+  timing:"8 min",
+  keyPoints:[
+    "Three levels: (1) resurrection — universal gift for all through Christ, (2) salvation — freedom from sin's consequences through repentance, (3) exaltation — living with God forever in families, conditional on covenants.",
+    "Teach at the level the investigator can receive. Don't go deep into kingdoms of glory unless asked."
+  ],
+  discussion:{
+    q:"How do you explain the difference between resurrection, salvation, and exaltation in simple language, without using those exact terms?",
+    watch:"Watch for missionaries who over-explain the kingdoms of glory at this stage. The detail can create confusion and fear rather than hope."
+  },
+  roleplay:{
+    setup:"Missionary B asks: 'So not everyone ends up in the same place after this life? Doesn't that seem harsh?' Missionary A explains God's mercy and justice without going into full detail about all the kingdoms.",
+    debrief:"Did they keep it hopeful and simple? Did they avoid going deep into the specifics unless the investigator pressed?"
+  },
+  note:"This principle closes the Plan of Salvation's timeline and opens the door directly to Lesson 3. End with the natural question: 'So now that we understand where we're going, let's talk about *how* we get there — that's what Lesson 3 is about.'"
+},
+
+{lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation",
+  title:"Judgment and Kingdoms of Glory",
+  timing:"8 min",
+  keyPoints:[
+    "Three points: (1) Christ is our judge — just and merciful, not harsh, (2) He knows our full circumstances — knowledge, accountability, desires, (3) our role is to prepare ourselves, not judge others.",
+    "This principle should bring peace, not fear. If it creates fear, something went wrong in the teaching."
+  ],
+  discussion:{
+    q:"What's the difference between teaching judgment in a way that motivates and teaching it in a way that creates fear? How do you make sure you're doing the first?",
+    watch:"Watch for missionaries who use judgment as pressure ('you need to repent before it's too late') rather than as a doctrinal statement about God's mercy and fairness."
+  },
+  roleplay:{
+    setup:"Missionary B says: 'I've made a lot of mistakes in my life. When I'm judged, I don't think it's going to go well for me.' Missionary A responds with hope, using the Atonement and God's mercy as the response.",
+    debrief:"Did they bring the Atonement back in? Did they leave the investigator with hope rather than fear?"
+  },
+  note:"This principle bridges naturally into Lesson 3: 'If judgment depends on faith, repentance, and covenants, then let's talk about what those look like — that's the Gospel of Jesus Christ.'"
+},
+
+// ===== LESSON 3: GOSPEL OF JESUS CHRIST (7) =====
+{lesson:"gospel", lessonLabel:"Lesson 3: The Gospel of Jesus Christ",
+  title:"The Divine Mission of Jesus Christ",
+  timing:"6-8 min",
+  keyPoints:[
+    "This principle is a bridge, not a full retelling. It transitions from 'what God has done' (Lessons 1-2) to 'what we do in response' (Lesson 3). Keep it brief and purposeful.",
+    "Frame it explicitly: 'You've learned who Jesus is and what He did. Now we want to talk about what that means for you — the specific steps He invites you to take.'"
+  ],
+  discussion:{
+    q:"How do you teach this principle in a way that feels fresh and meaningful — not like a repeat of things you've already covered in Lessons 1 and 2?",
+    watch:"Watch for missionaries who teach this as a full new lesson on the Atonement rather than as a transition into the doctrine of Christ."
+  },
+  roleplay:{
+    setup:"Missionary A introduces this principle in 60 seconds as a transition — summarizing what's been taught and pivoting to what's coming. Missionary B gives feedback: did it feel like a meaningful bridge or a repetition?",
+    debrief:"Was it concise? Did it clearly signal to the investigator that something new (their response) is about to begin?"
+  },
+  note:"This is a transition principle. If missionaries treat it as a full standalone lesson, they'll spend too long here and run out of time for faith, repentance, and baptism — which are the real substance of Lesson 3."
+},
+
+{lesson:"gospel", lessonLabel:"Lesson 3: The Gospel of Jesus Christ",
+  title:"Faith in Jesus Christ",
+  timing:"10 min",
+  keyPoints:[
+    "Three points: (1) faith means trusting Jesus Christ enough to act, even without certainty, (2) it is a principle of action and power — not just a feeling, (3) it grows through specific practices: prayer, scripture, and obedience.",
+    "Key scripture: Alma 32:27 — even a desire to believe is enough to begin."
+  ],
+  discussion:{
+    q:"Think of an investigator who said 'I want to believe but I just can't.' How did you respond, or how would you respond now?",
+    watch:"Listen for missionaries who treat faith as binary (you have it or you don't). The seed metaphor in Alma 32 is the tool — faith starts small and grows through action."
+  },
+  roleplay:{
+    setup:"Missionary B says: 'I want to have faith, but every time I've trusted in God before, things went wrong. How am I supposed to just trust again?' Missionary A responds with Alma 32:27 and the idea of a small seed.",
+    debrief:"Did they validate the past hurt before introducing the doctrine? Did they give a concrete next step (what to do to begin growing faith)?"
+  },
+  note:"This is the first step of the doctrine of Christ. It must feel accessible, not overwhelming. An investigator who leaves this conversation thinking 'I could try that small step' has received the principle well."
+},
+
+{lesson:"gospel", lessonLabel:"Lesson 3: The Gospel of Jesus Christ",
+  title:"Repentance",
+  timing:"10-12 min",
+  keyPoints:[
+    "Three points: (1) repentance is turning toward God and away from sin — a change of heart, not just behavior, (2) forgiveness is made possible through Christ's Atonement, (3) it is a lifelong, ongoing process — not a one-time event.",
+    "Key reframe: repentance is relief, not punishment. This must be established early or everything that follows is heard through a lens of shame."
+  ],
+  discussion:{
+    q:"What's the difference between an investigator who understands repentance as relief and one who understands it as shame? How does that difference affect how they receive baptism and the Holy Ghost?",
+    watch:"Listen for missionaries who teach what repentance IS without clearly teaching what it FEELS LIKE — peace, freedom, renewed closeness with God. The feeling is the point."
+  },
+  roleplay:{
+    setup:"Missionary B says: 'I've done some things in my past I'm really ashamed of. I don't think God would want someone like me.' Missionary A must reframe repentance as a gift of hope, not a list of requirements.",
+    debrief:"Did they lead with the Atonement? Did they avoid listing steps before the investigator felt hope? Did they use a scripture (1 John 1:9 or Isaiah 1:18)?"
+  },
+  note:"This principle is the emotional turning point of Lesson 3 for many investigators. Take the full time. Don't rush into baptism before repentance has genuinely landed."
+},
+
+{lesson:"gospel", lessonLabel:"Lesson 3: The Gospel of Jesus Christ",
+  title:"Baptism: Our First Covenant with God",
+  timing:"10-12 min",
+  keyPoints:[
+    "Three points: (1) baptism is the first covenant — a two-way promise with God, (2) by immersion, following Christ's own example, (3) it represents leaving our old life behind and being spiritually reborn.",
+    "This is where the baptismal invitation is extended. Missionaries should be ready with a specific proposed date."
+  ],
+  discussion:{
+    q:"What's the difference between extending a baptismal invitation as a requirement ('this is what you need to do') versus as a natural next step ('this is what you'll want to do once you've felt what you've felt')? How do you do the second?",
+    watch:"Listen for missionaries who present baptism as primarily institutional (joining the Church) rather than as covenant (a sacred promise with God). The relationship is the point."
+  },
+  roleplay:{
+    setup:"Missionary A extends a baptismal invitation to Missionary B (investigator who has attended church once, read 3 Nephi 11, and prayed). Missionary B hesitates: 'I was already baptized as a baby in my church.' Missionary A responds.",
+    debrief:"Did they acknowledge the meaning of the first baptism? Did they explain priesthood authority (from Lesson 1) without being dismissive? Did they extend a specific date?"
+  },
+  note:"Missionaries who are nervous about baptismal invitations often wait too long, give vague dates, or frame it as a question rather than a clear, warm invitation. Role-play this until it feels natural and confident, not transactional."
+},
+
+{lesson:"gospel", lessonLabel:"Lesson 3: The Gospel of Jesus Christ",
+  title:"The Gift of the Holy Ghost",
+  timing:"8-10 min",
+  keyPoints:[
+    "Three points: (1) baptism by water must be completed by baptism of the Spirit through confirmation, (2) the Holy Ghost is the third member of the Godhead — a person, not just a feeling, (3) His gifts include sanctification, guidance, comfort, and confirmation of truth.",
+    "Check: does the investigator remember the Godhead from Lesson 1? If not, briefly recap before building on it."
+  ],
+  discussion:{
+    q:"How do you help an investigator understand the difference between their conscience, general spiritual feelings, and the specific gift of the Holy Ghost they receive after baptism?",
+    watch:"Watch for missionaries who blur the distinction between feeling the Spirit as an investigator (temporary witness) and having the gift of the Holy Ghost (ongoing companionship). The difference motivates baptism."
+  },
+  roleplay:{
+    setup:"Missionary B says: 'I already feel spiritual things sometimes — what's different about what you're describing?' Missionary A explains the difference between feeling the Spirit's influence and having the gift of the Holy Ghost as a constant companion.",
+    debrief:"Was the distinction clear and not dismissive of the investigator's existing spiritual experiences? Did they connect it to the baptismal covenant?"
+  },
+  note:"The gift of the Holy Ghost is one of the most motivating reasons for baptism if taught well — permanent, personal guidance from God. Make sure missionaries are presenting it as the gift it is."
+},
+
+{lesson:"gospel", lessonLabel:"Lesson 3: The Gospel of Jesus Christ",
+  title:"Endure to the End",
+  timing:"8 min",
+  keyPoints:[
+    "Three points: (1) enduring to the end means continuing to live the gospel daily — faith, repentance, covenants, Spirit, (2) it is a direction and rhythm, not a finish line to sprint toward, (3) God's promise for those who endure: eternal life.",
+    "Reframe for investigators: this isn't 'you have to be perfect forever' — it's 'one day at a time, with repentance always available.'"
+  ],
+  discussion:{
+    q:"How do you help an investigator who feels overwhelmed by the idea of committing to this for the rest of their life?",
+    watch:"Watch for missionaries who close this principle with a generic 'and you just keep going' summary. It should feel hopeful and sustainable, not like a final heavy instruction."
+  },
+  roleplay:{
+    setup:"Missionary B says: 'This all sounds like a lot to commit to forever. How do people actually stay faithful for their whole lives?' Missionary A responds with the rhythm-not-perfection frame and points to repentance as always available.",
+    debrief:"Did they make it feel manageable? Did they connect repentance back in as what keeps people on the path even when they stumble?"
+  },
+  note:"This principle closes the doctrine of Christ loop and opens naturally into Lesson 4. Good closing line: 'Now that we've talked about the gospel of Jesus Christ, let's talk about what living it looks like day by day — that's Lesson 4.'"
+},
+
+{lesson:"gospel", lessonLabel:"Lesson 3: The Gospel of Jesus Christ",
+  title:"The Gospel of Jesus Christ Blesses All of God's Children",
+  timing:"8 min",
+  keyPoints:[
+    "Three points: (1) the gospel is for everyone, regardless of background or past, (2) living it brings real, practical blessings now — to individuals and families, (3) it also offers eternal blessings, circling back to the Plan of Salvation.",
+    "Most effective when personalized: connect back specifically to things this investigator has shared over previous visits."
+  ],
+  discussion:{
+    q:"How do you make this closing principle feel personal rather than like a generic summary? What specifically do you reference about the person in front of you?",
+    watch:"Watch for missionaries who give a generic 'the gospel blesses everyone' close instead of naming specific things the person has shared across the visits."
+  },
+  roleplay:{
+    setup:"Missionary A closes Lesson 3 by personalizing this principle to Missionary B (investigator who has shared across visits that they struggle with: (a) loneliness, (b) family conflict, or (c) a sense of purposelessness — instructor assigns one). The close must name that specific thing.",
+    debrief:"Did they name something specific from the visits, or give a generic summary? Did the 'investigator' feel seen?"
+  },
+  note:"This principle is also the natural bridge to Lesson 4. Close by saying: 'Everything we've talked about — the Restoration, God's plan, the gospel — comes to life in how we live day by day. Let's talk about what that looks like.'"
+},
+
+// ===== LESSON 4: LIFELONG DISCIPLESHIP (17) =====
+{lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples",
+  title:"Pray Often",
+  timing:"8 min",
+  keyPoints:[
+    "Teach prayer as a relationship, not a ritual. The four-part structure is helpful scaffolding — not the point.",
+    "Key skill for missionaries: modeling a sincere prayer, then inviting the investigator to try."
+  ],
+  discussion:{q:"What does a good prayer actually sound like? Can someone model one for the group right now?",
+    watch:"Watch for overly formal, rehearsed-sounding prayers. Real prayer is conversational."},
+  roleplay:{setup:"Missionary A prays together with Missionary B at the end of a lesson visit. Missionary B (investigator) says afterward: 'I wouldn't even know what to say.' Missionary A helps them try their first simple prayer.",
+    debrief:"Was the invitation warm and low-pressure? Did they let the investigator lead without correcting every word?"},
+  note:"Never leave a lesson without praying together. Missionaries who don't model prayer miss one of the most powerful moments of a visit."
+},
+
+{lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples",
+  title:"Study the Scriptures",
+  timing:"8 min",
+  keyPoints:[
+    "Connect scripture study to prayer: together they form the daily rhythm of discipleship.",
+    "Suggest a specific, short starting point — not 'read the Book of Mormon from the beginning.'"
+  ],
+  discussion:{q:"What's the best starting passage you recommend to someone who has never read the Book of Mormon before, and why that one?",
+    watch:"Listen for missionaries who recommend too much. Discipline and specificity here matters."},
+  roleplay:{setup:"Missionary A recommends a specific passage to Missionary B (investigator who says 'I'm not much of a reader') and explains how to read it with prayer and real intent in under 5 minutes a day.",
+    debrief:"Was the recommendation specific, accessible, and paired with prayer?"},
+  note:"Missionaries who read their own scriptures daily teach this principle with natural conviction. Those who don't, struggle to make it sound meaningful. This is a self-check moment."
+},
+
+{lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples",
+  title:"The Two Great Commandments &mdash; Love God and Love Others",
+  timing:"8 min",
+  keyPoints:[
+    "This principle is the lens for every commandment that follows. Teach it well and the rest of Lesson 4 becomes coherent rather than a disconnected list.",
+    "Ask investigators how each subsequent commandment reflects love — for God, for family, for others."
+  ],
+  discussion:{q:"If you could only spend 5 minutes explaining why we follow commandments, what would you say?",
+    watch:"Watch for missionaries who answer with 'because God said so' without connecting to love. The love connection is what makes obedience feel chosen rather than compelled."},
+  roleplay:{setup:"Missionary B says: 'I feel like all these commandments are just a list of things I'm not allowed to do.' Missionary A reframes every commandment as an expression of love.",
+    debrief:"Did they make love, not obligation, the frame? Did they give a concrete example?"},
+  note:"Spend adequate time here. Rushing this principle means every commandment in Lesson 4 will feel like a rule rather than a relationship."
+},
+
+{lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples",
+  title:"Follow the Prophet",
+  timing:"6-8 min",
+  keyPoints:[
+    "Build on Lesson 1 — this principle extends the prophet pattern into daily discipleship.",
+    "Best taught with a current, specific example of recent prophetic counsel."
+  ],
+  discussion:{q:"What's one thing the prophet or apostles have said recently that you've personally acted on? Be specific.",
+    watch:"Generic answers signal missionaries aren't following prophetic counsel themselves. This is a disciple-check."},
+  roleplay:{setup:"Missionary B: 'Our pastor also says he gets revelation from God. How is following your prophet different from following mine?' Missionary A responds using the restored authority pattern from Lesson 1.",
+    debrief:"Did they affirm the investigator's existing faith while explaining the distinction?"},
+  note:"Missionaries who are actively following prophetic counsel will teach this with natural credibility. Those who aren't will sound hollow. Invite honest self-reflection."
+},
+
+{lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples",
+  title:"Keep the Ten Commandments",
+  timing:"6 min",
+  keyPoints:[
+    "Most investigators broadly agree with the Ten Commandments — use this as a bridge, not a lesson.",
+    "The new element: these commandments are now part of a covenant with God, not just general ethics."
+  ],
+  discussion:{q:"How is keeping a commandment as part of a covenant with God different from just being a good person who agrees it's the right thing to do?",
+    watch:"Watch for missionaries who don't explain the covenant dimension — without it, this principle adds nothing beyond general morality."},
+  roleplay:{setup:"Missionary B: 'I already live by most of these — what's different now?' Missionary A introduces the covenant element.",
+    debrief:"Was the covenant dimension clear and meaningful?"},
+  note:"Brief principle — move quickly if missionaries demonstrate understanding. Spend more time only if the covenant element is unclear."
+},
+
+{lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples",
+  title:"Live the Law of Chastity",
+  timing:"10 min",
+  keyPoints:[
+    "Teach in this order: (1) God's loving design for marriage and intimacy, (2) the specific standard, (3) repentance and hope for those who have not yet lived this law.",
+    "Never go into personal detail. This principle may require a separate, private conversation."
+  ],
+  discussion:{q:"How do you teach this principle with both clarity and compassion — holding the standard while leaving room for people who haven't lived it?",
+    watch:"Two failure modes: (a) avoiding it entirely; (b) teaching it so bluntly it creates shame. Both undermine the lesson. The goal is warm clarity."},
+  roleplay:{setup:"Missionary B: 'My girlfriend and I are living together — we're planning to get married eventually. Does this mean we can't be baptized?' Missionary A responds with warmth, honesty, and a clear path forward.",
+    debrief:"Was the response warm and clear? Did they explain the path forward without being harsh? Did they avoid going into unnecessary detail?"},
+  note:"This principle often requires leader involvement for specific situations. Missionaries should know when to involve the mission president or ward leaders — not to handle everything themselves."
+},
+
+{lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples",
+  title:"Keep the Law of Tithing",
+  timing:"8-10 min",
+  keyPoints:[
+    "Teach the principle (gratitude, trust, putting God first) before the percentage.",
+    "Malachi 3:10 is the key promise. Be honest that blessings are real but may not always be financial."
+  ],
+  discussion:{q:"Have you seen tithing blessings in your own life or the lives of people you know? What did they actually look like?",
+    watch:"Watch for missionaries who present tithing as a financial formula ('give 10%, get back more'). That framing creates disappointment. The blessings are real but diverse."},
+  roleplay:{setup:"Missionary B: 'I can barely feed my family as it is. I can't afford to give away 10%.' Missionary A responds with compassion, truth, and the promise of Malachi 3:10.",
+    debrief:"Did they lead with compassion? Did they present the promise honestly without overpromising? Did they note this is a commitment made after baptism, not before?"},
+  note:"This is one of the most practically challenging principles for investigators in Nigeria. Take extra time and be willing to have honest, real conversations about financial circumstances."
+},
+
+{lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples",
+  title:"Obey the Word of Wisdom",
+  timing:"8-10 min",
+  keyPoints:[
+    "Frame as care for the body, not prohibition. The body is sacred; this law is about treating it that way.",
+    "For culturally embedded practices (alcohol at social events, coffee with elders), acknowledge the real social weight before inviting change."
+  ],
+  discussion:{q:"How do you help someone who drinks alcohol at every family gathering understand the Word of Wisdom without making them feel like they're being asked to abandon their culture?",
+    watch:"Watch for missionaries who minimize the social difficulty. Acknowledgment first, invitation second."},
+  roleplay:{setup:"Missionary B: 'My whole family drinks at celebrations — if I stop, I'll be seen as rejecting them. This feels impossible.' Missionary A responds.",
+    debrief:"Did they acknowledge the social reality? Did they offer practical ideas? Did they connect spiritual sensitivity as the positive benefit?"},
+  note:"God's help in making this change is real and worth promising. Missionaries should invite investigators to pray specifically for help with habits they're concerned about."
+},
+
+{lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples",
+  title:"Keep the Sabbath Day Holy",
+  timing:"8 min",
+  keyPoints:[
+    "Center on what the Sabbath is FOR, not what it prohibits.",
+    "The sacrament is the centerpiece — connecting to the baptismal covenant from Lesson 3."
+  ],
+  discussion:{q:"How do you make the Sabbath sound like something someone would want, not something imposed on them?",
+    watch:"Watch for missionaries who lead with the list of prohibited activities. Lead with renewal, worship, and family instead."},
+  roleplay:{setup:"Missionary B: 'Sunday is the only day I can catch up on errands and chores. Church attendance would be a real sacrifice.' Missionary A responds.",
+    debrief:"Did they affirm the real cost without backing down from the invitation? Did they focus on the spiritual renewal that makes the sacrifice worthwhile?"},
+  note:"The invitation to attend church this Sunday is one of the simplest and most effective commitments to extend at any point in the lesson sequence. Missionaries should extend it every visit until it's kept."
+},
+
+{lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples",
+  title:"Obey and Honor the Law",
+  timing:"6 min",
+  keyPoints:[
+    "Brief principle — most investigators don't need lengthy explanation.",
+    "Sensitive for anyone with a legal history — missionaries should be prepared with a compassionate, clear response."
+  ],
+  discussion:{q:"Have you ever had someone bring up a past legal issue during this principle? How did you handle it?",
+    watch:"Watch for missionaries who make this principle feel like a screening question. It's about forward-looking integrity, not past disqualification."},
+  roleplay:{setup:"Missionary B: 'I was arrested a few years ago and I still have a record. Does that mean I can't be baptized?' Missionary A responds with honesty and direction.",
+    debrief:"Was the response warm and clear about the process without making promises they can't keep?"},
+  note:"When legal history comes up, missionaries should involve mission leadership before making any statements about baptismal eligibility. Don't guess."
+},
+
+{lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples",
+  title:"Service",
+  timing:"6-8 min",
+  keyPoints:[
+    "Connect to Matthew 25:35-40 — serving others is serving God.",
+    "Give a concrete, immediate next step — not a future obligation."
+  ],
+  discussion:{q:"What's one small act of service an investigator could do this week, before they're even baptized, that would help them feel what this principle is about?",
+    watch:"Watch for missionaries who teach service as a future Church obligation rather than a present daily opportunity."},
+  roleplay:{setup:"Missionary A invites Missionary B (investigator) to notice one person in their life this week who needs something, and to do something about it. Missionary B responds: 'I'm already stretched thin — I don't have anything left to give.' Missionary A responds.",
+    debrief:"Did they help the investigator see that even a small act counts? Did they connect it to God's love expressed through us?"},
+  note:"Service is often best taught by example — missionaries who serve visibly in the community teach this principle more powerfully than any explanation."
+},
+
+{lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples",
+  title:"Sharing the Gospel",
+  timing:"6 min",
+  keyPoints:[
+    "This is premature for investigators still deciding — frame it as awareness, not expectation.",
+    "For new members (post-baptism teaching): the best sharing is living the gospel visibly and naturally."
+  ],
+  discussion:{q:"What's the most natural way you've seen someone share the gospel with a friend — not through a formal lesson, but just in their regular life?",
+    watch:"Watch for missionaries who present this as a program or a duty. Natural sharing grows from conviction, not instruction."},
+  roleplay:{setup:"Missionary B (investigator): 'I'm still figuring this out for myself — are you saying I have to start convincing my family about this before I even know what I believe?' Missionary A clarifies.",
+    debrief:"Did they lower the pressure? Did they reframe sharing as something that emerges naturally over time?"},
+  note:"The best teaching of this principle is the missionaries themselves. Their warmth and example in every visit is what shows what natural gospel sharing looks like."
+},
+
+{lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples",
+  title:"Fasting and Fast Offerings",
+  timing:"8 min",
+  keyPoints:[
+    "Pair fasting with prayer — they work together.",
+    "Clarify that fasting is adapted to health and circumstance; the purpose matters more than the form."
+  ],
+  discussion:{q:"How do you make fasting sound like something a person would want to do — rather than something difficult they're required to do?",
+    watch:"Watch for missionaries who present fasting as a rule without explaining the spiritual power it brings."},
+  roleplay:{setup:"Missionary B: 'I have a health condition that means I can't go without food. Does that mean I can't fast?' Missionary A responds.",
+    debrief:"Was the response flexible and compassionate? Did they explain the spiritual intent is primary?"},
+  note:"Invite missionaries to share their own experience of fasting for something specific. Personal testimony is the strongest teaching tool here."
+},
+
+{lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples",
+  title:"Priesthood and Church Organizations",
+  timing:"8 min",
+  keyPoints:[
+    "Focus on what's immediately relevant: ordinances require authorized priesthood holders, and there is a place for this person to belong.",
+    "Don't try to explain the full organizational chart. Keep it personal and relational."
+  ],
+  discussion:{q:"How do you explain the priesthood in a way that sounds like a sacred trust, not a hierarchy that excludes?",
+    watch:"Watch for missionaries who over-explain organizational structure. The investigator needs to feel welcomed into a community, not briefed on a corporate org chart."},
+  roleplay:{setup:"Missionary B: 'Why is it only men who hold this priesthood? That seems unfair to women.' Missionary A responds thoughtfully.",
+    debrief:"Did they respond with honesty and respect for the question? Did they explain the different but equal roles without being dismissive?"},
+  note:"This question will come up. Missionaries who aren't prepared will stumble. Run this role-play specifically so no one is caught off guard."
+},
+
+{lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples",
+  title:"Marriage and Families",
+  timing:"10 min",
+  keyPoints:[
+    "Requires significant sensitivity for people in non-traditional situations (single, divorced, widowed, same-sex relationships, estranged families).",
+    "Every person, regardless of family situation, belongs to God's family and can receive the gospel's blessings."
+  ],
+  discussion:{q:"How do you teach the ideal of eternal families in a way that includes and welcomes someone whose current family situation doesn't match that ideal?",
+    watch:"Watch for missionaries who present a one-size picture of family that makes people with different situations feel excluded from the gospel's promises."},
+  roleplay:{setup:"Missionary B (divorced, children don't speak to them): 'The way you describe family sounds like something I've lost. I don't know if this gospel has anything for someone like me.' Missionary A responds.",
+    debrief:"Did they make this person feel included rather than excluded? Did they connect to God's eternal plan while honoring current reality?"},
+  note:"There is no uniform family situation among missionaries' investigators. Sensitivity and personal pastoral care here is essential."
+},
+
+{lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples",
+  title:"Temple and Family History Work for Deceased Ancestors",
+  timing:"8 min",
+  keyPoints:[
+    "Connect to the Spirit World principle from Lesson 2 — this is the practical expression of that hope.",
+    "Family history resonates deeply in Nigerian culture — ancestors and heritage are meaningful."
+  ],
+  discussion:{q:"How does the doctrine of work for the dead connect to what we teach in Lesson 2 about the spirit world? Help missionaries make that connection explicit.",
+    watch:"Watch for missionaries who teach this as a separate unrelated topic rather than the natural continuation of the spirit world principle."},
+  roleplay:{setup:"Missionary B: 'My grandfather was a very religious man but he died before ever hearing about this church. What about him?' Missionary A responds connecting spirit world (Lesson 2) to temple work.",
+    debrief:"Did they make the connection to what was already taught? Was the answer hopeful and personal?"},
+  note:"In many Nigerian families, the connection to ancestors and heritage is deeply felt. This principle can resonate powerfully when taught with cultural awareness."
+},
+
+{lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples",
+  title:"Temples, the Endowment, Eternal Marriage, and Eternal Families",
+  timing:"10 min",
+  keyPoints:[
+    "This is the capstone of all four lessons. Tie back: Lesson 1's restored priesthood makes these ordinances possible. Lesson 2's Plan of Salvation shows families can be together forever. Lesson 3's covenants point toward the temple.",
+    "Land this as a destination the investigator is walking toward — not a distant, separate topic."
+  ],
+  discussion:{q:"If you had one sentence to explain why the temple matters, what would it be?",
+    watch:"Watch for missionaries who treat this as an afterthought. This is the culmination. Give it full weight."},
+  roleplay:{setup:"Missionary A closes the entire four-lesson sequence with this principle, tying every lesson together in 2-3 minutes for Missionary B. Missionary B then says: 'So all of this — everything we've talked about — is pointing toward the temple?' Missionary A confirms.",
+    debrief:"Did the close feel like a meaningful culmination? Did they tie back to at least two previous lessons? Did it leave the investigator with a sense of direction and hope?"},
+  note:"End here with the missionary's own testimony of the entire teaching experience — not just this principle. This is the closing moment of the full sequence. It should feel significant."
+},
+];
+
+const lessonOrder = ["restoration","pos","gospel","discipleship"];
+let currentFilter = "all";
+
+function render(){
+  const query = document.getElementById('search').value.trim().toLowerCase();
+  const resultsDiv = document.getElementById('results');
+  const noResults = document.getElementById('no-results');
+  resultsDiv.innerHTML = "";
+
+  let total = 0;
+  lessonOrder.forEach(lessonKey => {
+    if(currentFilter !== "all" && currentFilter !== lessonKey) return;
+    const items = data.filter(d => d.lesson === lessonKey && matches(d, query));
+    if(items.length === 0) return;
+
+    const group = document.createElement('div');
+    group.className = 'lesson-group';
+    const groupTitle = document.createElement('div');
+    groupTitle.className = 'lesson-group-title';
+    const totalInLesson = data.filter(d=>d.lesson===lessonKey).length;
+    groupTitle.textContent = items[0].lessonLabel + " (" + items.length + (items.length!==totalInLesson?" of "+totalInLesson:"") + ")";
+    group.appendChild(groupTitle);
+
+    items.forEach(item => {
+      total++;
+      const principleDiv = document.createElement('div');
+      principleDiv.className = 'principle';
+
+      const head = document.createElement('div');
+      head.className = 'principle-head';
+      head.innerHTML = `
+        <div class="title-row">
+          <h3>${item.title}</h3>
+          <span class="timing">&#9201; ${item.timing}</span>
+        </div>
+        <span class="arrow">&#9656;</span>`;
+      head.addEventListener('click', () => {
+        head.classList.toggle('open');
+        body.classList.toggle('open');
+      });
+
+      const body = document.createElement('div');
+      body.className = 'principle-body';
+
+      let kpHtml = '<ul>'+item.keyPoints.map(p=>'<li>'+p+'</li>').join('')+'</ul>';
+
+      body.innerHTML = `
+        <div class="block">
+          <span class="label label-green">Key Points for This Meeting</span>
+          ${kpHtml}
+        </div>
+        <div class="block">
+          <span class="label label-green">Discussion Question</span>
+          <div class="open-box">
+            <span class="q">${item.discussion.q}</span>
+            <span class="watch">&#128065; Watch for: ${item.discussion.watch}</span>
+          </div>
+        </div>
+        <div class="block">
+          <span class="label label-gold">Role-Play Scenario</span>
+          <div class="roleplay-box">
+            <span class="rp-title">Setup</span>
+            <p>${item.roleplay.setup}</p>
+            <span class="rp-title" style="margin-top:.5rem; display:block;">Debrief the Group</span>
+            <p>${item.roleplay.debrief}</p>
+          </div>
+        </div>
+        <div class="block">
+          <span class="label label-red">Instructor Note</span>
+          <div class="instructor-note">${item.note}</div>
+        </div>
+      `;
+
+      principleDiv.appendChild(head);
+      principleDiv.appendChild(body);
+      group.appendChild(principleDiv);
+    });
+
+    resultsDiv.appendChild(group);
+  });
+
+  document.getElementById('result-count').textContent = total + " principle" + (total === 1 ? "" : "s") + " shown of 39 total";
+  noResults.style.display = total === 0 ? 'block' : 'none';
+}
+
+function matches(item, query){
+  if(!query) return true;
+  const haystack = (item.title+" "+item.keyPoints.join(" ")+" "+item.discussion.q+" "+item.discussion.watch+" "+item.roleplay.setup+" "+item.roleplay.debrief+" "+item.note).toLowerCase();
+  return haystack.includes(query);
+}
+
+document.getElementById('search').addEventListener('input', render);
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.lesson;
+    render();
+  });
+});
+
+render();
+</script>
+
+</body>
+</html>

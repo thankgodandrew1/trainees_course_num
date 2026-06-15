@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section 4: The Heart of Each Lesson</title>
+<style>
+  :root{
+    --green:#0b4d2c;
+    --green-dark:#073a20;
+    --gold:#c9a227;
+    --gold-light:#f4e6c1;
+    --cream:#fbf8f1;
+    --ink:#222;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family: Georgia, 'Times New Roman', serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  header{
+    background:var(--green);
+    color:var(--cream);
+    padding:2.5rem 1.5rem 2rem;
+    text-align:center;
+    border-bottom:6px solid var(--gold);
+  }
+  header .eyebrow{
+    font-family:'Trebuchet MS', sans-serif;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    font-size:.75rem;
+    color:var(--gold-light);
+    margin-bottom:.5rem;
+  }
+  header h1{ margin:0; font-size:1.9rem; font-weight:700; }
+  header p{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.95rem;
+    color:var(--gold-light);
+    margin-top:.6rem;
+  }
+  main{ max-width:760px; margin:0 auto; padding:2rem 1.25rem 4rem; }
+  .card{
+    background:#fff;
+    border:1px solid #e6decf;
+    border-left:5px solid var(--green);
+    border-radius:6px;
+    padding:1.5rem;
+    margin-bottom:1.75rem;
+    box-shadow:0 1px 3px rgba(0,0,0,.04);
+  }
+  .card h2{
+    margin-top:0;
+    color:var(--green);
+    font-size:1.3rem;
+    font-family:'Trebuchet MS', sans-serif;
+  }
+  .card h2 .tag{
+    display:inline-block;
+    background:var(--gold);
+    color:var(--green-dark);
+    font-size:.7rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    padding:.2rem .5rem;
+    border-radius:3px;
+    margin-bottom:.5rem;
+    font-family:'Trebuchet MS', sans-serif;
+  }
+  .problem-box{
+    background:var(--gold-light);
+    border-left:4px solid var(--gold);
+    padding:.9rem 1rem;
+    border-radius:4px;
+    font-size:.97rem;
+  }
+  .scripture{
+    background:#f6f3ec;
+    border-left:4px solid var(--green);
+    padding:.9rem 1.1rem;
+    border-radius:4px;
+    font-style:italic;
+    font-size:.95rem;
+    margin:.8rem 0;
+  }
+  .scripture .ref{
+    display:block;
+    margin-top:.4rem;
+    font-style:normal;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.8rem;
+    letter-spacing:.05em;
+    color:var(--green-dark);
+    text-transform:uppercase;
+  }
+  textarea, input[type=text]{
+    width:100%;
+    font-family:inherit;
+    font-size:1rem;
+    padding:.7rem;
+    border:1px solid #ccc;
+    border-radius:5px;
+    resize:vertical;
+  }
+  label{
+    display:block;
+    font-weight:bold;
+    font-family:'Trebuchet MS', sans-serif;
+    margin-bottom:.4rem;
+    color:var(--green-dark);
+  }
+  .btn{
+    background:var(--green);
+    color:#fff;
+    border:none;
+    padding:.6rem 1.3rem;
+    border-radius:5px;
+    font-family:'Trebuchet MS', sans-serif;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:.6rem;
+    transition:background .2s;
+  }
+  .btn:hover{ background:var(--green-dark); }
+  .btn.secondary{
+    background:transparent;
+    color:var(--green);
+    border:1px solid var(--green);
+  }
+  .feedback{
+    margin-top:1rem;
+    padding:1rem;
+    border-radius:5px;
+    display:none;
+    font-size:.95rem;
+  }
+  .feedback.show{ display:block; }
+  .feedback.good{ background:#e6f2e9; border-left:4px solid var(--green); }
+  .feedback.warn{ background:#fdeeea; border-left:4px solid #b3441f; }
+  .divider{
+    text-align:center;
+    color:var(--gold);
+    font-size:1.4rem;
+    margin:1.5rem 0;
+    letter-spacing:.4em;
+  }
+  .progress-note{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.85rem;
+    color:#7a7158;
+    text-align:center;
+    margin-top:2rem;
+  }
+  .lesson-card{
+    border:1px solid #e6decf;
+    border-radius:6px;
+    margin-bottom:1.2rem;
+    overflow:hidden;
+  }
+  .lesson-head{
+    background:var(--green);
+    color:var(--gold-light);
+    padding:.8rem 1.1rem;
+    font-family:'Trebuchet MS', sans-serif;
+    font-weight:bold;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .lesson-head .arrow{
+    transition:transform .2s;
+  }
+  .lesson-head.open .arrow{
+    transform:rotate(90deg);
+  }
+  .lesson-body{
+    padding:1.1rem;
+    display:none;
+    font-size:.95rem;
+  }
+  .lesson-body.open{ display:block; }
+  .model-answer{
+    background:#f6f3ec;
+    border-left:4px solid var(--gold);
+    padding:.8rem 1rem;
+    border-radius:4px;
+    margin-top:.8rem;
+    font-size:.92rem;
+    display:none;
+  }
+  .model-answer.show{ display:block; }
+  .reveal-link{
+    color:var(--green);
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.85rem;
+    cursor:pointer;
+    text-decoration:underline;
+    display:inline-block;
+    margin-top:.6rem;
+  }
+  .summary-table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:.92rem;
+    margin-top:.5rem;
+  }
+  .summary-table th, .summary-table td{
+    border:1px solid #e6decf;
+    padding:.5rem .6rem;
+    text-align:left;
+    vertical-align:top;
+  }
+  .summary-table th{
+    background:var(--green);
+    color:var(--gold-light);
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.8rem;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+  }
+  .summary-table td textarea{
+    min-height:3.5rem;
+    font-size:.88rem;
+  }
+
+  footer{
+    background:var(--green-dark);
+    color:var(--gold-light);
+    text-align:center;
+    padding:.9rem 1rem;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.8rem;
+    letter-spacing:.04em;
+    margin-top:2rem;
+  }
+  
+</style>
+</head>
+<body>
+
+<div class="module-nav" style="font-family:'Trebuchet MS', sans-serif; background:#073a20; display:flex; justify-content:space-between; padding:.7rem 1.2rem; position:sticky; top:0; z-index:50;">
+  <a href="section3.html" style="color:#f4e6c1; text-decoration:none; font-size:.85rem;">&#8592; Prev: Commitments</a>
+  <span style="color:#fff; font-weight:bold; font-size:.85rem;">Section 4 of 4</span>
+  <a href="index.html" style="color:#f4e6c1; text-decoration:none; font-size:.85rem;">All Sections &#8594;</a>
+</div>
+
+<header>
+  <div class="eyebrow">Foundations Training Module &middot; Nigeria Uyo Mission</div>
+  <h1>Section 4: The Heart of Each Lesson</h1>
+  <p>Distilling the core message of every principle we teach</p>
+</header>
+
+<main>
+
+  <div class="card">
+    <h2><span class="tag">Bringing It Together</span><br>One Question for Every Lesson</h2>
+    <div class="problem-box">
+      Now that you've practiced staying focused (Section 1), asking simple questions (Section 2),
+      and extending meaningful commitments (Section 3), this section ties it all together. For
+      each of the four major lesson areas, ask yourself: <strong>"What is the ONE thing an
+      investigator must walk away understanding?"</strong> Everything else &mdash; scriptures,
+      questions, commitments &mdash; should support that one thing.
+    </div>
+    <div class="scripture">
+      "And thou shalt declare glad tidings, yea, publish it upon the mountains, and upon every
+      high place, and among every people that thou shalt be permitted to see."
+      <span class="ref">D&amp;C 19:29</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="tag">Explore</span><br>Four Lessons, Four Core Messages</h2>
+    <p>Tap each lesson area to reveal its core message. Read it, then try writing your own
+       version in your own words below it before checking the model answer.</p>
+
+    <div class="lesson-card">
+      <div class="lesson-head" onclick="toggleLesson(this)">
+        <span>Restoration</span><span class="arrow">&#9656;</span>
+      </div>
+      <div class="lesson-body">
+        <div class="scripture">
+          "And also all they who receive this priesthood receive me, saith the Lord; for he
+          that receiveth my servants receiveth me."
+          <span class="ref">D&amp;C 84:35-36 (context)</span>
+        </div>
+        <p><strong>Core message:</strong> God's true Church and authority, lost from the earth,
+        have been restored through the Prophet Joseph Smith &mdash; so the fulness of the gospel
+        is available again today.</p>
+        <label style="margin-top:.6rem;">Write it in your own words:</label>
+        <textarea rows="2" placeholder="In your own words..."></textarea>
+        <span class="reveal-link" onclick="toggleModel(this)">See a sample one-sentence summary</span>
+        <div class="model-answer">
+          "God speaks to us again today, the same way He always has, through a living prophet."
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-card">
+      <div class="lesson-head" onclick="toggleLesson(this)">
+        <span>Plan of Salvation</span><span class="arrow">&#9656;</span>
+      </div>
+      <div class="lesson-body">
+        <div class="scripture">
+          "For behold, this life is the time for men to prepare to meet God; yea, behold the day
+          of this life is the day for men to perform their labors."
+          <span class="ref">Alma 34:32</span>
+        </div>
+        <p><strong>Core message:</strong> God has a plan, centered on Jesus Christ, that explains
+        where we came from, why we're here, and where we can go &mdash; and that plan makes it
+        possible for families to be together forever.</p>
+        <label style="margin-top:.6rem;">Write it in your own words:</label>
+        <textarea rows="2" placeholder="In your own words..."></textarea>
+        <span class="reveal-link" onclick="toggleModel(this)">See a sample one-sentence summary</span>
+        <div class="model-answer">
+          "Life isn't random &mdash; God has a plan for you, and it's built around being with the people you love, forever."
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-card">
+      <div class="lesson-head" onclick="toggleLesson(this)">
+        <span>Gospel of Jesus Christ</span><span class="arrow">&#9656;</span>
+      </div>
+      <div class="lesson-body">
+        <div class="scripture">
+          "Wherefore, the right way is to believe in Christ, and deny him not; and Christ is the
+          Holy One of Israel... and have faith in him... repenting of your sins, and witness unto
+          the Father that ye are willing to take upon you the name of Christ, by baptism."
+          <span class="ref">2 Nephi 25:16, 29 (paraphrased)</span>
+        </div>
+        <p><strong>Core message:</strong> Through faith in Jesus Christ, repentance, baptism,
+        receiving the Holy Ghost, and enduring to the end, we can be forgiven, become more like
+        Christ, and return to live with God.</p>
+        <label style="margin-top:.6rem;">Write it in your own words:</label>
+        <textarea rows="2" placeholder="In your own words..."></textarea>
+        <span class="reveal-link" onclick="toggleModel(this)">See a sample one-sentence summary</span>
+        <div class="model-answer">
+          "Jesus Christ gives us a path &mdash; through faith, change, and covenants &mdash; to become who God wants us to be."
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-card">
+      <div class="lesson-head" onclick="toggleLesson(this)">
+        <span>General Missionary Lessons (Overview)</span><span class="arrow">&#9656;</span>
+      </div>
+      <div class="lesson-body">
+        <div class="scripture">
+          "Verily, verily, I say unto you, he that receiveth whomsoever I send is he that receiveth
+          me; and he that receiveth me receiveth my Father; and he that receiveth my Father
+          receiveth my Father's kingdom."
+          <span class="ref">D&amp;C 84:36-38 (context)</span>
+        </div>
+        <p><strong>Core message across all lessons:</strong> Every lesson, in its own way, is an
+        invitation to come closer to Jesus Christ &mdash; and through Him, to feel God's love and
+        find lasting peace.</p>
+        <label style="margin-top:.6rem;">Write it in your own words:</label>
+        <textarea rows="2" placeholder="In your own words..."></textarea>
+        <span class="reveal-link" onclick="toggleModel(this)">See a sample one-sentence summary</span>
+        <div class="model-answer">
+          "No matter which lesson we're teaching, we're really always inviting someone to feel closer to God."
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider">&#8226; &#8226; &#8226;</div>
+
+  <div class="card">
+    <h2><span class="tag">Bringing It All Together</span><br>Build a Complete Lesson Moment</h2>
+    <p>
+      Pick one of the four areas above. Using everything from Sections 1-3, fill in this table:
+      your one-sentence core message, one simple question you'd ask, and one commitment that
+      flows naturally from it.
+    </p>
+    <table class="summary-table">
+      <tr>
+        <th style="width:25%;">Lesson Area</th>
+        <th style="width:25%;">Core Message (1 sentence)</th>
+        <th style="width:25%;">One Simple Question</th>
+        <th style="width:25%;">Natural Commitment</th>
+      </tr>
+      <tr>
+        <td><input type="text" placeholder="e.g. Restoration"></td>
+        <td><textarea rows="3"></textarea></td>
+        <td><textarea rows="3"></textarea></td>
+        <td><textarea rows="3"></textarea></td>
+      </tr>
+    </table>
+    <button class="btn" onclick="checkTable()">Check My Work</button>
+    <div class="feedback" id="table-feedback"></div>
+  </div>
+
+  <div class="card" style="border-left-color:var(--gold); background:var(--gold-light);">
+    <h2 style="color:var(--green-dark);"><span class="tag">Closing Thought</span><br>Teaching With Clarity and Love</h2>
+    <div class="scripture" style="background:#fff;">
+      "And now, behold, I say unto you, this is the order which I have given unto my servant
+      Joseph... bring forth and establish the cause of Zion."
+      <span class="ref">D&amp;C 21:1, 6 (paraphrased context)</span>
+    </div>
+    <p>
+      You now have a simple framework: <strong>stay focused on one principle, ask simple
+      questions and listen, extend commitments that flow naturally, and always know the one
+      thing you want someone to understand.</strong> This isn't about teaching less &mdash;
+      it's about teaching what matters most, in a way people can actually receive. As you apply
+      this, watch how investigators respond with more openness, and how your own confidence
+      grows.
+    </p>
+  </div>
+
+  <p class="progress-note">Section 4 of 4 &mdash; Foundations Training Module &middot; Complete</p>
+
+</main>
+
+<footer>
+  Developed by <strong>Elder ThankGod Andrew</strong> &mdash; Assistant to the President &mdash; Nigeria Uyo Mission
+</footer>
+
+<script>
+  function toggleLesson(head){
+    const body = head.nextElementSibling;
+    head.classList.toggle('open');
+    body.classList.toggle('open');
+  }
+  function toggleModel(link){
+    const model = link.nextElementSibling;
+    model.classList.toggle('show');
+    link.textContent = model.classList.contains('show') ? 'Hide sample summary' : 'See a sample one-sentence summary';
+  }
+  function checkTable(){
+    const inputs = document.querySelectorAll('.summary-table textarea, .summary-table input[type=text]');
+    let filled = 0;
+    inputs.forEach(i => { if(i.value.trim().length > 0) filled++; });
+    const fb = document.getElementById('table-feedback');
+    fb.classList.remove('good','warn');
+    if(filled === inputs.length){
+      fb.textContent = "Well done — you've just built a complete lesson moment: a clear core message, a simple question to invite reflection, and a commitment that flows directly from it. This is the pattern to carry into every lesson you teach.";
+      fb.classList.add('good');
+    } else {
+      fb.textContent = "Fill in all four fields to complete this exercise. Remember: the question and commitment should both connect directly back to your one-sentence core message.";
+      fb.classList.add('warn');
+    }
+    fb.classList.add('show');
+  }
+</script>
+
+</body>
+</html>

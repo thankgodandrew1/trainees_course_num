@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Principle Reference Companion &mdash; Nigeria Uyo Mission</title>
+<style>
+  :root{
+    --green:#0b4d2c;
+    --green-dark:#073a20;
+    --gold:#c9a227;
+    --gold-light:#f4e6c1;
+    --cream:#fbf8f1;
+    --ink:#222;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family: Georgia, 'Times New Roman', serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.55;
+  }
+  .module-nav{
+    font-family:'Trebuchet MS', sans-serif;
+    background:var(--green-dark);
+    display:flex;
+    justify-content:space-between;
+    padding:.7rem 1.2rem;
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  .module-nav a{ color:var(--gold-light); text-decoration:none; font-size:.85rem; }
+  .module-nav a:hover{ color:#fff; }
+  .module-nav span{ color:#fff; font-weight:bold; font-size:.85rem; }
+
+  header{
+    background:var(--green);
+    color:var(--cream);
+    padding:2.2rem 1.5rem 1.8rem;
+    text-align:center;
+    border-bottom:6px solid var(--gold);
+  }
+  header .eyebrow{
+    font-family:'Trebuchet MS', sans-serif;
+    letter-spacing:.25em;
+    text-transform:uppercase;
+    font-size:.75rem;
+    color:var(--gold-light);
+    margin-bottom:.5rem;
+  }
+  header h1{ margin:0; font-size:1.8rem; font-weight:700; }
+  header p{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.92rem;
+    color:var(--gold-light);
+    margin-top:.6rem;
+    max-width:540px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  main{ max-width:780px; margin:0 auto; padding:1.5rem 1.1rem 4rem; }
+
+  .controls{
+    position:sticky;
+    top:42px;
+    background:var(--cream);
+    z-index:40;
+    padding:1rem 0 .8rem;
+    border-bottom:1px solid #e6decf;
+    margin-bottom:1.2rem;
+  }
+  #search{
+    width:100%;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:1rem;
+    padding:.7rem .9rem;
+    border:1px solid #ccc;
+    border-radius:6px;
+    margin-bottom:.7rem;
+  }
+  .filter-row{
+    display:flex;
+    gap:.5rem;
+    flex-wrap:wrap;
+  }
+  .filter-btn{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.8rem;
+    padding:.4rem .85rem;
+    border:1px solid var(--green);
+    background:#fff;
+    color:var(--green);
+    border-radius:20px;
+    cursor:pointer;
+  }
+  .filter-btn.active{
+    background:var(--green);
+    color:#fff;
+  }
+  .result-count{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.8rem;
+    color:#7a7158;
+    margin-top:.6rem;
+  }
+
+  .lesson-group{ margin-bottom:1.8rem; }
+  .lesson-group-title{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.85rem;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--green-dark);
+    border-bottom:2px solid var(--gold);
+    padding-bottom:.3rem;
+    margin-bottom:.8rem;
+  }
+
+  .principle{
+    background:#fff;
+    border:1px solid #e6decf;
+    border-left:5px solid var(--green);
+    border-radius:6px;
+    margin-bottom:.8rem;
+    overflow:hidden;
+  }
+  .principle-head{
+    padding:.85rem 1.1rem;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:.8rem;
+  }
+  .principle-head h3{
+    margin:0;
+    font-size:1.02rem;
+    color:var(--green-dark);
+    font-family:'Trebuchet MS', sans-serif;
+  }
+  .principle-head .arrow{
+    color:var(--gold);
+    flex:0 0 auto;
+    transition:transform .2s;
+  }
+  .principle-head.open .arrow{ transform:rotate(90deg); }
+  .principle-body{
+    display:none;
+    padding:0 1.1rem 1.1rem;
+    font-size:.93rem;
+  }
+  .principle-body.open{ display:block; }
+  .principle-body .row{ margin-bottom:.6rem; }
+  .principle-body .row .label{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.72rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--gold);
+    display:block;
+    margin-bottom:.15rem;
+  }
+  .principle-body .ref{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.78rem;
+    color:#7a7158;
+    font-style:italic;
+  }
+  .no-results{
+    text-align:center;
+    color:#a99a6f;
+    font-family:'Trebuchet MS', sans-serif;
+    padding:2rem 0;
+  }
+  .source-note{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.8rem;
+    color:#7a7158;
+    text-align:center;
+    margin-top:2.5rem;
+  }
+
+  footer{
+    background:var(--green-dark);
+    color:var(--gold-light);
+    text-align:center;
+    padding:.9rem 1rem;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.8rem;
+    letter-spacing:.04em;
+    margin-top:2rem;
+  }
+  
+</style>
+</head>
+<body>
+
+<div class="module-nav">
+  <a href="index.html">&#8592; Foundations Module</a>
+  <span>Principle Reference Companion</span>
+  <a href="deep-dive.html">Deep Dive (1-3) &#8594;</a>
+</div>
+
+<header>
+  <div class="eyebrow">Nigeria Uyo Mission</div>
+  <h1>Principle Reference Companion</h1>
+  <p>All 39 principles across the four Preach My Gospel lessons. Each entry gives the
+     core message, a question you might ask, an invitation drawn from the manual,
+     and scripture references for further study. Search or filter by lesson.</p>
+</header>
+
+<main>
+
+  <div class="controls">
+    <input type="text" id="search" placeholder="Search by keyword (e.g. 'prayer', 'baptism', 'family')...">
+    <div class="filter-row">
+      <button class="filter-btn active" data-lesson="all">All Lessons</button>
+      <button class="filter-btn" data-lesson="restoration">Restoration (7)</button>
+      <button class="filter-btn" data-lesson="pos">Plan of Salvation (8)</button>
+      <button class="filter-btn" data-lesson="gospel">Gospel of Jesus Christ (7)</button>
+      <button class="filter-btn" data-lesson="discipleship">Lifelong Discipleship (17)</button>
+    </div>
+    <div class="result-count" id="result-count"></div>
+  </div>
+
+  <div id="results"></div>
+  <div class="no-results" id="no-results" style="display:none;">No principles match your search. Try a different word.</div>
+
+  <p class="source-note">Content adapted from Preach My Gospel, Chapter 3 (2023 edition)</p>
+
+</main>
+<footer>
+  Developed by <strong>Elder ThankGod Andrew</strong> &mdash; Assistant to the President &mdash; Nigeria Uyo Mission
+</footer>
+<script>
+const data = [
+  // ===== LESSON 1: RESTORATION (7) =====
+  {lesson:"restoration", lessonLabel:"Lesson 1: The Message of the Restoration", title:"God Is Our Loving Heavenly Father",
+    core:"God is our Heavenly Father, and we are His children, created in His image. He knows us personally and loves us, and He wants to bless us with peace and a fulness of joy that will last for eternity.",
+    question:"What do you believe about God? How would feeling closer to God help you?",
+    commitment:"Will you ask God in prayer to help you know that what we have taught is true?",
+    ref:"John 3:16-17; D&C 130:22; Moses 1:39"},
+
+  {lesson:"restoration", lessonLabel:"Lesson 1: The Message of the Restoration", title:"God Reveals the Gospel through Prophets in Every Dispensation",
+    core:"God calls prophets to be His representatives on earth. Anciently He called prophets such as Adam, Noah, Abraham, and Moses. A living prophet receives revelation from God to teach and lead us today.",
+    question:"How would it help you to know that there is a living prophet on the earth today?",
+    commitment:"Will you attend church this Sunday to learn more about what we have taught?",
+    ref:"Amos 3:7; D&C 1:37-38"},
+
+  {lesson:"restoration", lessonLabel:"Lesson 1: The Message of the Restoration", title:"Jesus Christ's Earthly Ministry and Atonement",
+    core:"Jesus Christ is the Son of God. During His earthly ministry He taught His gospel and established His Church. He atoned for our sins through His suffering and death, and was resurrected so that all of us will be resurrected.",
+    question:"What do you know about Jesus Christ? How have His life and teachings influenced you?",
+    commitment:"Will you read the Book of Mormon and pray to know that it is the word of God?",
+    ref:"2 Nephi 2:6-8; Alma 7:11-13; John 3:16-17; 1 Corinthians 15:20-22"},
+
+  {lesson:"restoration", lessonLabel:"Lesson 1: The Message of the Restoration", title:"The Falling Away",
+    core:"After Jesus's Apostles died, there was a widespread falling away from the gospel and Church of Jesus Christ. Priesthood authority was withdrawn, and gospel teachings and ordinances were changed.",
+    question:"Why do you think there are so many different churches today?",
+    commitment:"Will you keep an open mind as we talk about why a restoration was needed?",
+    ref:"2 Thessalonians 2:1-3; Amos 8:11-12; Acts 3:20-21"},
+
+  {lesson:"restoration", lessonLabel:"Lesson 1: The Message of the Restoration", title:"The Restoration of the Gospel through Joseph Smith",
+    core:"Heavenly Father and Jesus Christ appeared to Joseph Smith in the First Vision. God called him to be a prophet, the gospel of Jesus Christ was restored through him, and the priesthood and Church were restored.",
+    question:"How would it help you to know that God's full truth and authority are available again today?",
+    commitment:"Will you follow Jesus's example and be baptized?",
+    ref:"Joseph Smith&mdash;History 1:15-20; D&C 110:11-16"},
+
+  {lesson:"restoration", lessonLabel:"Lesson 1: The Message of the Restoration", title:"The Book of Mormon: Another Testament of Jesus Christ",
+    core:"The Book of Mormon is scripture translated by Joseph Smith that, with the Bible, provides a witness of Jesus Christ's ministry, teachings, and mission as our Savior. We can get nearer to God by reading it and abiding by its precepts.",
+    question:"Have you heard of the Book of Mormon? May we share why it is important?",
+    commitment:"Will you read the Book of Mormon and pray to know that it is the word of God? (suggest specific chapters)",
+    ref:"Moroni 10:3-5; 2 Nephi 29:8"},
+
+  {lesson:"restoration", lessonLabel:"Lesson 1: The Message of the Restoration", title:"Pray to Know the Truth through the Holy Ghost",
+    core:"Prayer is two-way communication with God. As we pray with faith and real intent, the Holy Ghost teaches and confirms truth to us, usually as a quiet assurance through our feelings, thoughts, and impressions.",
+    question:"Would you share your beliefs about prayer? May we share ours?",
+    commitment:"May we set a time for our next visit?",
+    ref:"Moroni 10:3-5; D&C 8:2-3"},
+
+  // ===== LESSON 2: PLAN OF SALVATION (8) =====
+  {lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation", title:"Premortal Life: God's Purpose and Plan for Us",
+    core:"We are all spirit children of God and lived with Him before we were born on earth. In our premortal life we chose to follow God's plan, which meant coming to earth to take the next step in our eternal progression.",
+    question:"Where do you feel you came from, and what do you feel is your purpose?",
+    commitment:"Will you ask God in prayer to help you know that what we have taught is true?",
+    ref:"Jeremiah 1:5; Abraham 3:22-26; D&C 138:53-56"},
+
+  {lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation", title:"The Creation",
+    core:"Under God's direction, Jesus Christ created the earth and all living things, including man and woman in God's own image, so His spirit children would have a place to receive physical bodies and gain experience.",
+    question:"What do you feel when you consider the order and beauty of creation?",
+    commitment:"Will you read the Book of Mormon and pray to know that it is the word of God?",
+    ref:"Moses 2; Genesis 1:27; D&C 88:41-47"},
+
+  {lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation", title:"The Fall of Adam and Eve",
+    core:"Adam and Eve transgressed and were cast out of the Garden of Eden, becoming mortal. This event, the Fall, was a necessary step forward &mdash; it made it possible for us to be born on earth, to experience both good and evil, and to progress.",
+    question:"How do you make sense of why there is both joy and hardship in life?",
+    commitment:"Will you attend church with us this Sunday to learn more about what we have taught?",
+    ref:"2 Nephi 2:22-27; Moses 5:10-11"},
+
+  {lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation", title:"Our Life on Earth",
+    core:"We come to earth to receive a physical body, learn to use our agency wisely, and learn to walk by faith. Every part of our mortal experience &mdash; joys and sorrows, successes and setbacks &mdash; helps us grow and prepare to return to God.",
+    question:"What have you learned from the challenges you have faced?",
+    commitment:"Will you follow Jesus's example and be baptized?",
+    ref:"2 Nephi 2:11, 25-29; Romans 3:23; Helaman 5:11"},
+
+  {lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation", title:"The Atonement of Jesus Christ",
+    core:"Because God loves us, He sent Jesus Christ to redeem us from sin and death. Through His Atonement we can be forgiven and cleansed as we repent, and through His Resurrection we will all be resurrected with perfected bodies.",
+    question:"What is a challenge you or your family is facing? May we share how the Atonement of Jesus Christ could help?",
+    commitment:"Will you read the Book of Mormon and pray to know that it is the word of God?",
+    ref:"Alma 7:11-13; 34:16; 2 Nephi 9:6-12; Romans 8:39"},
+
+  {lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation", title:"The Spirit World",
+    core:"When our physical body dies, our spirit continues to live in the spirit world &mdash; a temporary state of learning and preparation before the Resurrection. The gospel continues to be taught there to those who did not receive it in mortality.",
+    question:"What do you currently believe happens after someone dies?",
+    commitment:"Will you attend church with us this Sunday to learn more about what we have taught?",
+    ref:"Alma 40; D&C 138"},
+
+  {lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation", title:"The Resurrection, Salvation, and Exaltation",
+    core:"The Resurrection is the reuniting of body and spirit, made possible by the Savior's Atonement and Resurrection. Salvation from physical death comes to all; exaltation &mdash; living with God forever in eternal families &mdash; comes through faith, repentance, baptism, the Holy Ghost, and faithfulness to temple covenants.",
+    question:"What would it mean to you to know your family relationships could continue beyond this life?",
+    commitment:"Will you follow Jesus's example and be baptized?",
+    ref:"Alma 11:42-44; 42:13-15, 21-25; 1 Corinthians 15:20-22"},
+
+  {lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation", title:"Judgment and Kingdoms of Glory",
+    core:"When we are resurrected, Jesus Christ will be our just and merciful judge. With very few exceptions, each of us will receive a place in a kingdom of glory, judged according to our faith, works, desires, and repentance.",
+    question:"How does it feel to think that a loving God, who knows your whole story, will be the one to judge you?",
+    commitment:"May we set a time for our next visit?",
+    ref:"2 Nephi 9:15; D&C 76:50-113; 137:7-10"},
+
+  // ===== LESSON 3: GOSPEL OF JESUS CHRIST (7) =====
+  {lesson:"gospel", lessonLabel:"Lesson 3: The Gospel of Jesus Christ", title:"The Divine Mission of Jesus Christ",
+    core:"Heavenly Father sent His Beloved Son, Jesus Christ, to earth to redeem us from sin and death. Because of His atoning sacrifice, we can be cleansed and sanctified as we repent, and because of His Resurrection, we will all be resurrected.",
+    question:"What do you know about Jesus Christ?",
+    commitment:"Will you ask God in prayer to help you know that what we have taught is true?",
+    ref:"Alma 11:40; John 3:16-17; D&C 76:40-42"},
+
+  {lesson:"gospel", lessonLabel:"Lesson 3: The Gospel of Jesus Christ", title:"Faith in Jesus Christ",
+    core:"Faith in Jesus Christ is the first principle of the gospel. It includes confidence that He is the Son of God and trust in Him as our Savior &mdash; a principle of action and power that we strengthen through prayer, scripture study, and obedience.",
+    question:"What does it mean to you to have faith in Jesus Christ?",
+    commitment:"Will you attend church this Sunday to learn more about what we have taught?",
+    ref:"2 Nephi 31:19; Alma 32"},
+
+  {lesson:"gospel", lessonLabel:"Lesson 3: The Gospel of Jesus Christ", title:"Repentance",
+    core:"Repentance is the process of turning to God and turning away from sin, made possible through Jesus Christ's atoning sacrifice. It is a lifelong process that brings a mighty change of heart, peace, and joy &mdash; not punishment.",
+    question:"What changes do you want to make in your life?",
+    commitment:"Will you read the Book of Mormon and pray to know that it is the word of God?",
+    ref:"Mosiah 26:30; Alma 5:12-14; D&C 58:42-43"},
+
+  {lesson:"gospel", lessonLabel:"Lesson 3: The Gospel of Jesus Christ", title:"Baptism: Our First Covenant with God",
+    core:"Baptism is the first saving ordinance and our first covenant with God. By immersion, following Jesus's example, it represents the death of our old life and our spiritual rebirth, cleansing us of sin and giving us a new start.",
+    question:"What is your understanding of baptism? What can you do now to prepare for baptism?",
+    commitment:"Will you follow Jesus's example and be baptized?",
+    ref:"2 Nephi 31:13; Mosiah 18:8-10; D&C 20:37"},
+
+  {lesson:"gospel", lessonLabel:"Lesson 3: The Gospel of Jesus Christ", title:"The Gift of the Holy Ghost",
+    core:"Baptism by water must be followed by baptism of the Spirit, received through confirmation. The Holy Ghost, the third member of the Godhead, sanctifies, guides, comforts, and teaches us, and can be our companion as we are faithful.",
+    question:"How could the Holy Ghost help you in your journey to return to God's presence?",
+    commitment:"May we set a time for our next visit?",
+    ref:"John 3:5; 2 Nephi 32:5; 3 Nephi 27:20"},
+
+  {lesson:"gospel", lessonLabel:"Lesson 3: The Gospel of Jesus Christ", title:"Endure to the End",
+    core:"Enduring to the end means staying faithful to God throughout our lives &mdash; continuing to exercise faith, repent, keep our covenants, and seek the Holy Ghost &mdash; with the promise of eternal life for those who press forward in Christ.",
+    question:"What helps you stay committed to something important over a long period of time?",
+    commitment:"Will you attend church this Sunday to learn more about what we have taught?",
+    ref:"2 Nephi 31:14-20"},
+
+  {lesson:"gospel", lessonLabel:"Lesson 3: The Gospel of Jesus Christ", title:"The Gospel of Jesus Christ Blesses All of God's Children",
+    core:"The gospel is for everyone, regardless of background or situation. Living it deepens our joy, strengthens our families, and provides the way for families to be united for eternity.",
+    question:"What is a challenge that you or your family is facing? May we share some ways the gospel could help?",
+    commitment:"Will you read the Book of Mormon and pray to know that it is the word of God?",
+    ref:"2 Nephi 26:33; Mosiah 2:41; \"The Family: A Proclamation to the World\""},
+
+  // ===== LESSON 4: BECOMING LIFELONG DISCIPLES (17) =====
+  {lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples", title:"Pray Often",
+    core:"Prayer is a simple, sincere conversation with Heavenly Father, offered in the name of Jesus Christ. As part of taking upon us Christ's name, we speak openly with God, express gratitude, ask for help, and listen.",
+    question:"What does talking to God currently look like in your life, if at all?",
+    commitment:"Will you pray daily to Heavenly Father?",
+    ref:"3 Nephi 18:19-20; Alma 34:17-28; D&C 19:28"},
+
+  {lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples", title:"Study the Scriptures",
+    core:"Studying the scriptures, especially the Book of Mormon, daily is an essential way to remember and follow Jesus Christ. As we feast on His words, our faith increases and our testimonies grow stronger.",
+    question:"What's a book or message that has shaped how you think or live?",
+    commitment:"Will you read the scriptures daily? (suggest specific chapters)",
+    ref:"2 Nephi 32:3; 2 Timothy 3:14-17"},
+
+  {lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples", title:"The Two Great Commandments &mdash; Love God and Love Others",
+    core:"When asked the great commandment, Jesus taught us to love God with all our heart, soul, and mind, and to love our neighbor as ourselves. These two commandments are the foundation of all of God's commandments and a defining characteristic of discipleship.",
+    question:"Who is someone you find it easy to love, and what does that love look like in action?",
+    commitment:"This week, look for one way to show love for God and one way to show love for someone around you.",
+    ref:"Matthew 22:36-40; Mosiah 2-5; Moroni 7:45-48"},
+
+  {lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples", title:"Follow the Prophet",
+    core:"God calls prophets as His representatives on earth. The teachings of the living prophet and apostles provide an anchor of eternal truth, and following them brings greater happiness and guidance for our eternal journey.",
+    question:"Do you believe [current Church President] is a prophet of God? What does this mean to you?",
+    commitment:"Will you follow the counsel of the living prophet?",
+    ref:"Amos 3:7; D&C 1:37-38; 21:1-7"},
+
+  {lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples", title:"Keep the Ten Commandments",
+    core:"The Ten Commandments, given to Moses, apply just as much today. They teach us to worship and show reverence for God, and how to treat one another.",
+    question:"Which of these commandments feels most relevant to your life right now?",
+    commitment:"Will you keep the Ten Commandments?",
+    ref:"Exodus 20:1-17; Mosiah 13:11-24"},
+
+  {lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples", title:"Live the Law of Chastity",
+    core:"The law of chastity &mdash; abstinence outside of legal marriage between a man and woman, and complete fidelity within marriage &mdash; protects the sacred power to create life and brings personal peace, trust, and family unity.",
+    question:"What do you feel are the most important values to protect in a marriage or relationship?",
+    commitment:"Will you strive for moral cleanliness in your thoughts and behavior? Will you live the law of chastity?",
+    ref:"D&C 58:42-43; 121:45; Exodus 20:14"},
+
+  {lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples", title:"Keep the Law of Tithing",
+    core:"Tithing &mdash; one-tenth of our income, given to God &mdash; is an expression of faith and gratitude that furthers God's work. He promises blessings far greater than what we give.",
+    question:"Have you ever given something away and felt it came back to you in another form, spiritually or otherwise?",
+    commitment:"Will you obey the law of tithing after you are baptized?",
+    ref:"Malachi 3:7-12; D&C 119"},
+
+  {lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples", title:"Obey the Word of Wisdom",
+    core:"Our bodies are sacred gifts from God, compared to temples. The Word of Wisdom teaches us to eat healthy foods and avoid substances that harm our bodies, with promised blessings of health, wisdom, and spiritual receptiveness.",
+    question:"How do you currently think about the connection between physical health and spiritual wellbeing?",
+    commitment:"Will you obey the Word of Wisdom?",
+    ref:"D&C 89; 1 Corinthians 6:19-20"},
+
+  {lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples", title:"Keep the Sabbath Day Holy",
+    core:"The Sabbath is a day set apart to rest from labor and worship God, centered on partaking of the sacrament to remember Jesus Christ and renew our covenants. Keeping it holy brings joy, peace, and closeness to God.",
+    question:"What does rest and renewal currently look like for you each week?",
+    commitment:"Will you keep the Sabbath day holy and attend church weekly? Will you come with us to meet the bishop or branch president?",
+    ref:"Exodus 20:8-11; D&C 59:9-19; Isaiah 58:13-14"},
+
+  {lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples", title:"Obey and Honor the Law",
+    core:"Latter-day Saints believe in obeying the law and being good citizens, rendering service to improve their communities and being an influence for sound moral values.",
+    question:"How do you see the connection between being a good citizen and living your faith?",
+    commitment:"Will you obey the laws of the country in which you live?",
+    ref:"D&C 58:21; 134; Articles of Faith 1:12"},
+
+  {lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples", title:"Service",
+    core:"When baptized, we covenant to serve God and others &mdash; bearing one another's burdens, mourning with those who mourn, and comforting those in need. As disciples, we look for opportunities to serve each day.",
+    question:"Can you recall a time someone served you in a way that meant a lot?",
+    commitment:"Will you accept a calling or assignment if it is extended to you, including as a ministering brother or sister?",
+    ref:"Mosiah 18:8-10; James 1:27"},
+
+  {lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples", title:"Sharing the Gospel",
+    core:"As part of our baptismal covenant, we promise to stand as witnesses of God. Sharing the gospel &mdash; through normal, natural invitations &mdash; is one of the most joyful kinds of service and a powerful expression of love.",
+    question:"Is there someone in your life you think might benefit from what you're learning?",
+    commitment:"Will you pray for the missionaries and for opportunities to share the gospel?",
+    ref:"Mosiah 18:9; D&C 88:81"},
+
+  {lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples", title:"Fasting and Fast Offerings",
+    core:"Fasting &mdash; going without food and drink, paired with prayer &mdash; builds spiritual strength and humility. Fast offerings, donated during this time, help care for those in need.",
+    question:"Have you ever given something up temporarily for a goal or cause you cared about?",
+    commitment:"Will you fast and pray on the next fast Sunday for a specific need? Will you donate a fast offering after baptism?",
+    ref:"Isaiah 58:6-11; D&C 59:12-16; 88:76"},
+
+  {lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples", title:"Priesthood and Church Organizations",
+    core:"The priesthood is the authority and power of God, restored through Joseph Smith, by which Church leaders are called and ordinances such as baptism and the sacrament are performed. Church organizations like quorums, Relief Society, and Primary help members serve and grow.",
+    question:"What questions do you have about how the Church is organized and led?",
+    commitment:"Will you prepare to receive the Aaronic or Melchizedek Priesthood (as applicable)? Will you participate actively in Church organizations?",
+    ref:"D&C 84:19-20; 107; 121:34-46"},
+
+  {lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples", title:"Marriage and Families",
+    core:"Marriage between a man and a woman, and the family, are ordained of God and central to His plan. Families are most likely to be happy when they live by the teachings of Jesus Christ, through family prayer, scripture study, and worship together.",
+    question:"What's something from your own family growing up that you'd want to carry forward, or do differently?",
+    commitment:"Will you hold weekly home evening, daily family prayer, and daily family scripture study? Will you worship on the Sabbath as a family?",
+    ref:"\"The Family: A Proclamation to the World\"; D&C 49:15"},
+
+  {lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples", title:"Temple and Family History Work for Deceased Ancestors",
+    core:"Through family history work and temple ordinances performed on their behalf, those who died without receiving the gospel can accept or reject it in the spirit world &mdash; potentially uniting families for eternity.",
+    question:"Do you know much about your family's history or ancestors?",
+    commitment:"Will you participate in family history work and submit names of deceased ancestors to receive temple ordinances?",
+    ref:"D&C 128; 138; 1 Corinthians 15:29"},
+
+  {lesson:"discipleship", lessonLabel:"Lesson 4: Becoming Lifelong Disciples", title:"Temples, the Endowment, Eternal Marriage, and Eternal Families",
+    core:"The temple is the house of the Lord, where sacred ordinances such as the endowment and eternal marriage are received. God's plan of happiness enables family relationships to endure beyond the grave through these covenants.",
+    question:"What would it mean to you to know your family relationships could continue beyond this life?",
+    commitment:"Will you prepare to attend the temple and receive temple ordinances?",
+    ref:"D&C 109; 131:1-4"},
+];
+
+const lessonOrder = ["restoration","pos","gospel","discipleship"];
+let currentFilter = "all";
+
+function render(){
+  const query = document.getElementById('search').value.trim().toLowerCase();
+  const resultsDiv = document.getElementById('results');
+  const noResults = document.getElementById('no-results');
+  resultsDiv.innerHTML = "";
+
+  let total = 0;
+  lessonOrder.forEach(lessonKey => {
+    if(currentFilter !== "all" && currentFilter !== lessonKey) return;
+    const items = data.filter(d => d.lesson === lessonKey && matches(d, query));
+    if(items.length === 0) return;
+
+    const group = document.createElement('div');
+    group.className = 'lesson-group';
+    const groupTitle = document.createElement('div');
+    groupTitle.className = 'lesson-group-title';
+    const totalInLesson = data.filter(d=>d.lesson===lessonKey).length;
+    groupTitle.textContent = items[0].lessonLabel + " (" + items.length + (items.length !== totalInLesson ? " of " + totalInLesson : "") + ")";
+    group.appendChild(groupTitle);
+
+    items.forEach(item => {
+      total++;
+      const principleDiv = document.createElement('div');
+      principleDiv.className = 'principle';
+
+      const head = document.createElement('div');
+      head.className = 'principle-head';
+      head.innerHTML = '<h3>' + item.title + '</h3><span class="arrow">&#9656;</span>';
+      head.addEventListener('click', () => {
+        head.classList.toggle('open');
+        body.classList.toggle('open');
+      });
+
+      const body = document.createElement('div');
+      body.className = 'principle-body';
+      body.innerHTML = `
+        <div class="row"><span class="label">Core Message</span>${item.core}</div>
+        <div class="row"><span class="label">Question to Ask</span>${item.question}</div>
+        <div class="row"><span class="label">Invitation / Commitment</span>${item.commitment}</div>
+        <div class="row ref">${item.ref}</div>
+      `;
+
+      principleDiv.appendChild(head);
+      principleDiv.appendChild(body);
+      group.appendChild(principleDiv);
+    });
+
+    resultsDiv.appendChild(group);
+  });
+
+  document.getElementById('result-count').textContent = total + " principle" + (total === 1 ? "" : "s") + " shown of 39 total";
+  noResults.style.display = total === 0 ? 'block' : 'none';
+}
+
+function matches(item, query){
+  if(!query) return true;
+  const haystack = (item.title + " " + item.core + " " + item.question + " " + item.commitment + " " + item.ref).toLowerCase();
+  return haystack.includes(query);
+}
+
+document.getElementById('search').addEventListener('input', render);
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.lesson;
+    render();
+  });
+});
+
+render();
+</script>
+
+</body>
+
+</html>

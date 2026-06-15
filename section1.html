@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section 1: One Principle, Clearly Taught</title>
+<style>
+  :root{
+    --green:#0b4d2c;
+    --green-dark:#073a20;
+    --gold:#c9a227;
+    --gold-light:#f4e6c1;
+    --cream:#fbf8f1;
+    --ink:#222;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family: Georgia, 'Times New Roman', serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  header{
+    background:var(--green);
+    color:var(--cream);
+    padding:2.5rem 1.5rem 2rem;
+    text-align:center;
+    border-bottom:6px solid var(--gold);
+  }
+  header .eyebrow{
+    font-family: 'Trebuchet MS', sans-serif;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    font-size:.75rem;
+    color:var(--gold-light);
+    margin-bottom:.5rem;
+  }
+  header h1{
+    margin:0;
+    font-size:1.9rem;
+    font-weight:700;
+  }
+  header p{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.95rem;
+    color:var(--gold-light);
+    margin-top:.6rem;
+  }
+  main{
+    max-width:760px;
+    margin:0 auto;
+    padding:2rem 1.25rem 4rem;
+  }
+  .card{
+    background:#fff;
+    border:1px solid #e6decf;
+    border-left:5px solid var(--green);
+    border-radius:6px;
+    padding:1.5rem;
+    margin-bottom:1.75rem;
+    box-shadow:0 1px 3px rgba(0,0,0,.04);
+  }
+  .card h2{
+    margin-top:0;
+    color:var(--green);
+    font-size:1.3rem;
+    font-family:'Trebuchet MS', sans-serif;
+  }
+  .card h2 .tag{
+    display:inline-block;
+    background:var(--gold);
+    color:var(--green-dark);
+    font-size:.7rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    padding:.2rem .5rem;
+    border-radius:3px;
+    margin-bottom:.5rem;
+    font-family:'Trebuchet MS', sans-serif;
+  }
+  .problem-box{
+    background:var(--gold-light);
+    border-left:4px solid var(--gold);
+    padding:.9rem 1rem;
+    border-radius:4px;
+    font-size:.97rem;
+  }
+  textarea, input[type=text]{
+    width:100%;
+    font-family:inherit;
+    font-size:1rem;
+    padding:.7rem;
+    border:1px solid #ccc;
+    border-radius:5px;
+    resize:vertical;
+  }
+  label{
+    display:block;
+    font-weight:bold;
+    font-family:'Trebuchet MS', sans-serif;
+    margin-bottom:.4rem;
+    color:var(--green-dark);
+  }
+  .btn{
+    background:var(--green);
+    color:#fff;
+    border:none;
+    padding:.6rem 1.3rem;
+    border-radius:5px;
+    font-family:'Trebuchet MS', sans-serif;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:.6rem;
+    transition:background .2s;
+  }
+  .btn:hover{ background:var(--green-dark); }
+  .btn.secondary{
+    background:transparent;
+    color:var(--green);
+    border:1px solid var(--green);
+  }
+  .feedback{
+    margin-top:1rem;
+    padding:1rem;
+    border-radius:5px;
+    display:none;
+    font-size:.95rem;
+  }
+  .feedback.show{ display:block; }
+  .feedback.good{ background:#e6f2e9; border-left:4px solid var(--green); }
+  .feedback.warn{ background:#fdeeea; border-left:4px solid #b3441f; }
+  .principle-select{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.5rem;
+    margin-bottom:1rem;
+  }
+  .principle-select button{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.85rem;
+    padding:.45rem .9rem;
+    border:1px solid var(--green);
+    background:#fff;
+    color:var(--green);
+    border-radius:20px;
+    cursor:pointer;
+  }
+  .principle-select button.active{
+    background:var(--green);
+    color:#fff;
+  }
+  .principle-detail{
+    margin-top:.5rem;
+    font-size:.95rem;
+    background:#f6f3ec;
+    padding:.9rem 1rem;
+    border-radius:5px;
+    display:none;
+  }
+  .principle-detail.show{ display:block; }
+  .principle-detail strong{ color:var(--green-dark); }
+  .roleplay-script{
+    background:var(--green-dark);
+    color:var(--gold-light);
+    padding:1rem 1.2rem;
+    border-radius:6px;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.92rem;
+    margin:1rem 0;
+  }
+  .roleplay-script p{ margin:.4rem 0; }
+  .roleplay-script .speaker{ color:var(--gold); font-weight:bold; }
+  .check-row{
+    display:flex;
+    align-items:flex-start;
+    gap:.6rem;
+    margin:.6rem 0;
+    font-size:.95rem;
+  }
+  .check-row input{ margin-top:.25rem; }
+  .progress-note{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.85rem;
+    color:#7a7158;
+    text-align:center;
+    margin-top:2rem;
+  }
+  .divider{
+    text-align:center;
+    color:var(--gold);
+    font-size:1.4rem;
+    margin:1.5rem 0;
+    letter-spacing:.4em;
+  }
+
+  footer{
+    background:var(--green-dark);
+    color:var(--gold-light);
+    text-align:center;
+    padding:.9rem 1rem;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.8rem;
+    letter-spacing:.04em;
+    margin-top:2rem;
+  }
+  
+</style>
+</head>
+<body>
+
+<div class="module-nav" style="font-family:'Trebuchet MS', sans-serif; background:#073a20; display:flex; justify-content:space-between; padding:.7rem 1.2rem; position:sticky; top:0; z-index:50;">
+  <a href="index.html" style="color:#f4e6c1; text-decoration:none; font-size:.85rem;">&#8592; All Sections</a>
+  <span style="color:#fff; font-weight:bold; font-size:.85rem;">Section 1 of 4</span>
+  <a href="section2.html" style="color:#f4e6c1; text-decoration:none; font-size:.85rem;">Next: Questions &#8594;</a>
+</div>
+
+<header>
+  <div class="eyebrow">Foundations Training Module &middot; Nigeria Uyo Mission</div>
+  <h1>Section 1: One Principle, Clearly Taught</h1>
+  <p>Learning to stay on track and teach with clarity</p>
+</header>
+
+<main>
+
+  <div class="card">
+    <h2><span class="tag">The Problem</span><br>Drifting Between Principles</h2>
+    <div class="problem-box">
+      It happens often: you set out to teach one principle &mdash; say, the Restoration &mdash;
+      but partway through, you find yourself explaining the Plan of Salvation, or jumping ahead
+      to baptism. By the end, the investigator isn't sure what the lesson was actually about.
+      Nothing was taught poorly &mdash; but nothing was taught <em>clearly</em>, either.
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="tag">Core Skill</span><br>Find the One Sentence</h2>
+    <p>
+      Before you open your mouth to teach a principle, you should be able to say what it is
+      in <strong>one sentence</strong>. Not a paragraph. Not three points. One sentence that
+      captures the heart of it. Everything you teach in that moment should support that sentence
+      &mdash; and nothing else.
+    </p>
+    <p>
+      Try it below. Pick a principle, then write your one sentence.
+    </p>
+
+    <div class="principle-select">
+      <button data-principle="restoration" class="active">Restoration</button>
+      <button data-principle="plan">Plan of Salvation</button>
+      <button data-principle="gospel">Gospel of Jesus Christ</button>
+      <button data-principle="repentance">Repentance</button>
+    </div>
+
+    <div class="principle-detail show" id="detail-restoration">
+      <strong>Restoration:</strong> The fulness of Christ's gospel, lost through apostasy, has been
+      brought back to the earth through the Prophet Joseph Smith.
+    </div>
+    <div class="principle-detail" id="detail-plan">
+      <strong>Plan of Salvation:</strong> God has a plan that explains where we came from, why we
+      are here, and where we can go after this life &mdash; and that plan centers on Jesus Christ.
+    </div>
+    <div class="principle-detail" id="detail-gospel">
+      <strong>Gospel of Jesus Christ:</strong> Through faith in Jesus Christ, repentance, baptism,
+      receiving the Holy Ghost, and enduring to the end, we can return to live with God.
+    </div>
+    <div class="principle-detail" id="detail-repentance">
+      <strong>Repentance:</strong> Because of Jesus Christ, we can change, be forgiven, and become
+      more like Him &mdash; repentance is a gift, not a punishment.
+    </div>
+
+    <label for="one-sentence" style="margin-top:1rem;">Your one-sentence version:</label>
+    <textarea id="one-sentence" rows="2" placeholder="In one sentence, what is this principle about?"></textarea>
+    <button class="btn" onclick="checkSentence()">Check My Sentence</button>
+
+    <div class="feedback" id="sentence-feedback"></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="tag">Watch For This</span><br>Signs You're Drifting</h2>
+    <p>Check any of these you've noticed yourself doing while teaching:</p>
+    <div class="check-row"><input type="checkbox"><span>Starting to explain a second principle before finishing the first</span></div>
+    <div class="check-row"><input type="checkbox"><span>Answering a question by introducing a whole new topic</span></div>
+    <div class="check-row"><input type="checkbox"><span>Using scriptures from three different principles in one explanation</span></div>
+    <div class="check-row"><input type="checkbox"><span>Realizing at the end of the lesson you're not sure what the investigator actually learned</span></div>
+    <p style="font-size:.9rem; color:#7a7158; margin-bottom:0;">
+      If you checked two or more, this section is especially for you &mdash; and that's a good thing.
+      Awareness is the first step.
+    </p>
+  </div>
+
+  <div class="divider">&#8226; &#8226; &#8226;</div>
+
+  <div class="card">
+    <h2><span class="tag">Role-Play Scenario</span><br>Teach the One Sentence</h2>
+    <p>Read through this short scenario. Notice how the missionary stays anchored to one idea,
+       even when the investigator's question could lead somewhere else.</p>
+
+    <div class="roleplay-script">
+      <p><span class="speaker">Investigator:</span> So if Joseph Smith brought back the true church,
+      does that mean my church is wrong? My grandmother was baptized in it for 60 years.</p>
+      <p><span class="speaker">Missionary:</span> That's a fair question, and I respect your
+      grandmother's faith deeply. Here's the simple truth I want to share: over time, after the
+      original apostles died, parts of Christ's teachings and authority were lost from the earth &mdash;
+      not because people were bad, but because that's what was prophesied would happen. The
+      Restoration means God brought that fulness back through a prophet, so it's available again today.</p>
+      <p><span class="speaker">Investigator:</span> Okay... but what happens to people who were never
+      part of that?</p>
+      <p><span class="speaker">Missionary:</span> That's a really good question &mdash; and it connects
+      to another principle we'd love to share with you another time. For today, I just want to make
+      sure this main idea is clear: God restored His full gospel through a prophet. Does that make sense
+      so far?</p>
+    </div>
+
+    <p style="font-size:.95rem;">
+      Notice: the missionary didn't ignore the question. They acknowledged it, then gently
+      <strong>parked it for later</strong> and returned to the one sentence for today's principle.
+    </p>
+
+    <label for="practice-response" style="margin-top:.5rem;">Now you try:</label>
+    <p style="font-size:.95rem; margin-top:-.4rem;">
+      An investigator asks: <em>"If God loves everyone, why do some people never even hear about
+      this church in their whole lives?"</em> &mdash; while you're teaching the Plan of Salvation.
+      Write a short response that acknowledges the question but returns to your one sentence.
+    </p>
+    <textarea id="practice-response" rows="3" placeholder="Type your response here..."></textarea>
+    <button class="btn" onclick="checkPractice()">Get Feedback</button>
+    <div class="feedback" id="practice-feedback"></div>
+  </div>
+
+  <div class="card" style="border-left-color:var(--gold); background:var(--gold-light);">
+    <h2 style="color:var(--green-dark);"><span class="tag">Takeaway</span><br>Before You Teach</h2>
+    <p style="margin-bottom:0;">
+      Before every lesson, ask yourself: <em>"What is the one thing I want this person to walk
+      away understanding?"</em> Write it down if you need to. When questions or tangents come up
+      &mdash; and they will &mdash; acknowledge them warmly, then return to that one thing.
+      Clarity isn't about saying less. It's about saying <strong>what matters most, clearly.</strong>
+    </p>
+  </div>
+
+  <p class="progress-note">Section 1 of 4 &mdash; Foundations Training Module</p>
+
+</main>
+<footer>
+  Developed by <strong>Elder ThankGod Andrew</strong> &mdash; Assistant to the President &mdash; Nigeria Uyo Mission
+</footer>
+<script>
+  const principles = ['restoration','plan','gospel','repentance'];
+  const buttons = document.querySelectorAll('.principle-select button');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      principles.forEach(p => document.getElementById('detail-'+p).classList.remove('show'));
+      document.getElementById('detail-'+btn.dataset.principle).classList.add('show');
+      document.getElementById('sentence-feedback').classList.remove('show');
+    });
+  });
+
+  function checkSentence(){
+    const val = document.getElementById('one-sentence').value.trim();
+    const fb = document.getElementById('sentence-feedback');
+    fb.classList.remove('good','warn');
+    if(val.length === 0){
+      fb.textContent = "Try writing a sentence first — even a rough attempt helps you practice.";
+      fb.classList.add('warn');
+    } else {
+      const sentenceCount = (val.match(/[.!?]/g) || []).length;
+      const wordCount = val.split(/\s+/).length;
+      if(sentenceCount > 1){
+        fb.textContent = "This looks like more than one sentence. Try trimming it down to a single idea — that's the discipline this builds.";
+        fb.classList.add('warn');
+      } else if(wordCount > 35){
+        fb.textContent = "Good start — but it's a bit long for 'one sentence.' See if you can tighten it further. Shorter sentences are easier for investigators to hold onto.";
+        fb.classList.add('warn');
+      } else {
+        fb.textContent = "Nice work. A short, single-idea sentence like this gives you a clear anchor — if the lesson drifts, you can always return to it.";
+        fb.classList.add('good');
+      }
+    }
+    fb.classList.add('show');
+  }
+
+  function checkPractice(){
+    const val = document.getElementById('practice-response').value.trim().toLowerCase();
+    const fb = document.getElementById('practice-feedback');
+    fb.classList.remove('good','warn');
+    if(val.length === 0){
+      fb.textContent = "Give it a try — even a short attempt is useful practice.";
+      fb.classList.add('warn');
+    } else {
+      const acknowledges = /good question|understand|hear you|fair|important|valid|appreciate/.test(val);
+      const returns = /plan of salvation|main idea|today|for now|come back|focus|share with you/.test(val);
+      if(acknowledges && returns){
+        fb.textContent = "Well done — you acknowledged the question warmly and brought the conversation back to your one sentence on the Plan of Salvation. That's exactly the balance to aim for.";
+        fb.classList.add('good');
+      } else if(acknowledges && !returns){
+        fb.textContent = "Good — you acknowledged the question. Now try adding a sentence that brings the focus back to the Plan of Salvation specifically, so the lesson stays anchored.";
+        fb.classList.add('warn');
+      } else {
+        fb.textContent = "Try starting by acknowledging the question warmly (it's a real concern), then gently return to the one sentence you're teaching today.";
+        fb.classList.add('warn');
+      }
+    }
+    fb.classList.add('show');
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deep Dive: Lesson 4 &mdash; Nigeria Uyo Mission</title>
+<style>
+  :root{
+    --green:#0b4d2c;
+    --green-dark:#073a20;
+    --gold:#c9a227;
+    --gold-light:#f4e6c1;
+    --cream:#fbf8f1;
+    --ink:#222;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family: Georgia, 'Times New Roman', serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.55;
+  }
+  .module-nav{
+    font-family:'Trebuchet MS', sans-serif;
+    background:var(--green-dark);
+    display:flex;
+    justify-content:space-between;
+    padding:.7rem 1.2rem;
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  .module-nav a{ color:var(--gold-light); text-decoration:none; font-size:.85rem; }
+  .module-nav a:hover{ color:#fff; }
+  .module-nav span{ color:#fff; font-weight:bold; font-size:.85rem; }
+
+  header{
+    background:var(--green);
+    color:var(--cream);
+    padding:2.2rem 1.5rem 1.8rem;
+    text-align:center;
+    border-bottom:6px solid var(--gold);
+  }
+  header .eyebrow{
+    font-family:'Trebuchet MS', sans-serif;
+    letter-spacing:.25em;
+    text-transform:uppercase;
+    font-size:.75rem;
+    color:var(--gold-light);
+    margin-bottom:.5rem;
+  }
+  header h1{ margin:0; font-size:1.8rem; font-weight:700; }
+  header p{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.92rem;
+    color:var(--gold-light);
+    margin-top:.6rem;
+    max-width:560px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  main{ max-width:800px; margin:0 auto; padding:1.5rem 1.1rem 4rem; }
+
+  .controls{
+    position:sticky;
+    top:42px;
+    background:var(--cream);
+    z-index:40;
+    padding:1rem 0 .8rem;
+    border-bottom:1px solid #e6decf;
+    margin-bottom:1.2rem;
+  }
+  #search{
+    width:100%;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:1rem;
+    padding:.7rem .9rem;
+    border:1px solid #ccc;
+    border-radius:6px;
+    margin-bottom:.7rem;
+  }
+  .result-count{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.8rem;
+    color:#7a7158;
+    margin-top:.6rem;
+  }
+
+  .lesson-group-title{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.85rem;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--green-dark);
+    border-bottom:2px solid var(--gold);
+    padding-bottom:.3rem;
+    margin-bottom:.8rem;
+  }
+
+  .principle{
+    background:#fff;
+    border:1px solid #e6decf;
+    border-left:5px solid var(--green);
+    border-radius:6px;
+    margin-bottom:.8rem;
+    overflow:hidden;
+  }
+  .principle-head{
+    padding:.85rem 1.1rem;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:.8rem;
+  }
+  .principle-head h3{
+    margin:0;
+    font-size:1.02rem;
+    color:var(--green-dark);
+    font-family:'Trebuchet MS', sans-serif;
+  }
+  .principle-head .arrow{
+    color:var(--gold);
+    flex:0 0 auto;
+    transition:transform .2s;
+  }
+  .principle-head.open .arrow{ transform:rotate(90deg); }
+  .principle-body{
+    display:none;
+    padding:0 1.1rem 1.2rem;
+    font-size:.93rem;
+  }
+  .principle-body.open{ display:block; }
+
+  .block{
+    margin-bottom:1rem;
+    padding-bottom:.9rem;
+    border-bottom:1px solid #f0ead9;
+  }
+  .block:last-child{ border-bottom:none; margin-bottom:0; padding-bottom:0; }
+  .block .label{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.7rem;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--gold);
+    display:block;
+    margin-bottom:.35rem;
+    font-weight:bold;
+  }
+  .block ul{ margin:.3rem 0; padding-left:1.2rem; }
+  .block li{ margin-bottom:.3rem; }
+  .ref{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.78rem;
+    color:#7a7158;
+    font-style:italic;
+  }
+  .breakdown-box{
+    background:var(--gold-light);
+    border-left:3px solid var(--gold);
+    padding:.6rem .8rem;
+    border-radius:4px;
+    font-size:.9rem;
+  }
+  .question-box{
+    background:#f6f3ec;
+    border-left:3px solid var(--green);
+    padding:.6rem .8rem;
+    border-radius:4px;
+    font-size:.9rem;
+    margin-bottom:.5rem;
+  }
+  .question-box .q{
+    font-weight:bold;
+    color:var(--green-dark);
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.85rem;
+    display:block;
+    margin-bottom:.25rem;
+  }
+  .connection-box{ font-size:.88rem; color:#5c5648; }
+  .testimony-box{ font-size:.88rem; font-style:italic; color:#5c5648; }
+  .no-results{
+    text-align:center;
+    color:#a99a6f;
+    font-family:'Trebuchet MS', sans-serif;
+    padding:2rem 0;
+  }
+  .source-note{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.8rem;
+    color:#7a7158;
+    text-align:center;
+    margin-top:2.5rem;
+  }
+  .intro-card{
+    background:#fff;
+    border:1px solid #e6decf;
+    border-left:5px solid var(--green);
+    border-radius:6px;
+    padding:1.3rem 1.4rem;
+    margin-bottom:1.5rem;
+    font-size:.93rem;
+  }
+  .intro-card strong{ color:var(--green-dark); }
+
+  footer{
+    background:var(--green-dark);
+    color:var(--gold-light);
+    text-align:center;
+    padding:.9rem 1rem;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.8rem;
+    letter-spacing:.04em;
+    margin-top:2rem;
+  }
+  
+</style>
+</head>
+<body>
+
+<div class="module-nav">
+  <a href="deep-dive.html">&#8592; Deep Dive (1-3)</a>
+  <span>Deep Dive: Lesson 4</span>
+  <a href="reference.html">Quick Reference (39) &#8594;</a>
+</div>
+
+<header>
+  <div class="eyebrow">Nigeria Uyo Mission</div>
+  <h1>Deep Dive: Lesson 4 &mdash; Becoming Lifelong Disciples</h1>
+  <p>All 17 principles, in the same format as Lessons 1-3: what to help the
+     person understand, Bible &amp; Book of Mormon scriptures, common teaching
+     breakdowns, real investigator questions with simple responses, how each
+     connects to the rest of the gospel, and a testimony prompt.</p>
+</header>
+
+<main>
+
+  <div class="intro-card">
+    <strong>A note on this lesson:</strong> Lesson 4 is taught over several visits,
+    organized around the baptismal covenants (take upon us the name of Christ, keep
+    the commandments, serve God and others, endure to the end). Many of these
+    principles are sensitive (chastity, family situations, past mistakes) &mdash;
+    the "Common Drift" sections especially emphasize sensitivity and pacing, not
+    just doctrinal accuracy.
+  </div>
+
+  <div class="controls">
+    <input type="text" id="search" placeholder="Search by keyword (e.g. 'tithing', 'chastity', 'temple')...">
+    <div class="result-count" id="result-count"></div>
+  </div>
+
+  <div class="lesson-group-title">Lesson 4: Becoming Lifelong Disciples (17)</div>
+  <div id="results"></div>
+  <div class="no-results" id="no-results" style="display:none;">No principles match your search.</div>
+
+  <p class="source-note">Doctrinal points adapted from Preach My Gospel, Chapter 3. Scriptures limited to the Bible and Book of Mormon for use with investigators.</p>
+  
+</main>
+<footer>
+  Developed by <strong>Elder ThankGod Andrew</strong> &mdash; Assistant to the President &mdash; Nigeria Uyo Mission
+</footer>
+<script>
+const data = [
+{title:"Pray Often",
+  points:[
+    "Prayer is a simple, sincere conversation with Heavenly Father, offered in the name of Jesus Christ.",
+    "Prayer includes addressing God, expressing gratitude, asking for help and guidance, and closing in Christ's name.",
+    "After praying, we pause to listen &mdash; prayer is two-way."
+  ],
+  scriptures:[
+    "Pattern of prayer: Matthew 6:9-13 (the Lord's Prayer)",
+    "Praying in Christ's name: John 16:23-24; 3 Nephi 18:19-20",
+    "Sincerity over repetition: Matthew 6:7; Alma 34:27"
+  ],
+  breakdown:"Missionaries sometimes teach the *structure* of prayer (the four parts) without modeling what it actually feels like to pray sincerely. If the investigator has never prayed before, a structure alone can feel like reciting a script rather than talking to a Father.",
+  questions:[
+    {q:"\"I've never really prayed before &mdash; what if I do it wrong?\"",
+     a:"Reassure them there's no wrong way to talk to a loving Father. Offer to pray together first so they can hear what it sounds like, then invite them to try in their own words &mdash; emphasizing that sincerity matters more than form."}
+  ],
+  connection:"This is the first of the \"taking upon us the name of Christ\" principles and connects back to Lesson 1's invitation to pray about the Book of Mormon &mdash; this is that same skill, made a daily habit.",
+  testimony:"Share what a regular prayer habit has done for your own relationship with God &mdash; be specific about a recent prayer."
+},
+
+{title:"Study the Scriptures",
+  points:[
+    "Daily scripture study, especially the Book of Mormon, helps us remember and follow Jesus Christ.",
+    "Reading with real intent means being willing to act on what we learn.",
+    "Consistent study strengthens faith and testimony over time."
+  ],
+  scriptures:[
+    "Feasting on the word: 2 Nephi 32:3",
+    "Scripture's purpose: 2 Timothy 3:16-17; John 20:31",
+    "Real intent: Moroni 10:4 (BoM equivalent of acting on what's read)"
+  ],
+  breakdown:"This principle can be taught as a separate \"assignment\" disconnected from the prayer principle just covered, when really the two work together &mdash; reading and praying about what's read. Missionaries sometimes don't connect the two into one daily rhythm.",
+  questions:[
+    {q:"\"I'm not a big reader &mdash; will this still work for me?\"",
+     a:"Reassure them that even a few verses a day is meaningful &mdash; this isn't about volume. Suggest starting with short, accessible passages (like 3 Nephi 11 or Enos 1) and focus on noticing one thought or feeling per reading, not finishing chapters."}
+  ],
+  connection:"Pairs directly with \"Pray Often\" &mdash; together these form the daily spiritual rhythm that sustains everything else in Lesson 4. Also connects back to Lesson 1's Book of Mormon principle.",
+  testimony:"Share a specific verse or story that has personally meant something to you and why."
+},
+
+{title:"The Two Great Commandments &mdash; Love God and Love Others",
+  points:[
+    "Jesus taught that loving God with all our heart, soul, and mind is the first commandment.",
+    "The second is to love our neighbor as ourselves.",
+    "These two commandments are the foundation that all other commandments rest on."
+  ],
+  scriptures:[
+    "The two great commandments: Matthew 22:36-40; Mark 12:28-31",
+    "Loving God shown through obedience: John 14:15",
+    "Loving others in action: Luke 10:25-37 (the Good Samaritan); 1 John 4:20-21"
+  ],
+  breakdown:"Because this principle sits at the start of a long list of commandments, missionaries sometimes treat it as a brief introduction to \"get through\" rather than the lens through which every commandment that follows should be understood. If it's rushed, the rest of Lesson 4 can feel like a list of rules rather than expressions of love.",
+  questions:[
+    {q:"\"Why does God need so many specific rules if love is what really matters?\"",
+     a:"Reframe: the commandments aren't separate from love &mdash; they're specific expressions of it, like a parent's guidance growing out of care for a child. Each commandment in this lesson can be understood by asking, 'How does this reflect love for God or for others?'"}
+  ],
+  connection:"This is the lens for the entire rest of Lesson 4 &mdash; every commandment that follows (Sabbath, tithing, chastity, etc.) connects back to one or both of these two commandments. Revisit this principle if a later commandment feels like \"just a rule.\"",
+  testimony:"Share how keeping a specific commandment has helped you feel God's love or express love for someone else."
+},
+
+{title:"Follow the Prophet",
+  points:[
+    "God calls a living prophet today, just as He has throughout history (Lesson 1).",
+    "The prophet and apostles provide guidance suited to our time.",
+    "Following the prophet brings safety and direction amid the world's confusion."
+  ],
+  scriptures:[
+    "Pattern of prophets: Amos 3:7; Hebrews 1:1-2",
+    "Safety in following prophetic counsel: Proverbs 29:18; 1 Nephi 22:20-21"
+  ],
+  breakdown:"This principle can feel repetitive if it simply restates Lesson 1's \"God Reveals the Gospel through Prophets\" without adding the new element: a *living* prophet *today*, with current, specific counsel relevant to the investigator's life right now.",
+  questions:[
+    {q:"\"What has the prophet actually said recently that would matter to me?\"",
+     a:"Be ready with one or two specific, current examples of recent prophetic counsel (general conference messages, etc.) relevant to family, faith, or daily living &mdash; concrete and current, not abstract."}
+  ],
+  connection:"Builds directly on Lesson 1's prophet principle, now applied to discipleship: it's not just that prophets exist, but that following one shapes daily life.",
+  testimony:"Share how something a current Church leader has taught has shaped a specific decision or habit in your life."
+},
+
+{title:"Keep the Ten Commandments",
+  points:[
+    "The Ten Commandments, given to Moses, remain relevant guidance today.",
+    "They teach us how to honor God and how to treat others &mdash; an extension of the two great commandments.",
+    "Most people already accept these as good moral guidance; the gospel adds depth to *why* they matter."
+  ],
+  scriptures:[
+    "The Ten Commandments: Exodus 20:1-17",
+    "Christ's affirmation of the law: Matthew 5:17-19",
+    "Internalizing commandments (not just external compliance): Jeremiah 31:33; Psalm 119:11"
+  ],
+  breakdown:"Because most investigators already broadly agree with the Ten Commandments, missionaries sometimes treat this principle as a quick \"everyone agrees, moving on\" without exploring *why* these commandments matter as part of a covenant relationship with God &mdash; not just general ethics.",
+  questions:[
+    {q:"\"I already try to live by these &mdash; isn't that enough?\"",
+     a:"Affirm that's a wonderful foundation. Explain that what we're inviting isn't just ethical living, but a covenant relationship where keeping these commandments is part of a promise between the person and God &mdash; with God's help and the Holy Ghost's strength to live them more fully."}
+  ],
+  connection:"Connects to the two great commandments (the 'why') and to baptism's covenant (Lesson 3) &mdash; keeping commandments becomes part of a sacred two-way promise, not just personal ethics.",
+  testimony:"Share how living one of the Ten Commandments has felt different to you as part of a covenant, versus before you saw it that way."
+},
+
+{title:"Live the Law of Chastity",
+  points:[
+    "God's law of chastity reserves sexual intimacy for marriage between a man and a woman.",
+    "This law protects the sacred power to create life and strengthens marriage and family.",
+    "Where someone has not lived this law, repentance through Christ's Atonement is available and real."
+  ],
+  scriptures:[
+    "Marriage as the context for intimacy: Genesis 2:24; Hebrews 13:4",
+    "God's standard: Exodus 20:14; Matthew 5:27-28",
+    "Repentance and clean start: Isaiah 1:18; Psalm 51:10"
+  ],
+  breakdown:"This is one of the most sensitive principles in the lesson. Missionaries sometimes either avoid it out of discomfort, or present it bluntly without first establishing safety and without leading with the repentance/hope side of the message. The order matters: lead with God's loving design, not with prohibition.",
+  questions:[
+    {q:"\"I'm currently living with my partner / have a past I'm not proud of &mdash; does that disqualify me?\"",
+     a:"No &mdash; be calm and warm. Explain that this is between them and the Lord, that repentance is real and available, and that the path forward (which might include changes over time) will be discussed with care, without judgment, as they continue learning. Avoid going into detail in this setting; this is a conversation for a quieter, more personal moment, possibly with leader involvement as outlined in the manual."}
+  ],
+  connection:"Connects to the Atonement and repentance (Lesson 2 and 3) &mdash; this principle is impossible to teach with hope unless repentance has already been clearly established as real and available.",
+  testimony:"If appropriate, share (in general terms) how living this law has blessed your sense of self-respect, trust, or peace &mdash; without unnecessary personal detail."
+},
+
+{title:"Keep the Law of Tithing",
+  points:[
+    "Tithing is giving one-tenth of our income to God, as an expression of faith and gratitude.",
+    "It is a way of acknowledging that everything we have is a gift from God.",
+    "God promises blessings &mdash; spiritual and temporal &mdash; in connection with this law."
+  ],
+  scriptures:[
+    "The principle of tithing: Genesis 14:18-20 (Abraham); Malachi 3:8-10",
+    "Generosity and trust in God: Proverbs 3:9-10; Luke 6:38",
+    "Seeking God's kingdom first: Matthew 6:33"
+  ],
+  breakdown:"For investigators facing financial hardship, this principle can feel impossible or even unfair if introduced without sensitivity. Missionaries sometimes present the *amount* (10%) before establishing the *principle* (gratitude, trust, putting God first) &mdash; leading with the number can trigger anxiety before the 'why' is understood.",
+  questions:[
+    {q:"\"I'm barely making enough to get by &mdash; how can I give away 10% of that?\"",
+     a:"Acknowledge the real difficulty with compassion. Share Malachi 3:10's promise as something many members have experienced &mdash; not as a guarantee of wealth, but of sufficiency and blessings, often in unexpected ways. This is also a decision they'll have time to grow toward; it's not asked of investigators, only members after baptism."}
+  ],
+  connection:"Connects to the two great commandments (love of God shown through trust and generosity) and previews the broader theme of consecration in discipleship.",
+  testimony:"Share a specific experience of paying tithing and a blessing &mdash; financial or otherwise &mdash; that followed, being honest about what \"blessing\" looked like (not necessarily monetary)."
+},
+
+{title:"Obey the Word of Wisdom",
+  points:[
+    "Our bodies are sacred gifts from God, worth caring for.",
+    "The Word of Wisdom guides us away from substances harmful to our bodies (alcohol, tobacco, and others as guided locally).",
+    "Living this law brings physical and spiritual blessings, including greater sensitivity to the Holy Ghost."
+  ],
+  scriptures:[
+    "The body as sacred: 1 Corinthians 6:19-20; 3:16-17",
+    "Wise stewardship of the body: Daniel 1:8, 15-17 (Daniel's example)"
+  ],
+  breakdown:"For investigators in cultures where alcohol or certain substances are deeply woven into social and family life, this principle can feel isolating if presented as a rule to follow rather than a personal invitation tied to their own goals for health and spiritual sensitivity. Missionaries should avoid presenting this as \"giving things up\" without also presenting what is gained.",
+  questions:[
+    {q:"\"This is a big part of how I socialize with my family and friends &mdash; how would this even work?\"",
+     a:"Acknowledge this is a real and significant change for many people, not a small thing. Focus on the blessings &mdash; clearer thinking, health, spiritual sensitivity &mdash; and that change happens with God's help over time, not necessarily all at once before they're ready. This is also a discussion for ongoing visits, not a single conversation."}
+  ],
+  connection:"Connects to the body/temple imagery used again later for the literal temple, and to the broader theme that physical and spiritual wellbeing are connected throughout the Plan of Salvation.",
+  testimony:"Share how keeping the Word of Wisdom has affected your own clarity, health, or spiritual sensitivity."
+},
+
+{title:"Keep the Sabbath Day Holy",
+  points:[
+    "The Sabbath is a day set apart for rest and worship.",
+    "Attending church and partaking of the sacrament are central to Sabbath observance.",
+    "Keeping the Sabbath holy brings rest, renewal, and closeness to God."
+  ],
+  scriptures:[
+    "The Sabbath commandment: Exodus 20:8-11",
+    "Christ's example of Sabbath worship: Luke 4:16; Mark 2:27-28",
+    "A day of delight: Isaiah 58:13-14"
+  ],
+  breakdown:"Missionaries sometimes present this principle mainly as a list of things *not* to do (no shopping, no work) rather than emphasizing what the day is *for* &mdash; worship, rest, family, and renewal. An overly restrictive framing can make the Sabbath sound burdensome rather than restorative.",
+  questions:[
+    {q:"\"Sunday is often my only day to get errands done &mdash; how realistic is this?\"",
+     a:"Acknowledge the real logistical challenge many people face. Emphasize the *purpose* &mdash; intentional rest and worship &mdash; rather than a rigid checklist, and that this is something to grow into, with church attendance as the central, achievable starting point."}
+  ],
+  connection:"Connects to baptism's covenant of remembering Christ through the sacrament (Lesson 3), and gives investigators a first concrete invitation: attend church this Sunday.",
+  testimony:"Share what a typical Sabbath looks like for you and what it gives you that other days don't."
+},
+
+{title:"Obey and Honor the Law",
+  points:[
+    "Latter-day Saints believe in obeying just laws and being good citizens.",
+    "Living the gospel and being a good citizen go together, not against each other.",
+    "This reflects a broader principle of integrity in all areas of life."
+  ],
+  scriptures:[
+    "Obeying civil authority: Romans 13:1-2; Matthew 22:21 (\"render unto Caesar\")",
+    "Integrity as a witness: 1 Peter 2:12"
+  ],
+  breakdown:"This principle is sometimes skipped as \"obvious\" or unnecessary for most people, but for investigators with past legal issues, it can raise real concern about whether they're \"good enough\" to be baptized. Missionaries should be prepared to address this with sensitivity rather than skip past it.",
+  questions:[
+    {q:"\"I have a record from my past &mdash; does that mean I can't be baptized?\"",
+     a:"Be honest and warm: this is a conversation to have with the missionaries and, depending on the situation, with the mission president &mdash; not a disqualifier in itself. Many people with difficult pasts have found a place in the Church. The principle going forward is about living honestly and within the law from this point on, paired with the repentance already discussed."}
+  ],
+  connection:"Connects to honesty as an expression of the two great commandments, and to repentance &mdash; the past is addressed through Christ's Atonement, while this principle focuses on moving forward.",
+  testimony:"Share how living with integrity in everyday matters (even small ones) has affected your relationship with God."
+},
+
+{title:"Service",
+  points:[
+    "Serving others is one of the primary ways we serve God.",
+    "After baptism, members typically receive opportunities (callings) to serve in the Church.",
+    "Service blesses both the giver and receiver, and is a daily opportunity, not just a formal assignment."
+  ],
+  scriptures:[
+    "Service as worship: Matthew 25:35-40 (\"as ye have done it unto... me\")",
+    "Bearing one another's burdens: Galatians 6:2",
+    "Serving with willing hearts: 1 Peter 4:10"
+  ],
+  breakdown:"This principle can feel abstract (\"serve others\") without a concrete next step. Missionaries sometimes don't connect it to something the investigator could do *this week*, making it feel like a future obligation rather than a present opportunity.",
+  questions:[
+    {q:"\"What would 'serving' even look like for someone who's not a member yet?\"",
+     a:"Give concrete, small examples &mdash; helping a neighbor, checking in on someone who's struggling, offering to help with something practical. Emphasize that service doesn't wait for a formal calling; it starts with noticing people around us."}
+  ],
+  connection:"Connects directly to the second great commandment (love thy neighbor) and to the baptismal covenant to \"serve God and others\" (Lesson 3).",
+  testimony:"Share a specific time serving someone changed your perspective or strengthened your faith."
+},
+
+{title:"Sharing the Gospel",
+  points:[
+    "As part of the baptismal covenant, members promise to stand as witnesses of God.",
+    "Sharing the gospel happens naturally &mdash; through example, conversation, and simple invitations.",
+    "This is described as one of the most joyful forms of service."
+  ],
+  scriptures:[
+    "Standing as a witness: Matthew 5:14-16 (\"ye are the light of the world\")",
+    "Sharing naturally: Andrew bringing Peter to Christ, John 1:40-42",
+    "Joy in sharing: Luke 15:6-7 (the joy of finding what was lost, applied to sharing good news)"
+  ],
+  breakdown:"This principle can feel premature or even uncomfortable to an investigator who is still deciding about the gospel themselves &mdash; being asked to \"share\" something they haven't yet fully embraced can feel like pressure. Missionaries should frame this gently, around their own experience so far, not as an expectation yet to come.",
+  questions:[
+    {q:"\"I'm still figuring this out for myself &mdash; how could I share something I'm not sure about yet?\"",
+     a:"Reassure them this isn't being asked of them now. Simply invite them to notice, as they continue learning, whether there's anyone in their life who might also be interested &mdash; no pressure, just awareness. Sharing grows naturally out of personal conviction, which takes time."}
+  ],
+  connection:"Connects to the baptismal covenant (Lesson 3) and to the missionary's own example &mdash; this principle is often best taught by the missionaries' own enthusiasm rather than as an instruction.",
+  testimony:"Share what motivated you personally to want to share the gospel &mdash; your own story, not a generic reason."
+},
+
+{title:"Fasting and Fast Offerings",
+  points:[
+    "Fasting &mdash; going without food and drink for a period, paired with prayer &mdash; builds spiritual strength.",
+    "The Church sets aside a regular fast day, which includes prayer and testimony.",
+    "Fast offerings, given during this time, help care for those in need."
+  ],
+  scriptures:[
+    "Fasting and spiritual strength: Matthew 4:1-2 (Christ's fast); Matthew 17:21",
+    "Fasting paired with prayer: Acts 13:2-3",
+    "Caring for the needy: Isaiah 58:6-7"
+  ],
+  breakdown:"For investigators with health conditions, pregnancy, or other circumstances, the idea of fasting from food can raise immediate concern. Missionaries sometimes don't clarify early enough that fasting is adaptable to individual circumstances and is not about rigid rules.",
+  questions:[
+    {q:"\"I have a health condition / I'm pregnant &mdash; can I still participate in this?\"",
+     a:"Yes &mdash; explain that fasting is adapted to individual health and circumstances; some people fast from certain foods, shorten the time, or focus on the prayer and spiritual intent without abstaining from food at all. The spiritual purpose matters more than the specific form."}
+  ],
+  connection:"Connects to prayer (the first principle of this lesson) and to service (fast offerings caring for those in need) &mdash; it ties personal spiritual practice to caring for others.",
+  testimony:"Share an experience of fasting for something specific and what you felt or learned."
+},
+
+{title:"Priesthood and Church Organizations",
+  points:[
+    "The priesthood is God's authority, restored through Joseph Smith (Lesson 1), by which ordinances are performed.",
+    "Church leaders are called and given authority to serve, not to dominate or profit.",
+    "Various Church organizations (quorums, Relief Society, youth and children's programs) help members grow and serve."
+  ],
+  scriptures:[
+    "Priesthood authority: Hebrews 5:4 (\"no man taketh this honour unto himself\"); Matthew 16:19",
+    "Service-oriented leadership: Mark 10:43-45 (\"whosoever will be great among you, shall be your minister\")"
+  ],
+  breakdown:"This principle involves a lot of organizational detail that can overwhelm an investigator if presented all at once. Missionaries sometimes try to explain the entire Church organizational chart rather than focusing on what's immediately relevant: ordinances are performed by authorized priesthood holders, and there's a place for the investigator to belong once they join.",
+  questions:[
+    {q:"\"This sounds like a lot of structure &mdash; is this more like a hierarchy than a community?\"",
+     a:"Acknowledge the structure exists for a purpose: ensuring ordinances are performed with proper authority, and that everyone has opportunities to serve. But emphasize that day-to-day, this feels like a close community &mdash; the structure exists to support relationships, not replace them."}
+  ],
+  connection:"Connects back to the Restoration (Lesson 1) &mdash; this is the practical outworking of restored priesthood authority. Also connects to baptismal authority (Lesson 3).",
+  testimony:"Share what being part of a Church congregation has meant for your sense of community and belonging."
+},
+
+{title:"Marriage and Families",
+  points:[
+    "Marriage between a man and a woman and the family unit are central to God's plan.",
+    "Strong families are built through shared worship, prayer, and scripture study together.",
+    "The gospel blesses families practically &mdash; through unity, communication, and shared values."
+  ],
+  scriptures:[
+    "Marriage ordained of God: Genesis 2:18, 24; Mark 10:6-9",
+    "Family worship and teaching: Deuteronomy 6:6-7; Ephesians 6:4",
+    "Unity in the home: Psalm 133:1"
+  ],
+  breakdown:"This principle requires significant sensitivity for investigators who are single, divorced, widowed, in non-traditional family situations, or estranged from family. Missionaries sometimes present an idealized picture of family that can unintentionally make someone feel excluded from the gospel's blessings if their situation doesn't match.",
+  questions:[
+    {q:"\"I'm not married and don't have children &mdash; does the gospel still have something for me?\"",
+     a:"Absolutely. Affirm that the gospel blesses individuals regardless of marital or family status &mdash; this person is part of God's family regardless. The hope of eternal families (Lesson 2) is available to all who are faithful, in this life or the next, and the Church community itself can be a source of belonging now."}
+  ],
+  connection:"Connects directly to Lesson 2's teaching on families being together forever, and to the two great commandments (love expressed within the home).",
+  testimony:"Share something specific about how living gospel principles has strengthened a relationship in your own family, being mindful of varied family situations among those listening."
+},
+
+{title:"Temple and Family History Work for Deceased Ancestors",
+  points:[
+    "Many people have died without the opportunity to receive the gospel or its ordinances.",
+    "Through family history research, we identify ancestors who need these ordinances.",
+    "Temple ordinances can be performed on their behalf, and they can choose to accept them in the spirit world."
+  ],
+  scriptures:[
+    "Ordinances for the dead: 1 Corinthians 15:29; 1 Peter 4:6",
+    "Turning hearts to ancestors: Malachi 4:5-6"
+  ],
+  breakdown:"This principle connects to Lesson 2's \"Spirit World\" teaching, but if that connection isn't made explicit, this can feel like a new and unrelated topic introduced late in the teaching process, rather than the natural continuation of something already taught.",
+  questions:[
+    {q:"\"How is this different from just praying for someone who has passed?\"",
+     a:"Explain that this builds on what was discussed earlier (Lesson 2) &mdash; that those who died without the gospel have the opportunity to receive it in the spirit world. Family history and temple work make those specific ordinances available to them, which they can then choose to accept."}
+  ],
+  connection:"Directly continues Lesson 2's Spirit World principle, and previews the next principle (temples) as the place where this work happens.",
+  testimony:"If appropriate, share an experience with family history work or feelings about connecting with ancestors."
+},
+
+{title:"Temples, the Endowment, Eternal Marriage, and Eternal Families",
+  points:[
+    "The temple is a sacred place where additional covenants are made with God.",
+    "The endowment is a gift of knowledge and instruction received in the temple.",
+    "Eternal marriage, performed in the temple, makes it possible for families to be together forever (connecting to Lesson 2)."
+  ],
+  scriptures:[
+    "The temple as God's house: 1 Kings 8:10-11; Psalm 24:3-4 (\"who shall ascend... clean hands, and a pure heart\")",
+    "Eternal family relationships: Genesis 17:7; Malachi 4:5-6"
+  ],
+  breakdown:"As the final principle of the lesson, this can be rushed or treated as a distant, future-only topic (\"something for much later\") rather than connected to the hope already built throughout Lessons 2-4. Missionaries should land this as the *culmination* of everything taught &mdash; not an afterthought.",
+  questions:[
+    {q:"\"This all sounds very far away &mdash; how does something like this connect to where I am right now?\"",
+     a:"Bring it back to the beginning: in Lesson 2, we talked about the hope of being with family forever. Everything since then &mdash; faith, repentance, baptism, daily discipleship &mdash; is the path toward that hope, with the temple as where those eternal covenants are ultimately made. It's not separate from where they are now; it's the direction they're walking."}
+  ],
+  connection:"This is the capstone of the entire four-lesson sequence &mdash; it ties back to Lesson 2's Plan of Salvation (families forever) and Lesson 1's Restoration (restored priesthood authority makes these ordinances possible).",
+  testimony:"Share what the hope of eternal family relationships means to you personally, and how it motivates your daily choices."
+},
+];
+
+function render(){
+  const query = document.getElementById('search').value.trim().toLowerCase();
+  const resultsDiv = document.getElementById('results');
+  const noResults = document.getElementById('no-results');
+  resultsDiv.innerHTML = "";
+
+  let total = 0;
+  data.forEach(item => {
+    const haystack = (item.title + " " + item.points.join(" ") + " " + item.scriptures.join(" ") + " " + item.breakdown + " " + item.questions.map(q=>q.q+" "+q.a).join(" ") + " " + item.connection + " " + item.testimony).toLowerCase();
+    if(query && !haystack.includes(query)) return;
+    total++;
+
+    const principleDiv = document.createElement('div');
+    principleDiv.className = 'principle';
+
+    const head = document.createElement('div');
+    head.className = 'principle-head';
+    head.innerHTML = '<h3>' + item.title + '</h3><span class="arrow">&#9656;</span>';
+    head.addEventListener('click', () => {
+      head.classList.toggle('open');
+      body.classList.toggle('open');
+    });
+
+    const body = document.createElement('div');
+    body.className = 'principle-body';
+
+    let pointsHtml = '<ul>' + item.points.map(p => '<li>' + p + '</li>').join('') + '</ul>';
+    let scripturesHtml = '<ul>' + item.scriptures.map(s => '<li class="ref">' + s + '</li>').join('') + '</ul>';
+    let questionsHtml = item.questions.map(qa =>
+      '<div class="question-box"><span class="q">' + qa.q + '</span>' + qa.a + '</div>'
+    ).join('');
+
+    body.innerHTML = `
+      <div class="block">
+        <span class="label">What to Help Them Understand</span>
+        ${pointsHtml}
+      </div>
+      <div class="block">
+        <span class="label">Scriptures (Bible &amp; Book of Mormon)</span>
+        ${scripturesHtml}
+      </div>
+      <div class="block">
+        <span class="label">Common Drift / Breakdown</span>
+        <div class="breakdown-box">${item.breakdown}</div>
+      </div>
+      <div class="block">
+        <span class="label">Real Investigator Questions</span>
+        ${questionsHtml}
+      </div>
+      <div class="block">
+        <span class="label">How This Connects</span>
+        <div class="connection-box">${item.connection}</div>
+      </div>
+      <div class="block">
+        <span class="label">Your Testimony</span>
+        <div class="testimony-box">${item.testimony}</div>
+      </div>
+    `;
+
+    principleDiv.appendChild(head);
+    principleDiv.appendChild(body);
+    resultsDiv.appendChild(principleDiv);
+  });
+
+  document.getElementById('result-count').textContent = total + " principle" + (total === 1 ? "" : "s") + " shown of 17 total";
+  noResults.style.display = total === 0 ? 'block' : 'none';
+}
+
+document.getElementById('search').addEventListener('input', render);
+render();
+</script>
+
+</body>
+</html>
