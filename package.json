@@ -1,0 +1,12 @@
+{
+  "name": "trainees-course",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Training course static site for Nigeria Uyo Mission",
+  "scripts": {
+    "format": "prettier --write \"**/*.html\""
+  },
+  "devDependencies": {
+    "prettier": "^3.8.0"
+  }
+}

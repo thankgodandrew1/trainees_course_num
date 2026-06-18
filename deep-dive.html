@@ -1,798 +1,1039 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Deep Dive: Lessons 1-3 &mdash; Nigeria Uyo Mission</title>
-<style>
-  :root{
-    --green:#0b4d2c;
-    --green-dark:#073a20;
-    --gold:#c9a227;
-    --gold-light:#f4e6c1;
-    --cream:#fbf8f1;
-    --ink:#222;
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    font-family: Georgia, 'Times New Roman', serif;
-    background:var(--cream);
-    color:var(--ink);
-    line-height:1.55;
-  }
-  .module-nav{
-    font-family:'Trebuchet MS', sans-serif;
-    background:var(--green-dark);
-    display:flex;
-    justify-content:space-between;
-    padding:.7rem 1.2rem;
-    position:sticky;
-    top:0;
-    z-index:50;
-  }
-  .module-nav a{ color:var(--gold-light); text-decoration:none; font-size:.85rem; }
-  .module-nav a:hover{ color:#fff; }
-  .module-nav span{ color:#fff; font-weight:bold; font-size:.85rem; }
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Deep Dive: Lessons 1-3 &mdash; Nigeria Uyo Mission</title>
+    <style>
+      :root {
+        --green: #0b4d2c;
+        --green-dark: #073a20;
+        --gold: #c9a227;
+        --gold-light: #f4e6c1;
+        --cream: #fbf8f1;
+        --ink: #222;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        background: var(--cream);
+        color: var(--ink);
+        line-height: 1.55;
+      }
+      .module-nav {
+        font-family: "Trebuchet MS", sans-serif;
+        background: var(--green-dark);
+        display: flex;
+        justify-content: space-between;
+        padding: 0.7rem 1.2rem;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+      .module-nav a {
+        color: var(--gold-light);
+        text-decoration: none;
+        font-size: 0.85rem;
+      }
+      .module-nav a:hover {
+        color: #fff;
+      }
+      .module-nav span {
+        color: #fff;
+        font-weight: bold;
+        font-size: 0.85rem;
+      }
 
-  header{
-    background:var(--green);
-    color:var(--cream);
-    padding:2.2rem 1.5rem 1.8rem;
-    text-align:center;
-    border-bottom:6px solid var(--gold);
-  }
-  header .eyebrow{
-    font-family:'Trebuchet MS', sans-serif;
-    letter-spacing:.25em;
-    text-transform:uppercase;
-    font-size:.75rem;
-    color:var(--gold-light);
-    margin-bottom:.5rem;
-  }
-  header h1{ margin:0; font-size:1.8rem; font-weight:700; }
-  header p{
-    font-family:'Trebuchet MS', sans-serif;
-    font-size:.92rem;
-    color:var(--gold-light);
-    margin-top:.6rem;
-    max-width:560px;
-    margin-left:auto;
-    margin-right:auto;
-  }
+      header {
+        background: var(--green);
+        color: var(--cream);
+        padding: 2.2rem 1.5rem 1.8rem;
+        text-align: center;
+        border-bottom: 6px solid var(--gold);
+      }
+      header .eyebrow {
+        font-family: "Trebuchet MS", sans-serif;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        color: var(--gold-light);
+        margin-bottom: 0.5rem;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 1.8rem;
+        font-weight: 700;
+      }
+      header p {
+        font-family: "Trebuchet MS", sans-serif;
+        font-size: 0.92rem;
+        color: var(--gold-light);
+        margin-top: 0.6rem;
+        max-width: 560px;
+        margin-left: auto;
+        margin-right: auto;
+      }
 
-  main{ max-width:800px; margin:0 auto; padding:1.5rem 1.1rem 4rem; }
+      main {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 1.5rem 1.1rem 4rem;
+      }
 
-  .controls{
-    position:sticky;
-    top:42px;
-    background:var(--cream);
-    z-index:40;
-    padding:1rem 0 .8rem;
-    border-bottom:1px solid #e6decf;
-    margin-bottom:1.2rem;
-  }
-  #search{
-    width:100%;
-    font-family:'Trebuchet MS', sans-serif;
-    font-size:1rem;
-    padding:.7rem .9rem;
-    border:1px solid #ccc;
-    border-radius:6px;
-    margin-bottom:.7rem;
-  }
-  .filter-row{ display:flex; gap:.5rem; flex-wrap:wrap; }
-  .filter-btn{
-    font-family:'Trebuchet MS', sans-serif;
-    font-size:.8rem;
-    padding:.4rem .85rem;
-    border:1px solid var(--green);
-    background:#fff;
-    color:var(--green);
-    border-radius:20px;
-    cursor:pointer;
-  }
-  .filter-btn.active{ background:var(--green); color:#fff; }
-  .result-count{
-    font-family:'Trebuchet MS', sans-serif;
-    font-size:.8rem;
-    color:#7a7158;
-    margin-top:.6rem;
-  }
+      .controls {
+        position: sticky;
+        top: 42px;
+        background: var(--cream);
+        z-index: 40;
+        padding: 1rem 0 0.8rem;
+        border-bottom: 1px solid #e6decf;
+        margin-bottom: 1.2rem;
+      }
+      #search {
+        width: 100%;
+        font-family: "Trebuchet MS", sans-serif;
+        font-size: 1rem;
+        padding: 0.7rem 0.9rem;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        margin-bottom: 0.7rem;
+      }
+      .filter-row {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+      .filter-btn {
+        font-family: "Trebuchet MS", sans-serif;
+        font-size: 0.8rem;
+        padding: 0.4rem 0.85rem;
+        border: 1px solid var(--green);
+        background: #fff;
+        color: var(--green);
+        border-radius: 20px;
+        cursor: pointer;
+      }
+      .filter-btn.active {
+        background: var(--green);
+        color: #fff;
+      }
+      .result-count {
+        font-family: "Trebuchet MS", sans-serif;
+        font-size: 0.8rem;
+        color: #7a7158;
+        margin-top: 0.6rem;
+      }
 
-  .lesson-group{ margin-bottom:1.8rem; }
-  .lesson-group-title{
-    font-family:'Trebuchet MS', sans-serif;
-    font-size:.85rem;
-    text-transform:uppercase;
-    letter-spacing:.1em;
-    color:var(--green-dark);
-    border-bottom:2px solid var(--gold);
-    padding-bottom:.3rem;
-    margin-bottom:.8rem;
-  }
+      .lesson-group {
+        margin-bottom: 1.8rem;
+      }
+      .lesson-group-title {
+        font-family: "Trebuchet MS", sans-serif;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--green-dark);
+        border-bottom: 2px solid var(--gold);
+        padding-bottom: 0.3rem;
+        margin-bottom: 0.8rem;
+      }
 
-  .principle{
-    background:#fff;
-    border:1px solid #e6decf;
-    border-left:5px solid var(--green);
-    border-radius:6px;
-    margin-bottom:.8rem;
-    overflow:hidden;
-  }
-  .principle-head{
-    padding:.85rem 1.1rem;
-    cursor:pointer;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:.8rem;
-  }
-  .principle-head h3{
-    margin:0;
-    font-size:1.02rem;
-    color:var(--green-dark);
-    font-family:'Trebuchet MS', sans-serif;
-  }
-  .principle-head .arrow{
-    color:var(--gold);
-    flex:0 0 auto;
-    transition:transform .2s;
-  }
-  .principle-head.open .arrow{ transform:rotate(90deg); }
-  .principle-body{
-    display:none;
-    padding:0 1.1rem 1.2rem;
-    font-size:.93rem;
-  }
-  .principle-body.open{ display:block; }
+      .principle {
+        background: #fff;
+        border: 1px solid #e6decf;
+        border-left: 5px solid var(--green);
+        border-radius: 6px;
+        margin-bottom: 0.8rem;
+        overflow: hidden;
+      }
+      .principle-head {
+        padding: 0.85rem 1.1rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.8rem;
+      }
+      .principle-head h3 {
+        margin: 0;
+        font-size: 1.02rem;
+        color: var(--green-dark);
+        font-family: "Trebuchet MS", sans-serif;
+      }
+      .principle-head .arrow {
+        color: var(--gold);
+        flex: 0 0 auto;
+        transition: transform 0.2s;
+      }
+      .principle-head.open .arrow {
+        transform: rotate(90deg);
+      }
+      .principle-body {
+        display: none;
+        padding: 0 1.1rem 1.2rem;
+        font-size: 0.93rem;
+      }
+      .principle-body.open {
+        display: block;
+      }
 
-  .block{
-    margin-bottom:1rem;
-    padding-bottom:.9rem;
-    border-bottom:1px solid #f0ead9;
-  }
-  .block:last-child{ border-bottom:none; margin-bottom:0; padding-bottom:0; }
-  .block .label{
-    font-family:'Trebuchet MS', sans-serif;
-    font-size:.7rem;
-    text-transform:uppercase;
-    letter-spacing:.1em;
-    color:var(--gold);
-    display:block;
-    margin-bottom:.35rem;
-    font-weight:bold;
-  }
-  .block ul{ margin:.3rem 0; padding-left:1.2rem; }
-  .block li{ margin-bottom:.3rem; }
-  .ref{
-    font-family:'Trebuchet MS', sans-serif;
-    font-size:.78rem;
-    color:#7a7158;
-    font-style:italic;
-  }
-  .breakdown-box{
-    background:var(--gold-light);
-    border-left:3px solid var(--gold);
-    padding:.6rem .8rem;
-    border-radius:4px;
-    font-size:.9rem;
-  }
-  .question-box{
-    background:#f6f3ec;
-    border-left:3px solid var(--green);
-    padding:.6rem .8rem;
-    border-radius:4px;
-    font-size:.9rem;
-    margin-bottom:.5rem;
-  }
-  .question-box .q{
-    font-weight:bold;
-    color:var(--green-dark);
-    font-family:'Trebuchet MS', sans-serif;
-    font-size:.85rem;
-    display:block;
-    margin-bottom:.25rem;
-  }
-  .connection-box{
-    font-size:.88rem;
-    color:#5c5648;
-  }
-  .testimony-box{
-    font-size:.88rem;
-    font-style:italic;
-    color:#5c5648;
-  }
-  .no-results{
-    text-align:center;
-    color:#a99a6f;
-    font-family:'Trebuchet MS', sans-serif;
-    padding:2rem 0;
-  }
-  .source-note{
-    font-family:'Trebuchet MS', sans-serif;
-    font-size:.8rem;
-    color:#7a7158;
-    text-align:center;
-    margin-top:2.5rem;
-  }
-  .intro-card{
-    background:#fff;
-    border:1px solid #e6decf;
-    border-left:5px solid var(--green);
-    border-radius:6px;
-    padding:1.3rem 1.4rem;
-    margin-bottom:1.5rem;
-    font-size:.93rem;
-  }
-  .intro-card strong{ color:var(--green-dark); }
+      .block {
+        margin-bottom: 1rem;
+        padding-bottom: 0.9rem;
+        border-bottom: 1px solid #f0ead9;
+      }
+      .block:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+      .block .label {
+        font-family: "Trebuchet MS", sans-serif;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--gold);
+        display: block;
+        margin-bottom: 0.35rem;
+        font-weight: bold;
+      }
+      .block ul {
+        margin: 0.3rem 0;
+        padding-left: 1.2rem;
+      }
+      .block li {
+        margin-bottom: 0.3rem;
+      }
+      .ref {
+        font-family: "Trebuchet MS", sans-serif;
+        font-size: 0.78rem;
+        color: #7a7158;
+        font-style: italic;
+      }
+      .breakdown-box {
+        background: var(--gold-light);
+        border-left: 3px solid var(--gold);
+        padding: 0.6rem 0.8rem;
+        border-radius: 4px;
+        font-size: 0.9rem;
+      }
+      .question-box {
+        background: #f6f3ec;
+        border-left: 3px solid var(--green);
+        padding: 0.6rem 0.8rem;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+      .question-box .q {
+        font-weight: bold;
+        color: var(--green-dark);
+        font-family: "Trebuchet MS", sans-serif;
+        font-size: 0.85rem;
+        display: block;
+        margin-bottom: 0.25rem;
+      }
+      .connection-box {
+        font-size: 0.88rem;
+        color: #5c5648;
+      }
+      .testimony-box {
+        font-size: 0.88rem;
+        font-style: italic;
+        color: #5c5648;
+      }
+      .no-results {
+        text-align: center;
+        color: #a99a6f;
+        font-family: "Trebuchet MS", sans-serif;
+        padding: 2rem 0;
+      }
+      .source-note {
+        font-family: "Trebuchet MS", sans-serif;
+        font-size: 0.8rem;
+        color: #7a7158;
+        text-align: center;
+        margin-top: 2.5rem;
+      }
+      .intro-card {
+        background: #fff;
+        border: 1px solid #e6decf;
+        border-left: 5px solid var(--green);
+        border-radius: 6px;
+        padding: 1.3rem 1.4rem;
+        margin-bottom: 1.5rem;
+        font-size: 0.93rem;
+      }
+      .intro-card strong {
+        color: var(--green-dark);
+      }
 
-  footer{
-    background:var(--green-dark);
-    color:var(--gold-light);
-    text-align:center;
-    padding:.9rem 1rem;
-    font-family:'Trebuchet MS', sans-serif;
-    font-size:.8rem;
-    letter-spacing:.04em;
-    margin-top:2rem;
-  }
-  
-</style>
-</head>
-<body>
-
-<div class="module-nav">
-  <a href="index.html">&#8592; Foundations Module</a>
-  <span>Deep Dive: Lessons 1-3</span>
-  <a href="deep-dive-lesson4.html">Deep Dive (4) &#8594;</a>
-</div>
-
-<header>
-  <div class="eyebrow">Nigeria Uyo Mission</div>
-  <h1>Deep Dive: Lessons 1-3</h1>
-  <p>Going beyond the PMG summary. For each principle: the specific doctrinal points
-     to cover, Bible &amp; Book of Mormon scriptures (no D&amp;C &mdash; for use with
-     investigators), common ways missionaries drift when teaching it, real
-     investigator questions with simple responses, how it connects to other
-     principles, and a prompt for your own testimony.</p>
-</header>
-
-<main>
-
-  <div class="intro-card">
-    <strong>How to use this:</strong> Tap a principle to expand it. The goal isn't to
-    memorize more &mdash; it's to know the 2-4 specific points that must land for this
-    principle, recognize when you're drifting, and have a ready, simple response when
-    a hard question comes up. Lessons 1-3 only for now (22 principles); Lesson 4 can
-    be added later if helpful.
-  </div>
-
-  <div class="controls">
-    <input type="text" id="search" placeholder="Search by keyword (e.g. 'Godhead', 'apostasy', 'doubt')...">
-    <div class="filter-row">
-      <button class="filter-btn active" data-lesson="all">All</button>
-      <button class="filter-btn" data-lesson="restoration">Restoration (7)</button>
-      <button class="filter-btn" data-lesson="pos">Plan of Salvation (8)</button>
-      <button class="filter-btn" data-lesson="gospel">Gospel of Jesus Christ (7)</button>
+      footer {
+        background: var(--green-dark);
+        color: var(--gold-light);
+        text-align: center;
+        padding: 0.9rem 1rem;
+        font-family: "Trebuchet MS", sans-serif;
+        font-size: 0.8rem;
+        letter-spacing: 0.04em;
+        margin-top: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="module-nav">
+      <a href="index.html">&larr; Foundations Module</a>
+      <span>Deep Dive: Lessons 1-3</span>
+      <a href="deep-dive-lesson4.html">Deep Dive (4) &rarr;</a>
     </div>
-    <div class="result-count" id="result-count"></div>
-  </div>
+    <header>
+      <div class="eyebrow">Nigeria Uyo Mission</div>
+      <h1>Deep Dive: Lessons 1-3</h1>
+      <p>
+        Going beyond the PMG summary. For each principle: the specific doctrinal
+        points to cover, Bible &amp; Book of Mormon scriptures (no D&amp;C
+        &mdash; for use with investigators), common ways missionaries drift when
+        teaching it, real investigator questions with simple responses, how it
+        connects to other principles, and a prompt for your own testimony.
+      </p>
+    </header>
+    <main>
+      <div class="intro-card">
+        <strong>How to use this:</strong>
+        Tap a principle to expand it. The goal isn't to memorize more &mdash;
+        it's to know the 2-4 specific points that must land for this principle,
+        recognize when you're drifting, and have a ready, simple response when a
+        hard question comes up. Lessons 1-3 only for now (22 principles); Lesson
+        4 can be added later if helpful.
+      </div>
+      <div class="controls">
+        <input
+          id="search"
+          placeholder="Search by keyword (e.g. 'Godhead', 'apostasy', 'doubt')..."
+          type="text"
+        />
+        <div class="filter-row">
+          <button class="filter-btn active" data-lesson="all">All</button>
+          <button class="filter-btn" data-lesson="restoration">
+            Restoration (7)
+          </button>
+          <button class="filter-btn" data-lesson="pos">
+            Plan of Salvation (8)
+          </button>
+          <button class="filter-btn" data-lesson="gospel">
+            Gospel of Jesus Christ (7)
+          </button>
+        </div>
+        <div class="result-count" id="result-count"></div>
+      </div>
+      <div id="results"></div>
+      <div class="no-results" id="no-results" style="display: none">
+        No principles match your search.
+      </div>
+      <p class="source-note">
+        Doctrinal points adapted from Preach My Gospel, Chapter 3. Scriptures
+        limited to the Bible and Book of Mormon for use with investigators.
+      </p>
+    </main>
+    <footer>
+      Developed by
+      <strong>Elder ThankGod Andrew</strong>
+      &mdash; Assistant to the President &mdash; Nigeria Uyo Mission
+    </footer>
+    <script>
+      const data = [
+        // ===================== LESSON 1: RESTORATION (7) =====================
+        {
+          lesson: "restoration",
+          lessonLabel: "Lesson 1: The Message of the Restoration",
+          title: "God Is Our Loving Heavenly Father",
+          points: [
+            "God loves them personally &mdash; He knows them, understands their trials, and wants to bless them with joy.",
+            "The nature of God &mdash; He is our literal Father, has a glorified body of flesh and bone, and is not an abstract force.",
+            "The Godhead &mdash; the Father, the Son, and the Holy Ghost are three distinct beings, united in purpose.",
+          ],
+          scriptures: [
+            "God's love: John 3:16; 1 John 4:8-10; 2 Nephi 26:24-33",
+            "God's nature / body: Genesis 1:26-27; Acts 17:28-29; Ether 3:15-16",
+            "The Godhead as separate beings: Matthew 3:16-17 (Father's voice, Son baptized, Spirit descends); John 17:11, 21-22; 3 Nephi 11:7, 32",
+          ],
+          breakdown:
+            "Missionaries often rush past this principle to get to the Restoration story, assuming everyone already believes in a loving God. As a result, when doubts about God's love or the nature of the Godhead surface later, there's no foundation to return to.",
+          questions: [
+            {
+              q: '"If God loves me, why has my life been so hard?"',
+              a: "Acknowledge the pain is real. Share that God's love doesn't mean a life without hardship &mdash; it means He walks with us through it and has a plan for our growth and eventual joy (2 Nephi 2:25; John 16:33).",
+            },
+            {
+              q: '"Isn\'t God three persons in one &mdash; the Trinity?"',
+              a: "Gently note that at Christ's baptism, the Father spoke from heaven, the Son was in the water, and the Spirit descended as a dove &mdash; three distinct beings, present at once, perfectly united (Matthew 3:16-17). That unity of purpose, not identity, is what we mean by the Godhead.",
+            },
+          ],
+          connection:
+            "This is the foundation everything else rests on. If someone doesn't believe God is real, personal, and loving, the Restoration, the Plan of Salvation, and the Gospel of Jesus Christ have nowhere to land. Always return here if a later lesson stalls.",
+          testimony:
+            "Think of a specific moment you felt God's personal love for you &mdash; not a general statement, but a moment. That's what you share here.",
+        },
 
-  <div id="results"></div>
-  <div class="no-results" id="no-results" style="display:none;">No principles match your search.</div>
+        {
+          lesson: "restoration",
+          lessonLabel: "Lesson 1: The Message of the Restoration",
+          title:
+            "God Reveals His Gospel through Prophets &mdash; and It Blesses Families and Individuals",
+          points: [
+            "God has always spoken through prophets &mdash; this is how He communicates with His children as a group.",
+            "The gospel, when lived, blesses individuals with peace, direction, and personal growth.",
+            "The gospel, when lived, blesses families &mdash; strengthening marriages, parenting, and relationships across generations.",
+          ],
+          scriptures: [
+            "Prophets as God's pattern: Amos 3:7; Hebrews 1:1; 1 Nephi 10:17-19",
+            "Blessings to individuals: Psalm 32:8; Proverbs 3:5-6; Mosiah 2:41",
+            "Blessings to families: Malachi 4:5-6; 3 Nephi 18:21",
+          ],
+          breakdown:
+            'This principle is sometimes taught as just "God has prophets" without connecting it to something the investigator can feel right now &mdash; that living gospel principles actually changes daily life and family relationships. Without that bridge, it can feel abstract.',
+          questions: [
+            {
+              q: '"How would having a prophet actually change anything for me and my family?"',
+              a: "Share a concrete example: a prophet's counsel on prayer, honesty, or family time isn't just religious advice &mdash; it's tested guidance meant to bring peace into ordinary days. Invite them to think of one area of their life or family where they'd welcome that kind of direction.",
+            },
+          ],
+          connection:
+            "This sets up the next principle (prophets specifically) and plants the idea that this isn't just history &mdash; it's relevant to their life today. It also previews the Plan of Salvation's promise that families can be strengthened now and forever.",
+          testimony:
+            "Share one specific way following counsel from Church leaders has blessed your own family or personal life.",
+        },
 
-  <p class="source-note">Doctrinal points adapted from Preach My Gospel, Chapter 3. Scriptures limited to the Bible and Book of Mormon for use with investigators.</p>
+        {
+          lesson: "restoration",
+          lessonLabel: "Lesson 1: The Message of the Restoration",
+          title: "God Reveals His Gospel through Prophets",
+          points: [
+            "Who a prophet is &mdash; someone called and authorized by God to speak for Him.",
+            "The role of prophets &mdash; teaching truth, warning of error, and guiding God's people, as seen anciently with Adam, Noah, Abraham, and Moses.",
+            "The importance of listening to prophets &mdash; our safety and guidance come from heeding their counsel.",
+          ],
+          scriptures: [
+            "Definition and role: Amos 3:7; Deuteronomy 18:18; Acts 3:22-23",
+            "Ancient prophets: Genesis 6:13-14 (Noah); Genesis 12:1-3 (Abraham); Exodus 3:10 (Moses)",
+            'Importance of heeding prophets: 1 Nephi 22:20-21; Mosiah 8:18 ("a seer can know of things which are past, and also of things which are to come")',
+          ],
+          breakdown:
+            "Missionaries sometimes list ancient prophets without explaining *why* God uses this pattern, or jump straight to Joseph Smith without first establishing that this is how God has always operated. This can make Joseph Smith feel like an exception rather than part of a consistent pattern.",
+          questions: [
+            {
+              q: '"Why would God need a prophet today when we have the Bible?"',
+              a: "Ask if they've ever needed personal direction that a book alone couldn't give &mdash; a decision specific to their life, their time. Explain that just as God spoke to His people anew in each generation through prophets, He continues that pattern today so His children can receive guidance suited to our specific time.",
+            },
+          ],
+          connection:
+            'This principle sets the pattern that the Restoration (principle 5) will complete. Without firmly establishing "God speaks through prophets in every era," the idea of a modern prophet can feel like a new or strange claim rather than a continuation.',
+          testimony:
+            "Share how something a living prophet has taught has given you direction or peace in a specific situation.",
+        },
 
-</main>
-<footer>
-  Developed by <strong>Elder ThankGod Andrew</strong> &mdash; Assistant to the President &mdash; Nigeria Uyo Mission
-</footer>
-<script>
-const data = [
-// ===================== LESSON 1: RESTORATION (7) =====================
-{lesson:"restoration", lessonLabel:"Lesson 1: The Message of the Restoration",
-  title:"God Is Our Loving Heavenly Father",
-  points:[
-    "God loves them personally &mdash; He knows them, understands their trials, and wants to bless them with joy.",
-    "The nature of God &mdash; He is our literal Father, has a glorified body of flesh and bone, and is not an abstract force.",
-    "The Godhead &mdash; the Father, the Son, and the Holy Ghost are three distinct beings, united in purpose."
-  ],
-  scriptures:[
-    "God's love: John 3:16; 1 John 4:8-10; 2 Nephi 26:24-33",
-    "God's nature / body: Genesis 1:26-27; Acts 17:28-29; Ether 3:15-16",
-    "The Godhead as separate beings: Matthew 3:16-17 (Father's voice, Son baptized, Spirit descends); John 17:11, 21-22; 3 Nephi 11:7, 32"
-  ],
-  breakdown:"Missionaries often rush past this principle to get to the Restoration story, assuming everyone already believes in a loving God. As a result, when doubts about God's love or the nature of the Godhead surface later, there's no foundation to return to.",
-  questions:[
-    {q:"\"If God loves me, why has my life been so hard?\"",
-     a:"Acknowledge the pain is real. Share that God's love doesn't mean a life without hardship &mdash; it means He walks with us through it and has a plan for our growth and eventual joy (2 Nephi 2:25; John 16:33)."},
-    {q:"\"Isn't God three persons in one &mdash; the Trinity?\"",
-     a:"Gently note that at Christ's baptism, the Father spoke from heaven, the Son was in the water, and the Spirit descended as a dove &mdash; three distinct beings, present at once, perfectly united (Matthew 3:16-17). That unity of purpose, not identity, is what we mean by the Godhead."}
-  ],
-  connection:"This is the foundation everything else rests on. If someone doesn't believe God is real, personal, and loving, the Restoration, the Plan of Salvation, and the Gospel of Jesus Christ have nowhere to land. Always return here if a later lesson stalls.",
-  testimony:"Think of a specific moment you felt God's personal love for you &mdash; not a general statement, but a moment. That's what you share here."
-},
+        {
+          lesson: "restoration",
+          lessonLabel: "Lesson 1: The Message of the Restoration",
+          title:
+            "Jesus Christ's Earthly Ministry and the Establishment of His Church",
+          points: [
+            "Who Jesus Christ is &mdash; the Son of God, prophesied of for centuries before His birth.",
+            "His ministry &mdash; He taught with compassion, healed, and ministered to people's needs.",
+            "He called Apostles and gave them priesthood authority to lead and establish His Church on earth.",
+          ],
+          scriptures: [
+            "Prophecies of His coming: Isaiah 53:3-5; Isaiah 9:6; 1 Nephi 11:13-21",
+            "His compassionate ministry: Matthew 9:35-36; Luke 4:18; 3 Nephi 17:5-9",
+            "Calling and authorizing Apostles: Matthew 16:18-19; Mark 3:14; John 15:16",
+          ],
+          breakdown:
+            "Because this principle covers so much ground (prophecy, ministry, Church organization), missionaries can rush through it as background information rather than helping the investigator feel who Jesus actually is &mdash; His compassion specifically &mdash; before moving to the apostasy.",
+          questions: [
+            {
+              q: '"I already believe in Jesus &mdash; why do I need anything more?"',
+              a: "Affirm that faith in Jesus Christ is the very foundation we're building on together. Explain gently that what we want to share is how He organized His Church with specific authority during His life &mdash; and what happened to that organization afterward, which is the next part of the story.",
+            },
+          ],
+          connection:
+            'This principle is the hinge: it establishes that Christ\'s true Church existed with real authority, which makes the apostasy (next principle) meaningful as a *loss* rather than just "old history," and makes the Restoration a recovery of something specific rather than something new.',
+          testimony:
+            "Share a moment when you felt the Savior's compassion personally &mdash; in your own life or through someone else's example.",
+        },
 
-{lesson:"restoration", lessonLabel:"Lesson 1: The Message of the Restoration",
-  title:"God Reveals His Gospel through Prophets &mdash; and It Blesses Families and Individuals",
-  points:[
-    "God has always spoken through prophets &mdash; this is how He communicates with His children as a group.",
-    "The gospel, when lived, blesses individuals with peace, direction, and personal growth.",
-    "The gospel, when lived, blesses families &mdash; strengthening marriages, parenting, and relationships across generations."
-  ],
-  scriptures:[
-    "Prophets as God's pattern: Amos 3:7; Hebrews 1:1; 1 Nephi 10:17-19",
-    "Blessings to individuals: Psalm 32:8; Proverbs 3:5-6; Mosiah 2:41",
-    "Blessings to families: Malachi 4:5-6; 3 Nephi 18:21"
-  ],
-  breakdown:"This principle is sometimes taught as just \"God has prophets\" without connecting it to something the investigator can feel right now &mdash; that living gospel principles actually changes daily life and family relationships. Without that bridge, it can feel abstract.",
-  questions:[
-    {q:"\"How would having a prophet actually change anything for me and my family?\"",
-     a:"Share a concrete example: a prophet's counsel on prayer, honesty, or family time isn't just religious advice &mdash; it's tested guidance meant to bring peace into ordinary days. Invite them to think of one area of their life or family where they'd welcome that kind of direction."}
-  ],
-  connection:"This sets up the next principle (prophets specifically) and plants the idea that this isn't just history &mdash; it's relevant to their life today. It also previews the Plan of Salvation's promise that families can be strengthened now and forever.",
-  testimony:"Share one specific way following counsel from Church leaders has blessed your own family or personal life."
-},
+        {
+          lesson: "restoration",
+          lessonLabel: "Lesson 1: The Message of the Restoration",
+          title: "The Apostasy",
+          points: [
+            "After Christ's Apostles were killed, corruption and division crept into Christianity.",
+            "This falling away (apostasy) was prophesied to happen &mdash; it wasn't a surprise to God.",
+            "As a result, priesthood authority and the fulness of Christ's teachings were lost from the earth.",
+          ],
+          scriptures: [
+            "Prophesied apostasy: Amos 8:11-12; 2 Thessalonians 2:1-3; Acts 20:29-30",
+            "Loss of authority and truth: Isaiah 24:5; 2 Timothy 4:3-4; 1 Nephi 13:26-29",
+          ],
+          breakdown:
+            "This principle can come across as critical of other churches or of well-meaning people of faith throughout history if not handled carefully. Missionaries sometimes either avoid it entirely (making the Restoration seem unnecessary) or present it too bluntly, which can feel dismissive of someone's heritage or current faith community.",
+          questions: [
+            {
+              q: '"Are you saying my church and my grandmother\'s faith were all wrong?"',
+              a: "No &mdash; affirm that God has honored the faith and good lives of sincere believers throughout history, in every church. What was lost wasn't people's sincerity or goodness, but specific priesthood authority and certain teachings. Frame the Restoration as *addition*, not accusation: bringing back what was missing, not erasing what was good.",
+            },
+          ],
+          connection:
+            'This principle only makes sense in light of the previous one (Christ\'s true Church with real authority) and directly sets up the next (the Restoration as the *answer* to this loss). Skipping or rushing it can make the Restoration feel unnecessary &mdash; "why would God need to restore anything?"',
+          testimony:
+            "If helpful, share how understanding the apostasy helped you make sense of why there are so many different churches &mdash; without it feeling like a judgment on anyone's faith.",
+        },
 
-{lesson:"restoration", lessonLabel:"Lesson 1: The Message of the Restoration",
-  title:"God Reveals His Gospel through Prophets",
-  points:[
-    "Who a prophet is &mdash; someone called and authorized by God to speak for Him.",
-    "The role of prophets &mdash; teaching truth, warning of error, and guiding God's people, as seen anciently with Adam, Noah, Abraham, and Moses.",
-    "The importance of listening to prophets &mdash; our safety and guidance come from heeding their counsel."
-  ],
-  scriptures:[
-    "Definition and role: Amos 3:7; Deuteronomy 18:18; Acts 3:22-23",
-    "Ancient prophets: Genesis 6:13-14 (Noah); Genesis 12:1-3 (Abraham); Exodus 3:10 (Moses)",
-    "Importance of heeding prophets: 1 Nephi 22:20-21; Mosiah 8:18 (\"a seer can know of things which are past, and also of things which are to come\")"
-  ],
-  breakdown:"Missionaries sometimes list ancient prophets without explaining *why* God uses this pattern, or jump straight to Joseph Smith without first establishing that this is how God has always operated. This can make Joseph Smith feel like an exception rather than part of a consistent pattern.",
-  questions:[
-    {q:"\"Why would God need a prophet today when we have the Bible?\"",
-     a:"Ask if they've ever needed personal direction that a book alone couldn't give &mdash; a decision specific to their life, their time. Explain that just as God spoke to His people anew in each generation through prophets, He continues that pattern today so His children can receive guidance suited to our specific time."}
-  ],
-  connection:"This principle sets the pattern that the Restoration (principle 5) will complete. Without firmly establishing \"God speaks through prophets in every era,\" the idea of a modern prophet can feel like a new or strange claim rather than a continuation.",
-  testimony:"Share how something a living prophet has taught has given you direction or peace in a specific situation."
-},
+        {
+          lesson: "restoration",
+          lessonLabel: "Lesson 1: The Message of the Restoration",
+          title: "The Restoration of the Gospel through Joseph Smith",
+          points: [
+            "How the Restoration happened &mdash; through the First Vision, God called Joseph Smith as a prophet.",
+            "What was restored &mdash; the fulness of the gospel and the priesthood authority that had been lost.",
+            "This was a restoration of something that had existed before, not the creation of something new.",
+          ],
+          scriptures: [
+            "Pattern of restoration prophesied: Acts 3:19-21; Ephesians 1:9-10; Isaiah 29:13-14",
+            "A marvelous work to come forth: Isaiah 29:11-12; 1 Nephi 13:34-35; 2 Nephi 27:6-26",
+          ],
+          breakdown:
+            'Missionaries sometimes present the First Vision as the climax without circling back to connect it to the apostasy ("this is the answer to the loss we just talked about") or forward to what it set in motion (priesthood, Church organization, scripture). Without those connections, it can feel like an isolated event rather than the turning point of the whole narrative.',
+          questions: [
+            {
+              q: '"How is this any different from someone else today claiming to see a vision?"',
+              a: "Point to the pattern established earlier in the lesson: God has always called prophets through personal experiences with Him &mdash; Moses at the burning bush, Paul on the road to Damascus. Invite them to consider that the real question isn't whether visions happen, but whether *this* one fits what God restored: authority, scripture, and a organized Church that continues to bless lives today. Invite them to pray about it directly (this leads into principle 7).",
+            },
+          ],
+          connection:
+            'This is the turning point of the entire lesson &mdash; it resolves the apostasy and opens the door to the Book of Mormon and the invitation to pray. Make sure investigators feel the *shift*: from "something was lost" to "something has been given back."',
+          testimony:
+            "Share what the Restoration personally means to you &mdash; not just historically, but how it affects your life today.",
+        },
 
-{lesson:"restoration", lessonLabel:"Lesson 1: The Message of the Restoration",
-  title:"Jesus Christ's Earthly Ministry and the Establishment of His Church",
-  points:[
-    "Who Jesus Christ is &mdash; the Son of God, prophesied of for centuries before His birth.",
-    "His ministry &mdash; He taught with compassion, healed, and ministered to people's needs.",
-    "He called Apostles and gave them priesthood authority to lead and establish His Church on earth."
-  ],
-  scriptures:[
-    "Prophecies of His coming: Isaiah 53:3-5; Isaiah 9:6; 1 Nephi 11:13-21",
-    "His compassionate ministry: Matthew 9:35-36; Luke 4:18; 3 Nephi 17:5-9",
-    "Calling and authorizing Apostles: Matthew 16:18-19; Mark 3:14; John 15:16"
-  ],
-  breakdown:"Because this principle covers so much ground (prophecy, ministry, Church organization), missionaries can rush through it as background information rather than helping the investigator feel who Jesus actually is &mdash; His compassion specifically &mdash; before moving to the apostasy.",
-  questions:[
-    {q:"\"I already believe in Jesus &mdash; why do I need anything more?\"",
-     a:"Affirm that faith in Jesus Christ is the very foundation we're building on together. Explain gently that what we want to share is how He organized His Church with specific authority during His life &mdash; and what happened to that organization afterward, which is the next part of the story."}
-  ],
-  connection:"This principle is the hinge: it establishes that Christ's true Church existed with real authority, which makes the apostasy (next principle) meaningful as a *loss* rather than just \"old history,\" and makes the Restoration a recovery of something specific rather than something new.",
-  testimony:"Share a moment when you felt the Savior's compassion personally &mdash; in your own life or through someone else's example."
-},
+        {
+          lesson: "restoration",
+          lessonLabel: "Lesson 1: The Message of the Restoration",
+          title: "The Book of Mormon and Praying to Know the Truth",
+          points: [
+            "The Book of Mormon came forth as part of the Restoration &mdash; another witness of Jesus Christ alongside the Bible.",
+            "Reading it brings us closer to God and helps us recognize truth.",
+            "Praying with real intent invites the Holy Ghost to confirm what has been taught.",
+          ],
+          scriptures: [
+            'Another witness of Christ: Ezekiel 37:15-17 (two records becoming one); 2 Corinthians 13:1 ("in the mouth of two or three witnesses"); Title page and Introduction to the Book of Mormon',
+            "Promise of personal revelation: James 1:5-6; Moroni 10:3-5",
+          ],
+          breakdown:
+            'This is often treated as just "homework" at the end of the lesson &mdash; "read this and pray about it" &mdash; without explaining *why* this specific approach (reading, pondering, sincere prayer) is how truth in spiritual matters is recognized. Without that explanation, the invitation can feel like a formality rather than the doorway to a real spiritual experience.',
+          questions: [
+            {
+              q: '"How can a feeling tell me whether a book is true?"',
+              a: "Use James 1:5 &mdash; God invites us to ask when we lack wisdom, and promises He will answer. Explain that the Holy Ghost communicates truth through real, recognizable feelings of peace and clarity (not just emotion), and that this is the same way people throughout the scriptures came to know truth. Invite them to try it with real intent &mdash; willing to act on what they receive.",
+            },
+          ],
+          connection:
+            "This is the capstone of Lesson 1 and the bridge to everything that follows: if someone gains a witness here, the door is open to the Plan of Salvation and the Gospel of Jesus Christ being received not just as information but as truth confirmed by the Spirit.",
+          testimony:
+            "Share your own experience of praying about the Book of Mormon and what you felt &mdash; be specific about the feeling, not just the conclusion.",
+        },
 
-{lesson:"restoration", lessonLabel:"Lesson 1: The Message of the Restoration",
-  title:"The Apostasy",
-  points:[
-    "After Christ's Apostles were killed, corruption and division crept into Christianity.",
-    "This falling away (apostasy) was prophesied to happen &mdash; it wasn't a surprise to God.",
-    "As a result, priesthood authority and the fulness of Christ's teachings were lost from the earth."
-  ],
-  scriptures:[
-    "Prophesied apostasy: Amos 8:11-12; 2 Thessalonians 2:1-3; Acts 20:29-30",
-    "Loss of authority and truth: Isaiah 24:5; 2 Timothy 4:3-4; 1 Nephi 13:26-29"
-  ],
-  breakdown:"This principle can come across as critical of other churches or of well-meaning people of faith throughout history if not handled carefully. Missionaries sometimes either avoid it entirely (making the Restoration seem unnecessary) or present it too bluntly, which can feel dismissive of someone's heritage or current faith community.",
-  questions:[
-    {q:"\"Are you saying my church and my grandmother's faith were all wrong?\"",
-     a:"No &mdash; affirm that God has honored the faith and good lives of sincere believers throughout history, in every church. What was lost wasn't people's sincerity or goodness, but specific priesthood authority and certain teachings. Frame the Restoration as *addition*, not accusation: bringing back what was missing, not erasing what was good."}
-  ],
-  connection:"This principle only makes sense in light of the previous one (Christ's true Church with real authority) and directly sets up the next (the Restoration as the *answer* to this loss). Skipping or rushing it can make the Restoration feel unnecessary &mdash; \"why would God need to restore anything?\"",
-  testimony:"If helpful, share how understanding the apostasy helped you make sense of why there are so many different churches &mdash; without it feeling like a judgment on anyone's faith."
-},
+        // ===================== LESSON 2: PLAN OF SALVATION (8) =====================
+        {
+          lesson: "pos",
+          lessonLabel: "Lesson 2: Heavenly Father's Plan of Salvation",
+          title: "Premortal Life",
+          points: [
+            "We lived with God as His spirit children before coming to earth.",
+            "Jesus Christ was chosen in the premortal council to be our Savior and Redeemer.",
+            "Coming to earth was part of God's plan for our eternal progression &mdash; not an accident.",
+          ],
+          scriptures: [
+            "Spirit children of God: Job 38:4-7; Hebrews 12:9; Jeremiah 1:5",
+            "Christ chosen as Redeemer: Isaiah 53; Revelation 13:8; Alma 13:3, 7-9 (foreordination)",
+          ],
+          breakdown:
+            'This principle can feel disconnected from "real life" if presented only as abstract premortal history. Missionaries sometimes don\'t connect it to identity &mdash; the idea that knowing where you came from changes how you see your worth and purpose right now.',
+          questions: [
+            {
+              q: "\"I don't remember any of that &mdash; how can I know it's true?\"",
+              a: "Acknowledge that's true for everyone &mdash; part of coming to earth was leaving that memory behind so we could grow through faith. Point to the feeling many people have of an inner sense of purpose or worth that doesn't come from anything in this life, and invite them to consider where that sense might come from.",
+            },
+          ],
+          connection:
+            "This is the starting point of the Plan of Salvation's timeline (premortal life &rarr; creation &rarr; fall &rarr; mortality &rarr; death &rarr; judgment). It also connects back to Lesson 1's teaching on the nature of God &mdash; if God is our literal Father, premortal life follows naturally.",
+          testimony:
+            "Share how understanding you lived with God before this life affects how you see your own worth or the worth of others.",
+        },
 
-{lesson:"restoration", lessonLabel:"Lesson 1: The Message of the Restoration",
-  title:"The Restoration of the Gospel through Joseph Smith",
-  points:[
-    "How the Restoration happened &mdash; through the First Vision, God called Joseph Smith as a prophet.",
-    "What was restored &mdash; the fulness of the gospel and the priesthood authority that had been lost.",
-    "This was a restoration of something that had existed before, not the creation of something new."
-  ],
-  scriptures:[
-    "Pattern of restoration prophesied: Acts 3:19-21; Ephesians 1:9-10; Isaiah 29:13-14",
-    "A marvelous work to come forth: Isaiah 29:11-12; 1 Nephi 13:34-35; 2 Nephi 27:6-26"
-  ],
-  breakdown:"Missionaries sometimes present the First Vision as the climax without circling back to connect it to the apostasy (\"this is the answer to the loss we just talked about\") or forward to what it set in motion (priesthood, Church organization, scripture). Without those connections, it can feel like an isolated event rather than the turning point of the whole narrative.",
-  questions:[
-    {q:"\"How is this any different from someone else today claiming to see a vision?\"",
-     a:"Point to the pattern established earlier in the lesson: God has always called prophets through personal experiences with Him &mdash; Moses at the burning bush, Paul on the road to Damascus. Invite them to consider that the real question isn't whether visions happen, but whether *this* one fits what God restored: authority, scripture, and a organized Church that continues to bless lives today. Invite them to pray about it directly (this leads into principle 7)."}
-  ],
-  connection:"This is the turning point of the entire lesson &mdash; it resolves the apostasy and opens the door to the Book of Mormon and the invitation to pray. Make sure investigators feel the *shift*: from \"something was lost\" to \"something has been given back.\"",
-  testimony:"Share what the Restoration personally means to you &mdash; not just historically, but how it affects your life today."
-},
+        {
+          lesson: "pos",
+          lessonLabel: "Lesson 2: Heavenly Father's Plan of Salvation",
+          title: "The Creation",
+          points: [
+            "The earth was created under the direction of God the Father, by Jesus Christ.",
+            "Creation was purposeful &mdash; a place prepared for God's children to receive bodies and grow.",
+            "The order and beauty of creation reflects God's character and care.",
+          ],
+          scriptures: [
+            "Christ as Creator under the Father's direction: John 1:1-3, 10; Hebrews 1:1-2; 3 Nephi 9:15",
+            "Purpose of creation: Genesis 1:26-31; Psalm 19:1; Isaiah 45:18",
+          ],
+          breakdown:
+            'This principle is sometimes skipped entirely as "less essential," but doing so can leave a gap: investigators may wonder why Jesus is described as Creator if He\'s also the Savior born later in mortality. Without this principle, the timeline of the Plan of Salvation can feel confusing.',
+          questions: [
+            {
+              q: '"If Jesus created the earth, how was He later born as a baby?"',
+              a: "Explain simply: Jesus Christ, as a spirit being under the Father's direction, created the earth before His mortal birth. His mortal birth was a later, separate step in God's plan &mdash; when He came to earth Himself to live, teach, and complete His mission as Savior.",
+            },
+          ],
+          connection:
+            "Connects premortal life (where Christ was chosen) to mortal life (where we now live) &mdash; the earth is the *setting* for the rest of the plan to unfold.",
+          testimony:
+            "Share a moment when something in creation helped you feel close to God.",
+        },
 
-{lesson:"restoration", lessonLabel:"Lesson 1: The Message of the Restoration",
-  title:"The Book of Mormon and Praying to Know the Truth",
-  points:[
-    "The Book of Mormon came forth as part of the Restoration &mdash; another witness of Jesus Christ alongside the Bible.",
-    "Reading it brings us closer to God and helps us recognize truth.",
-    "Praying with real intent invites the Holy Ghost to confirm what has been taught."
-  ],
-  scriptures:[
-    "Another witness of Christ: Ezekiel 37:15-17 (two records becoming one); 2 Corinthians 13:1 (\"in the mouth of two or three witnesses\"); Title page and Introduction to the Book of Mormon",
-    "Promise of personal revelation: James 1:5-6; Moroni 10:3-5"
-  ],
-  breakdown:"This is often treated as just \"homework\" at the end of the lesson &mdash; \"read this and pray about it\" &mdash; without explaining *why* this specific approach (reading, pondering, sincere prayer) is how truth in spiritual matters is recognized. Without that explanation, the invitation can feel like a formality rather than the doorway to a real spiritual experience.",
-  questions:[
-    {q:"\"How can a feeling tell me whether a book is true?\"",
-     a:"Use James 1:5 &mdash; God invites us to ask when we lack wisdom, and promises He will answer. Explain that the Holy Ghost communicates truth through real, recognizable feelings of peace and clarity (not just emotion), and that this is the same way people throughout the scriptures came to know truth. Invite them to try it with real intent &mdash; willing to act on what they receive."}
-  ],
-  connection:"This is the capstone of Lesson 1 and the bridge to everything that follows: if someone gains a witness here, the door is open to the Plan of Salvation and the Gospel of Jesus Christ being received not just as information but as truth confirmed by the Spirit.",
-  testimony:"Share your own experience of praying about the Book of Mormon and what you felt &mdash; be specific about the feeling, not just the conclusion."
-},
+        {
+          lesson: "pos",
+          lessonLabel: "Lesson 2: Heavenly Father's Plan of Salvation",
+          title: "The Fall of Adam and Eve",
+          points: [
+            'Adam and Eve\'s choice in the Garden was a transgression, not what most people think of as "sin" in the way we use that word today.',
+            "The Fall was a necessary step forward in God's plan, not a tragedy or mistake.",
+            "Because of the Fall, we can experience both joy and sorrow, and have agency to choose.",
+          ],
+          scriptures: [
+            "The choice in the Garden: Genesis 3:6, 22-24",
+            'The Fall as part of God\'s plan: 2 Nephi 2:22-25 ("Adam fell that men might be"); Genesis 3:20 (Eve named "mother of all living")',
+          ],
+          breakdown:
+            'When taught quickly, this principle can leave the impression that Adam and Eve "ruined everything" &mdash; which conflicts with the next point that the Fall was necessary and even something to be grateful for. Missionaries need to clearly connect the transgression to its purpose, not just state both facts side by side.',
+          questions: [
+            {
+              q: '"If Adam and Eve sinned, why do I have to deal with the consequences? That seems unfair."',
+              a: 'Reframe gently: rather than inheriting guilt for their choice, we inherit the *opportunity* their choice created &mdash; a world where we can learn, grow, make our own choices, and experience real joy because we also experience real sorrow. 2 Nephi 2:25 frames this positively: it happened so that we "might have joy."',
+            },
+          ],
+          connection:
+            'This explains *why* mortal life looks the way it does (next principle) &mdash; why there\'s both good and hard things, and why agency matters. It directly sets up "Our Life on Earth."',
+          testimony:
+            "Share how understanding the Fall as part of God's plan (rather than a tragedy) has changed how you see hardship in your own life.",
+        },
 
-// ===================== LESSON 2: PLAN OF SALVATION (8) =====================
-{lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation",
-  title:"Premortal Life",
-  points:[
-    "We lived with God as His spirit children before coming to earth.",
-    "Jesus Christ was chosen in the premortal council to be our Savior and Redeemer.",
-    "Coming to earth was part of God's plan for our eternal progression &mdash; not an accident."
-  ],
-  scriptures:[
-    "Spirit children of God: Job 38:4-7; Hebrews 12:9; Jeremiah 1:5",
-    "Christ chosen as Redeemer: Isaiah 53; Revelation 13:8; Alma 13:3, 7-9 (foreordination)"
-  ],
-  breakdown:"This principle can feel disconnected from \"real life\" if presented only as abstract premortal history. Missionaries sometimes don't connect it to identity &mdash; the idea that knowing where you came from changes how you see your worth and purpose right now.",
-  questions:[
-    {q:"\"I don't remember any of that &mdash; how can I know it's true?\"",
-     a:"Acknowledge that's true for everyone &mdash; part of coming to earth was leaving that memory behind so we could grow through faith. Point to the feeling many people have of an inner sense of purpose or worth that doesn't come from anything in this life, and invite them to consider where that sense might come from."}
-  ],
-  connection:"This is the starting point of the Plan of Salvation's timeline (premortal life &rarr; creation &rarr; fall &rarr; mortality &rarr; death &rarr; judgment). It also connects back to Lesson 1's teaching on the nature of God &mdash; if God is our literal Father, premortal life follows naturally.",
-  testimony:"Share how understanding you lived with God before this life affects how you see your own worth or the worth of others."
-},
+        {
+          lesson: "pos",
+          lessonLabel: "Lesson 2: Heavenly Father's Plan of Salvation",
+          title: "Our Life on Earth",
+          points: [
+            "We come to earth to receive a body, gain experience, and learn to use agency wisely.",
+            "We don't remember premortal life &mdash; this life requires faith.",
+            "Trials and challenges are part of how we grow, not signs that God has abandoned us.",
+          ],
+          scriptures: [
+            'Purpose of earth life: Ecclesiastes 3:1; 2 Corinthians 5:7 ("walk by faith, not by sight"); 2 Nephi 2:11, 27',
+            "Growth through trials: Romans 5:3-5; James 1:2-4; Alma 36:3",
+          ],
+          breakdown:
+            'This principle risks sounding like a platitude ("everything happens for a reason") if not grounded in something specific the investigator is experiencing. Missionaries sometimes generalize instead of connecting the principle to the person\'s actual life and current challenges.',
+          questions: [
+            {
+              q: '"Why would a loving God let me go through what I\'m going through right now?"',
+              a: "Don't rush to explain it away. Acknowledge the pain first. Then gently connect: God's plan isn't that we'd never struggle, but that we wouldn't struggle *alone* or *without purpose*. The Atonement (coming up next) is specifically how He helps us carry what's hard.",
+            },
+          ],
+          connection:
+            'This is where the Plan of Salvation becomes personal &mdash; it\'s the "why" behind whatever the investigator may be facing. It also directly sets up the Atonement as the answer to the difficulty of mortal life.',
+          testimony:
+            "Share how you've personally felt God's help during a hard time &mdash; specific enough that it feels real, not generic.",
+        },
 
-{lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation",
-  title:"The Creation",
-  points:[
-    "The earth was created under the direction of God the Father, by Jesus Christ.",
-    "Creation was purposeful &mdash; a place prepared for God's children to receive bodies and grow.",
-    "The order and beauty of creation reflects God's character and care."
-  ],
-  scriptures:[
-    "Christ as Creator under the Father's direction: John 1:1-3, 10; Hebrews 1:1-2; 3 Nephi 9:15",
-    "Purpose of creation: Genesis 1:26-31; Psalm 19:1; Isaiah 45:18"
-  ],
-  breakdown:"This principle is sometimes skipped entirely as \"less essential,\" but doing so can leave a gap: investigators may wonder why Jesus is described as Creator if He's also the Savior born later in mortality. Without this principle, the timeline of the Plan of Salvation can feel confusing.",
-  questions:[
-    {q:"\"If Jesus created the earth, how was He later born as a baby?\"",
-     a:"Explain simply: Jesus Christ, as a spirit being under the Father's direction, created the earth before His mortal birth. His mortal birth was a later, separate step in God's plan &mdash; when He came to earth Himself to live, teach, and complete His mission as Savior."}
-  ],
-  connection:"Connects premortal life (where Christ was chosen) to mortal life (where we now live) &mdash; the earth is the *setting* for the rest of the plan to unfold.",
-  testimony:"Share a moment when something in creation helped you feel close to God."
-},
+        {
+          lesson: "pos",
+          lessonLabel: "Lesson 2: Heavenly Father's Plan of Salvation",
+          title: "The Atonement of Jesus Christ",
+          points: [
+            "Because of the Fall, we all sin and will all die &mdash; we cannot fix this ourselves.",
+            "Jesus Christ's suffering and death made it possible for us to be forgiven as we repent.",
+            "His Resurrection guarantees that we will all be resurrected with a perfected body.",
+          ],
+          scriptures: [
+            "Need for a Redeemer: Romans 3:23; Isaiah 53:4-6; 2 Nephi 9:6-10",
+            "Forgiveness through Christ: 1 John 1:9; Alma 7:11-13",
+            "Resurrection for all: 1 Corinthians 15:20-22; Job 19:25-26; Alma 11:42-44",
+          ],
+          breakdown:
+            'Because this principle is so central, missionaries sometimes try to cover everything about the Atonement at once &mdash; forgiveness, healing, resurrection, justice and mercy &mdash; in a single pass. This is exactly the "drift" problem from Section 1. Pick the one or two aspects most relevant to the person in front of you.',
+          questions: [
+            {
+              q: '"How can someone else\'s suffering 2,000 years ago actually help me today?"',
+              a: "Use Alma 7:11-12 &mdash; Christ took upon Himself our pains and afflictions so He would know, personally, how to help us. It's not just a legal transaction; it's a relationship. He understands specifically because He experienced it. Invite them to bring something specific to Him in prayer this week and notice what happens.",
+            },
+          ],
+          connection:
+            'This is the hinge of the entire Plan of Salvation &mdash; without it, the Fall has no remedy and mortal life has no resolution. It also directly previews "Faith in Jesus Christ" and "Repentance" in Lesson 3.',
+          testimony:
+            "Share a specific time you felt forgiven, healed, or strengthened through Christ &mdash; the more specific, the more it will mean to the investigator.",
+        },
 
-{lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation",
-  title:"The Fall of Adam and Eve",
-  points:[
-    "Adam and Eve's choice in the Garden was a transgression, not what most people think of as \"sin\" in the way we use that word today.",
-    "The Fall was a necessary step forward in God's plan, not a tragedy or mistake.",
-    "Because of the Fall, we can experience both joy and sorrow, and have agency to choose."
-  ],
-  scriptures:[
-    "The choice in the Garden: Genesis 3:6, 22-24",
-    "The Fall as part of God's plan: 2 Nephi 2:22-25 (\"Adam fell that men might be\"); Genesis 3:20 (Eve named \"mother of all living\")"
-  ],
-  breakdown:"When taught quickly, this principle can leave the impression that Adam and Eve \"ruined everything\" &mdash; which conflicts with the next point that the Fall was necessary and even something to be grateful for. Missionaries need to clearly connect the transgression to its purpose, not just state both facts side by side.",
-  questions:[
-    {q:"\"If Adam and Eve sinned, why do I have to deal with the consequences? That seems unfair.\"",
-     a:"Reframe gently: rather than inheriting guilt for their choice, we inherit the *opportunity* their choice created &mdash; a world where we can learn, grow, make our own choices, and experience real joy because we also experience real sorrow. 2 Nephi 2:25 frames this positively: it happened so that we \"might have joy.\""}
-  ],
-  connection:"This explains *why* mortal life looks the way it does (next principle) &mdash; why there's both good and hard things, and why agency matters. It directly sets up \"Our Life on Earth.\"",
-  testimony:"Share how understanding the Fall as part of God's plan (rather than a tragedy) has changed how you see hardship in your own life."
-},
+        {
+          lesson: "pos",
+          lessonLabel: "Lesson 2: Heavenly Father's Plan of Salvation",
+          title: "The Spirit World",
+          points: [
+            "When we die, our spirit continues to live &mdash; death is not the end.",
+            "The spirit world is a place of continued learning and preparation before the Resurrection.",
+            "Those who didn't receive the gospel in this life have the opportunity to receive it there.",
+          ],
+          scriptures: [
+            "Spirit continues after death: Ecclesiastes 12:7; Luke 23:43; Alma 40:11-12",
+            "Continued opportunity to receive the gospel: 1 Peter 3:18-20; 1 Peter 4:6",
+          ],
+          breakdown:
+            "This principle can raise sensitive feelings about deceased loved ones. Missionaries sometimes either avoid it for fear of bringing up grief, or move through it too quickly without giving space for the investigator's own feelings about death and loss.",
+          questions: [
+            {
+              q: '"What about my relative who died without ever hearing about this church &mdash; is it too late for them?"',
+              a: "No &mdash; this is one of the most comforting parts of the Plan of Salvation. God is perfectly fair; those who didn't have the opportunity in this life will have it in the spirit world (1 Peter 4:6). Nothing is lost or too late in God's plan.",
+            },
+          ],
+          connection:
+            'This answers the question "what happens after death," which naturally follows the Atonement (which makes resurrection possible) and leads into Resurrection, Salvation, and Exaltation.',
+          testimony:
+            "If appropriate and comfortable, share how this principle has brought you peace regarding someone you've lost.",
+        },
 
-{lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation",
-  title:"Our Life on Earth",
-  points:[
-    "We come to earth to receive a body, gain experience, and learn to use agency wisely.",
-    "We don't remember premortal life &mdash; this life requires faith.",
-    "Trials and challenges are part of how we grow, not signs that God has abandoned us."
-  ],
-  scriptures:[
-    "Purpose of earth life: Ecclesiastes 3:1; 2 Corinthians 5:7 (\"walk by faith, not by sight\"); 2 Nephi 2:11, 27",
-    "Growth through trials: Romans 5:3-5; James 1:2-4; Alma 36:3"
-  ],
-  breakdown:"This principle risks sounding like a platitude (\"everything happens for a reason\") if not grounded in something specific the investigator is experiencing. Missionaries sometimes generalize instead of connecting the principle to the person's actual life and current challenges.",
-  questions:[
-    {q:"\"Why would a loving God let me go through what I'm going through right now?\"",
-     a:"Don't rush to explain it away. Acknowledge the pain first. Then gently connect: God's plan isn't that we'd never struggle, but that we wouldn't struggle *alone* or *without purpose*. The Atonement (coming up next) is specifically how He helps us carry what's hard."}
-  ],
-  connection:"This is where the Plan of Salvation becomes personal &mdash; it's the \"why\" behind whatever the investigator may be facing. It also directly sets up the Atonement as the answer to the difficulty of mortal life.",
-  testimony:"Share how you've personally felt God's help during a hard time &mdash; specific enough that it feels real, not generic."
-},
+        {
+          lesson: "pos",
+          lessonLabel: "Lesson 2: Heavenly Father's Plan of Salvation",
+          title: "The Resurrection, Salvation, and Exaltation",
+          points: [
+            "The Resurrection is the reuniting of body and spirit, made possible through Christ.",
+            "Salvation from physical death comes to everyone through Christ's grace.",
+            "Exaltation &mdash; living with God forever in families &mdash; is available to those who follow Christ's path.",
+          ],
+          scriptures: [
+            "Resurrection for all: 1 Corinthians 15:20-22; Job 19:25-26; Alma 11:42-45",
+            "Families and exaltation: Genesis 17:7 (everlasting covenant for generations); Malachi 4:5-6; Matthew 19:4-6",
+          ],
+          breakdown:
+            'The term "exaltation" can sound abstract or even exclusive if not grounded in something relatable. Missionaries sometimes explain it in doctrinal terms ("highest degree of the celestial kingdom") without first connecting it to something the person already cares about &mdash; like their own family relationships.',
+          questions: [
+            {
+              q: '"Are you saying that not everyone gets the same reward after this life? Doesn\'t that seem unfair?"',
+              a: "Reframe gently: God is both just and merciful, and with very few exceptions, everyone receives a place of glory &mdash; this isn't about punishment. The differences reflect God honoring each person's own choices and desires, while still being generous beyond what most religious traditions teach. Keep this simple and avoid going deep into the kingdoms of glory unless asked.",
+            },
+          ],
+          connection:
+            "This is the \"destination\" of the Plan of Salvation's timeline, and connects directly to the promise that families can be together forever &mdash; which ties back to Lesson 1's teaching on the blessings of the gospel for families.",
+          testimony:
+            "Share what the hope of being with your family forever means to you personally.",
+        },
 
-{lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation",
-  title:"The Atonement of Jesus Christ",
-  points:[
-    "Because of the Fall, we all sin and will all die &mdash; we cannot fix this ourselves.",
-    "Jesus Christ's suffering and death made it possible for us to be forgiven as we repent.",
-    "His Resurrection guarantees that we will all be resurrected with a perfected body."
-  ],
-  scriptures:[
-    "Need for a Redeemer: Romans 3:23; Isaiah 53:4-6; 2 Nephi 9:6-10",
-    "Forgiveness through Christ: 1 John 1:9; Alma 7:11-13",
-    "Resurrection for all: 1 Corinthians 15:20-22; Job 19:25-26; Alma 11:42-44"
-  ],
-  breakdown:"Because this principle is so central, missionaries sometimes try to cover everything about the Atonement at once &mdash; forgiveness, healing, resurrection, justice and mercy &mdash; in a single pass. This is exactly the \"drift\" problem from Section 1. Pick the one or two aspects most relevant to the person in front of you.",
-  questions:[
-    {q:"\"How can someone else's suffering 2,000 years ago actually help me today?\"",
-     a:"Use Alma 7:11-12 &mdash; Christ took upon Himself our pains and afflictions so He would know, personally, how to help us. It's not just a legal transaction; it's a relationship. He understands specifically because He experienced it. Invite them to bring something specific to Him in prayer this week and notice what happens."}
-  ],
-  connection:"This is the hinge of the entire Plan of Salvation &mdash; without it, the Fall has no remedy and mortal life has no resolution. It also directly previews \"Faith in Jesus Christ\" and \"Repentance\" in Lesson 3.",
-  testimony:"Share a specific time you felt forgiven, healed, or strengthened through Christ &mdash; the more specific, the more it will mean to the investigator."
-},
+        {
+          lesson: "pos",
+          lessonLabel: "Lesson 2: Heavenly Father's Plan of Salvation",
+          title: "Judgment and Kingdoms of Glory",
+          points: [
+            "After resurrection, Jesus Christ will judge each person according to their faith, works, and repentance.",
+            "God's judgment is both just and merciful &mdash; He knows each person's full circumstances.",
+            "We are taught to prepare ourselves to meet God, not to judge others' eternal outcomes.",
+          ],
+          scriptures: [
+            "Christ as judge: John 5:22; 2 Corinthians 5:10; 3 Nephi 27:13-16",
+            "Avoiding judgment of others: Matthew 7:1-2; Luke 6:37; Mosiah 26:28-29 (mercy for the penitent)",
+          ],
+          breakdown:
+            'This principle, taught at the wrong depth or wrong time, can create fear rather than hope. Missionaries sometimes over-explain the kingdoms of glory in detail when the investigator\'s real question is simpler: "will I be okay?"',
+          questions: [
+            {
+              q: "\"I've made a lot of mistakes in my life &mdash; what does that mean for me when I'm judged?\"",
+              a: "Bring this back to repentance and the Atonement (which is coming in Lesson 3, but can be previewed here): God's judgment takes into account our repentance, not just our mistakes. The purpose of the gospel is to help us prepare with hope, not to live in fear of judgment.",
+            },
+          ],
+          connection:
+            "This closes the Plan of Salvation's timeline and creates a natural bridge into Lesson 3 &mdash; if judgment depends on faith, works, and repentance, the obvious next question is: how do I live the gospel of Jesus Christ?",
+          testimony:
+            "Share how understanding God's judgment as merciful (not just exacting) has given you peace about your own life.",
+        },
 
-{lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation",
-  title:"The Spirit World",
-  points:[
-    "When we die, our spirit continues to live &mdash; death is not the end.",
-    "The spirit world is a place of continued learning and preparation before the Resurrection.",
-    "Those who didn't receive the gospel in this life have the opportunity to receive it there."
-  ],
-  scriptures:[
-    "Spirit continues after death: Ecclesiastes 12:7; Luke 23:43; Alma 40:11-12",
-    "Continued opportunity to receive the gospel: 1 Peter 3:18-20; 1 Peter 4:6"
-  ],
-  breakdown:"This principle can raise sensitive feelings about deceased loved ones. Missionaries sometimes either avoid it for fear of bringing up grief, or move through it too quickly without giving space for the investigator's own feelings about death and loss.",
-  questions:[
-    {q:"\"What about my relative who died without ever hearing about this church &mdash; is it too late for them?\"",
-     a:"No &mdash; this is one of the most comforting parts of the Plan of Salvation. God is perfectly fair; those who didn't have the opportunity in this life will have it in the spirit world (1 Peter 4:6). Nothing is lost or too late in God's plan."}
-  ],
-  connection:"This answers the question \"what happens after death,\" which naturally follows the Atonement (which makes resurrection possible) and leads into Resurrection, Salvation, and Exaltation.",
-  testimony:"If appropriate and comfortable, share how this principle has brought you peace regarding someone you've lost."
-},
+        // ===================== LESSON 3: GOSPEL OF JESUS CHRIST (7) =====================
+        {
+          lesson: "gospel",
+          lessonLabel: "Lesson 3: The Gospel of Jesus Christ",
+          title: "The Divine Mission of Jesus Christ",
+          points: [
+            "Jesus Christ was sent by the Father specifically to redeem us from sin and death.",
+            "His atoning sacrifice makes cleansing and sanctification possible as we repent.",
+            "His Resurrection guarantees our own resurrection.",
+          ],
+          scriptures: [
+            "Sent by the Father: John 3:16-17; 1 John 4:9-10",
+            "Mission to redeem: Luke 19:10; 2 Nephi 9:21",
+            "Resurrection guaranteed: 1 Corinthians 15:20-22",
+          ],
+          breakdown:
+            "This principle overlaps significantly with Lesson 1's \"Jesus Christ's Earthly Ministry and Atonement\" and Lesson 2's \"Atonement of Jesus Christ.\" Missionaries sometimes repeat the same content without adding anything new, which can feel repetitive to the investigator. Use this as a *summary and transition* into the gospel's specific steps (faith, repentance, baptism), not a third full retelling.",
+          questions: [
+            {
+              q: "\"We've already talked about Jesus and the Atonement &mdash; what's different this time?\"",
+              a: "Acknowledge that directly: \"You're right, we've talked about who Jesus is and what He did. Now we want to focus on what that means for *you* &mdash; the specific steps the gospel invites you to take in response.\" This frames Lesson 3 as application, not repetition.",
+            },
+          ],
+          connection:
+            'This is the bridge from "what God has done" (Lessons 1-2) to "what we do in response" (the rest of Lesson 3: faith, repentance, baptism, Holy Ghost, enduring).',
+          testimony:
+            "Keep this brief since it overlaps with earlier testimonies &mdash; a short reaffirmation is enough.",
+        },
 
-{lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation",
-  title:"The Resurrection, Salvation, and Exaltation",
-  points:[
-    "The Resurrection is the reuniting of body and spirit, made possible through Christ.",
-    "Salvation from physical death comes to everyone through Christ's grace.",
-    "Exaltation &mdash; living with God forever in families &mdash; is available to those who follow Christ's path."
-  ],
-  scriptures:[
-    "Resurrection for all: 1 Corinthians 15:20-22; Job 19:25-26; Alma 11:42-45",
-    "Families and exaltation: Genesis 17:7 (everlasting covenant for generations); Malachi 4:5-6; Matthew 19:4-6"
-  ],
-  breakdown:"The term \"exaltation\" can sound abstract or even exclusive if not grounded in something relatable. Missionaries sometimes explain it in doctrinal terms (\"highest degree of the celestial kingdom\") without first connecting it to something the person already cares about &mdash; like their own family relationships.",
-  questions:[
-    {q:"\"Are you saying that not everyone gets the same reward after this life? Doesn't that seem unfair?\"",
-     a:"Reframe gently: God is both just and merciful, and with very few exceptions, everyone receives a place of glory &mdash; this isn't about punishment. The differences reflect God honoring each person's own choices and desires, while still being generous beyond what most religious traditions teach. Keep this simple and avoid going deep into the kingdoms of glory unless asked."}
-  ],
-  connection:"This is the \"destination\" of the Plan of Salvation's timeline, and connects directly to the promise that families can be together forever &mdash; which ties back to Lesson 1's teaching on the blessings of the gospel for families.",
-  testimony:"Share what the hope of being with your family forever means to you personally."
-},
+        {
+          lesson: "gospel",
+          lessonLabel: "Lesson 3: The Gospel of Jesus Christ",
+          title: "Faith in Jesus Christ",
+          points: [
+            "Faith means trusting Jesus Christ as our Savior, even without having all the answers.",
+            "Faith is shown through action &mdash; it's not just a feeling or belief.",
+            "Faith grows through prayer, scripture study, and obedience &mdash; it can be developed.",
+          ],
+          scriptures: [
+            "Faith defined: Hebrews 11:1; Alma 32:21",
+            "Faith as action: James 2:17; 2 Nephi 31:19",
+            "Faith grows: Alma 32:27-28 (the seed); Romans 10:17",
+          ],
+          breakdown:
+            "Faith is sometimes taught as a static thing you either have or don't, rather than something that grows through specific actions. This can leave investigators feeling like faith is out of reach if they don't already feel certain.",
+          questions: [
+            {
+              q: '"What if I want to believe but I\'m just not sure?"',
+              a: "This is exactly where faith starts. Use Alma 32:27 &mdash; even a desire to believe is enough of a seed to begin. Invite them to act on that small desire (read, pray, attend church) and watch what happens, rather than waiting for certainty first.",
+            },
+          ],
+          connection:
+            "Faith is the first step that leads to repentance (next principle) &mdash; without trusting Christ, there's no motivation to change. This connects back to the invitation in Lesson 1 to pray about the Book of Mormon.",
+          testimony:
+            "Share an experience where acting on a small amount of faith led to greater faith or understanding.",
+        },
 
-{lesson:"pos", lessonLabel:"Lesson 2: Heavenly Father's Plan of Salvation",
-  title:"Judgment and Kingdoms of Glory",
-  points:[
-    "After resurrection, Jesus Christ will judge each person according to their faith, works, and repentance.",
-    "God's judgment is both just and merciful &mdash; He knows each person's full circumstances.",
-    "We are taught to prepare ourselves to meet God, not to judge others' eternal outcomes."
-  ],
-  scriptures:[
-    "Christ as judge: John 5:22; 2 Corinthians 5:10; 3 Nephi 27:13-16",
-    "Avoiding judgment of others: Matthew 7:1-2; Luke 6:37; Mosiah 26:28-29 (mercy for the penitent)"
-  ],
-  breakdown:"This principle, taught at the wrong depth or wrong time, can create fear rather than hope. Missionaries sometimes over-explain the kingdoms of glory in detail when the investigator's real question is simpler: \"will I be okay?\"",
-  questions:[
-    {q:"\"I've made a lot of mistakes in my life &mdash; what does that mean for me when I'm judged?\"",
-     a:"Bring this back to repentance and the Atonement (which is coming in Lesson 3, but can be previewed here): God's judgment takes into account our repentance, not just our mistakes. The purpose of the gospel is to help us prepare with hope, not to live in fear of judgment."}
-  ],
-  connection:"This closes the Plan of Salvation's timeline and creates a natural bridge into Lesson 3 &mdash; if judgment depends on faith, works, and repentance, the obvious next question is: how do I live the gospel of Jesus Christ?",
-  testimony:"Share how understanding God's judgment as merciful (not just exacting) has given you peace about your own life."
-},
+        {
+          lesson: "gospel",
+          lessonLabel: "Lesson 3: The Gospel of Jesus Christ",
+          title: "Repentance",
+          points: [
+            "Repentance is turning toward God and away from sin &mdash; a change of heart, not just behavior.",
+            "Forgiveness is possible because of Christ's Atonement.",
+            "Repentance is a lifelong, ongoing process &mdash; not a one-time event.",
+          ],
+          scriptures: [
+            'Turning to God: Isaiah 55:7; Acts 3:19; Alma 5:14 ("mighty change of heart")',
+            "Forgiveness through Christ: 1 John 1:9; Isaiah 1:18",
+            'Ongoing process: Proverbs 24:16; Mosiah 26:30 ("as often as my people repent")',
+          ],
+          breakdown:
+            "Repentance is often misunderstood by investigators as punishment or shame. If missionaries don't actively reframe it early, the rest of the lesson can be heard through a lens of guilt rather than hope, which affects how baptism and the Holy Ghost are received too.",
+          questions: [
+            {
+              q: "\"Doesn't repentance just mean admitting I'm a bad person?\"",
+              a: "No &mdash; reframe directly. Repentance means *change is possible*, and that God already knows everything about us and still wants a relationship with us (1 John 1:9). It's closer to relief than shame: a fresh start, available again and again.",
+            },
+          ],
+          connection:
+            "This directly prepares for baptism (next principle) &mdash; baptism is the formal covenant that follows faith and repentance. It also connects back to Lesson 2's teaching on judgment: repentance is what changes how judgment feels.",
+          testimony:
+            "Share a specific experience of repenting and feeling relief, change, or renewed connection with God &mdash; concrete, not abstract.",
+        },
 
-// ===================== LESSON 3: GOSPEL OF JESUS CHRIST (7) =====================
-{lesson:"gospel", lessonLabel:"Lesson 3: The Gospel of Jesus Christ",
-  title:"The Divine Mission of Jesus Christ",
-  points:[
-    "Jesus Christ was sent by the Father specifically to redeem us from sin and death.",
-    "His atoning sacrifice makes cleansing and sanctification possible as we repent.",
-    "His Resurrection guarantees our own resurrection."
-  ],
-  scriptures:[
-    "Sent by the Father: John 3:16-17; 1 John 4:9-10",
-    "Mission to redeem: Luke 19:10; 2 Nephi 9:21",
-    "Resurrection guaranteed: 1 Corinthians 15:20-22"
-  ],
-  breakdown:"This principle overlaps significantly with Lesson 1's \"Jesus Christ's Earthly Ministry and Atonement\" and Lesson 2's \"Atonement of Jesus Christ.\" Missionaries sometimes repeat the same content without adding anything new, which can feel repetitive to the investigator. Use this as a *summary and transition* into the gospel's specific steps (faith, repentance, baptism), not a third full retelling.",
-  questions:[
-    {q:"\"We've already talked about Jesus and the Atonement &mdash; what's different this time?\"",
-     a:"Acknowledge that directly: \"You're right, we've talked about who Jesus is and what He did. Now we want to focus on what that means for *you* &mdash; the specific steps the gospel invites you to take in response.\" This frames Lesson 3 as application, not repetition."}
-  ],
-  connection:"This is the bridge from \"what God has done\" (Lessons 1-2) to \"what we do in response\" (the rest of Lesson 3: faith, repentance, baptism, Holy Ghost, enduring).",
-  testimony:"Keep this brief since it overlaps with earlier testimonies &mdash; a short reaffirmation is enough."
-},
+        {
+          lesson: "gospel",
+          lessonLabel: "Lesson 3: The Gospel of Jesus Christ",
+          title: "Baptism: Our First Covenant with God",
+          points: [
+            "Baptism is the first covenant (two-way promise) we make with God.",
+            "It is performed by immersion, following Christ's own example.",
+            "It represents leaving our old life behind and starting fresh &mdash; spiritual rebirth.",
+          ],
+          scriptures: [
+            "Christ's example: Matthew 3:13-17",
+            "Baptism by immersion: Romans 6:3-4 (buried and raised with Christ); Mark 1:9-10",
+            "New life / covenant: 2 Corinthians 5:17; Acts 2:38",
+          ],
+          breakdown:
+            'Missionaries sometimes present baptism primarily as a *requirement* ("this is what you need to do to join the Church") rather than as the natural next step after faith and repentance &mdash; a covenant the person *wants* to make because of what they\'ve already come to feel and believe.',
+          questions: [
+            {
+              q: '"I was already baptized in my church as a baby/before &mdash; why would I need to do this again?"',
+              a: "Acknowledge that their previous baptism likely represented something meaningful to them and their family. Explain simply that baptism, to be part of this covenant and performed with the authority Christ gave His Apostles, is done by someone holding that specific authority &mdash; not a judgment on the sincerity of what came before, but a step that connects to the authority restored in Lesson 1.",
+            },
+          ],
+          connection:
+            "This connects directly back to the Restoration (Lesson 1) &mdash; baptism requires the priesthood authority that was restored through Joseph Smith. It also leads immediately into the Gift of the Holy Ghost.",
+          testimony:
+            "Share what your own baptismal covenant means to you and how you've felt its influence in your life.",
+        },
 
-{lesson:"gospel", lessonLabel:"Lesson 3: The Gospel of Jesus Christ",
-  title:"Faith in Jesus Christ",
-  points:[
-    "Faith means trusting Jesus Christ as our Savior, even without having all the answers.",
-    "Faith is shown through action &mdash; it's not just a feeling or belief.",
-    "Faith grows through prayer, scripture study, and obedience &mdash; it can be developed."
-  ],
-  scriptures:[
-    "Faith defined: Hebrews 11:1; Alma 32:21",
-    "Faith as action: James 2:17; 2 Nephi 31:19",
-    "Faith grows: Alma 32:27-28 (the seed); Romans 10:17"
-  ],
-  breakdown:"Faith is sometimes taught as a static thing you either have or don't, rather than something that grows through specific actions. This can leave investigators feeling like faith is out of reach if they don't already feel certain.",
-  questions:[
-    {q:"\"What if I want to believe but I'm just not sure?\"",
-     a:"This is exactly where faith starts. Use Alma 32:27 &mdash; even a desire to believe is enough of a seed to begin. Invite them to act on that small desire (read, pray, attend church) and watch what happens, rather than waiting for certainty first."}
-  ],
-  connection:"Faith is the first step that leads to repentance (next principle) &mdash; without trusting Christ, there's no motivation to change. This connects back to the invitation in Lesson 1 to pray about the Book of Mormon.",
-  testimony:"Share an experience where acting on a small amount of faith led to greater faith or understanding."
-},
+        {
+          lesson: "gospel",
+          lessonLabel: "Lesson 3: The Gospel of Jesus Christ",
+          title: "The Gift of the Holy Ghost",
+          points: [
+            "The Holy Ghost is the third member of the Godhead (introduced in Lesson 1).",
+            "Baptism by water is followed by baptism of the Spirit through confirmation.",
+            "The Holy Ghost guides, comforts, sanctifies, and teaches truth to those who are faithful.",
+          ],
+          scriptures: [
+            "Holy Ghost as comforter and guide: John 14:26; John 16:13",
+            "Receiving the Spirit: Acts 2:38; Acts 8:14-17 (laying on of hands)",
+            "Confirmation/sanctification: Moroni 6:4 (BoM equivalent pattern), 3 Nephi 27:20",
+          ],
+          breakdown:
+            "This principle can feel disconnected if the Godhead wasn't clearly established back in Lesson 1. If the investigator is still unclear on who the Holy Ghost *is*, adding what He *does* on top of that confusion compounds the problem. Check understanding of the Godhead before building on it here.",
+          questions: [
+            {
+              q: '"How is the Holy Ghost different from just having a conscience or intuition?"',
+              a: "Acknowledge the similarity &mdash; many people do describe the Holy Ghost's influence in those terms. The difference is that the Holy Ghost is a person, a member of the Godhead, who can dwell with us specifically because of covenants we've made, offering guidance that's connected to God's will, not just our own inner sense.",
+            },
+          ],
+          connection:
+            "This completes the baptismal covenant pattern (faith, repentance, baptism, Holy Ghost) and connects to Lesson 1's praying-to-know-truth principle &mdash; the same Spirit that can confirm truth in prayer is the one received through confirmation.",
+          testimony:
+            "Share a specific time you recognized the Holy Ghost's influence &mdash; comfort, direction, or a warning &mdash; and how you knew it was Him.",
+        },
 
-{lesson:"gospel", lessonLabel:"Lesson 3: The Gospel of Jesus Christ",
-  title:"Repentance",
-  points:[
-    "Repentance is turning toward God and away from sin &mdash; a change of heart, not just behavior.",
-    "Forgiveness is possible because of Christ's Atonement.",
-    "Repentance is a lifelong, ongoing process &mdash; not a one-time event."
-  ],
-  scriptures:[
-    "Turning to God: Isaiah 55:7; Acts 3:19; Alma 5:14 (\"mighty change of heart\")",
-    "Forgiveness through Christ: 1 John 1:9; Isaiah 1:18",
-    "Ongoing process: Proverbs 24:16; Mosiah 26:30 (\"as often as my people repent\")"
-  ],
-  breakdown:"Repentance is often misunderstood by investigators as punishment or shame. If missionaries don't actively reframe it early, the rest of the lesson can be heard through a lens of guilt rather than hope, which affects how baptism and the Holy Ghost are received too.",
-  questions:[
-    {q:"\"Doesn't repentance just mean admitting I'm a bad person?\"",
-     a:"No &mdash; reframe directly. Repentance means *change is possible*, and that God already knows everything about us and still wants a relationship with us (1 John 1:9). It's closer to relief than shame: a fresh start, available again and again."}
-  ],
-  connection:"This directly prepares for baptism (next principle) &mdash; baptism is the formal covenant that follows faith and repentance. It also connects back to Lesson 2's teaching on judgment: repentance is what changes how judgment feels.",
-  testimony:"Share a specific experience of repenting and feeling relief, change, or renewed connection with God &mdash; concrete, not abstract."
-},
+        {
+          lesson: "gospel",
+          lessonLabel: "Lesson 3: The Gospel of Jesus Christ",
+          title: "Endure to the End",
+          points: [
+            "Enduring to the end means continuing to live the gospel daily, not just at baptism.",
+            "It includes ongoing faith, repentance, and seeking the Holy Ghost.",
+            "The promise for those who endure is eternal life.",
+          ],
+          scriptures: [
+            'Pressing forward: 2 Nephi 31:20 ("press forward with a steadfastness in Christ"); Philippians 3:13-14',
+            "Ongoing faithfulness: Matthew 24:13; Galatians 6:9",
+            "Promise of eternal life: Revelation 2:10; D&C-free equivalent &mdash; John 17:3 (eternal life is to know God and Christ)",
+          ],
+          breakdown:
+            'This principle is sometimes presented at the end of a lesson as almost an afterthought &mdash; "and finally, keep doing this forever" &mdash; without helping the investigator see it as a hopeful, sustainable rhythm rather than a daunting lifelong demand.',
+          questions: [
+            {
+              q: '"This all sounds like a lot to commit to for the rest of my life."',
+              a: "Reframe the timeframe: enduring to the end isn't about getting everything right forever &mdash; it's about staying on the path, one day at a time, with repentance available whenever we step off it. It's a direction, not a finish line to sprint toward.",
+            },
+          ],
+          connection:
+            'This closes the loop on the doctrine of Christ (faith &rarr; repentance &rarr; baptism &rarr; Holy Ghost &rarr; endure), and connects forward to Lesson 4\'s daily discipleship habits (prayer, scripture study, etc.) as the practical "how" of enduring.',
+          testimony:
+            "Share how your own commitment to the gospel has felt sustainable over time &mdash; not perfect, but steady.",
+        },
 
-{lesson:"gospel", lessonLabel:"Lesson 3: The Gospel of Jesus Christ",
-  title:"Baptism: Our First Covenant with God",
-  points:[
-    "Baptism is the first covenant (two-way promise) we make with God.",
-    "It is performed by immersion, following Christ's own example.",
-    "It represents leaving our old life behind and starting fresh &mdash; spiritual rebirth."
-  ],
-  scriptures:[
-    "Christ's example: Matthew 3:13-17",
-    "Baptism by immersion: Romans 6:3-4 (buried and raised with Christ); Mark 1:9-10",
-    "New life / covenant: 2 Corinthians 5:17; Acts 2:38"
-  ],
-  breakdown:"Missionaries sometimes present baptism primarily as a *requirement* (\"this is what you need to do to join the Church\") rather than as the natural next step after faith and repentance &mdash; a covenant the person *wants* to make because of what they've already come to feel and believe.",
-  questions:[
-    {q:"\"I was already baptized in my church as a baby/before &mdash; why would I need to do this again?\"",
-     a:"Acknowledge that their previous baptism likely represented something meaningful to them and their family. Explain simply that baptism, to be part of this covenant and performed with the authority Christ gave His Apostles, is done by someone holding that specific authority &mdash; not a judgment on the sincerity of what came before, but a step that connects to the authority restored in Lesson 1."}
-  ],
-  connection:"This connects directly back to the Restoration (Lesson 1) &mdash; baptism requires the priesthood authority that was restored through Joseph Smith. It also leads immediately into the Gift of the Holy Ghost.",
-  testimony:"Share what your own baptismal covenant means to you and how you've felt its influence in your life."
-},
+        {
+          lesson: "gospel",
+          lessonLabel: "Lesson 3: The Gospel of Jesus Christ",
+          title: "The Gospel of Jesus Christ Blesses All of God's Children",
+          points: [
+            "The gospel is for everyone, regardless of background, culture, or past.",
+            "Living the gospel brings practical blessings &mdash; to individuals and families &mdash; in this life.",
+            "The gospel also offers the hope of eternal blessings, connecting back to the Plan of Salvation.",
+          ],
+          scriptures: [
+            'Gospel for all: Acts 10:34-35 ("God is no respecter of persons"); 2 Nephi 26:33 ("all are alike unto God")',
+            'Blessings in this life: Malachi 3:10 (windows of heaven); Mosiah 2:41 ("temporally and spiritually")',
+          ],
+          breakdown:
+            "As a closing principle, this can become a generic summary (\"the gospel is good, it blesses everyone\") rather than a specific, personal reflection on what's been taught across Lessons 1-3. Missionaries sometimes don't tie it back to the *specific* things this particular person has expressed needing or wanting.",
+          questions: [
+            {
+              q: '"This all sounds nice, but how does it actually help someone like me, specifically?"',
+              a: "This is the moment to connect everything back to what the person has shared throughout your visits &mdash; their specific hopes, struggles, or family situation. Avoid a generic answer; name the specific thing they've mentioned and show how a principle from Lessons 1-3 speaks directly to it.",
+            },
+          ],
+          connection:
+            "This is the closing principle of the doctrine of Christ section and naturally opens the door to Lesson 4 (Becoming Lifelong Disciples) &mdash; if the gospel blesses all of God's children, the natural next question is: what does living it look like day to day?",
+          testimony:
+            "Share how the gospel has blessed you in a way that connects to something this specific person has shared with you.",
+        },
+      ];
 
-{lesson:"gospel", lessonLabel:"Lesson 3: The Gospel of Jesus Christ",
-  title:"The Gift of the Holy Ghost",
-  points:[
-    "The Holy Ghost is the third member of the Godhead (introduced in Lesson 1).",
-    "Baptism by water is followed by baptism of the Spirit through confirmation.",
-    "The Holy Ghost guides, comforts, sanctifies, and teaches truth to those who are faithful."
-  ],
-  scriptures:[
-    "Holy Ghost as comforter and guide: John 14:26; John 16:13",
-    "Receiving the Spirit: Acts 2:38; Acts 8:14-17 (laying on of hands)",
-    "Confirmation/sanctification: Moroni 6:4 (BoM equivalent pattern), 3 Nephi 27:20"
-  ],
-  breakdown:"This principle can feel disconnected if the Godhead wasn't clearly established back in Lesson 1. If the investigator is still unclear on who the Holy Ghost *is*, adding what He *does* on top of that confusion compounds the problem. Check understanding of the Godhead before building on it here.",
-  questions:[
-    {q:"\"How is the Holy Ghost different from just having a conscience or intuition?\"",
-     a:"Acknowledge the similarity &mdash; many people do describe the Holy Ghost's influence in those terms. The difference is that the Holy Ghost is a person, a member of the Godhead, who can dwell with us specifically because of covenants we've made, offering guidance that's connected to God's will, not just our own inner sense."}
-  ],
-  connection:"This completes the baptismal covenant pattern (faith, repentance, baptism, Holy Ghost) and connects to Lesson 1's praying-to-know-truth principle &mdash; the same Spirit that can confirm truth in prayer is the one received through confirmation.",
-  testimony:"Share a specific time you recognized the Holy Ghost's influence &mdash; comfort, direction, or a warning &mdash; and how you knew it was Him."
-},
+      const lessonOrder = ["restoration", "pos", "gospel"];
+      let currentFilter = "all";
 
-{lesson:"gospel", lessonLabel:"Lesson 3: The Gospel of Jesus Christ",
-  title:"Endure to the End",
-  points:[
-    "Enduring to the end means continuing to live the gospel daily, not just at baptism.",
-    "It includes ongoing faith, repentance, and seeking the Holy Ghost.",
-    "The promise for those who endure is eternal life."
-  ],
-  scriptures:[
-    "Pressing forward: 2 Nephi 31:20 (\"press forward with a steadfastness in Christ\"); Philippians 3:13-14",
-    "Ongoing faithfulness: Matthew 24:13; Galatians 6:9",
-    "Promise of eternal life: Revelation 2:10; D&C-free equivalent &mdash; John 17:3 (eternal life is to know God and Christ)"
-  ],
-  breakdown:"This principle is sometimes presented at the end of a lesson as almost an afterthought &mdash; \"and finally, keep doing this forever\" &mdash; without helping the investigator see it as a hopeful, sustainable rhythm rather than a daunting lifelong demand.",
-  questions:[
-    {q:"\"This all sounds like a lot to commit to for the rest of my life.\"",
-     a:"Reframe the timeframe: enduring to the end isn't about getting everything right forever &mdash; it's about staying on the path, one day at a time, with repentance available whenever we step off it. It's a direction, not a finish line to sprint toward."}
-  ],
-  connection:"This closes the loop on the doctrine of Christ (faith &rarr; repentance &rarr; baptism &rarr; Holy Ghost &rarr; endure), and connects forward to Lesson 4's daily discipleship habits (prayer, scripture study, etc.) as the practical \"how\" of enduring.",
-  testimony:"Share how your own commitment to the gospel has felt sustainable over time &mdash; not perfect, but steady."
-},
+      function render() {
+        const query = document
+          .getElementById("search")
+          .value.trim()
+          .toLowerCase();
+        const resultsDiv = document.getElementById("results");
+        const noResults = document.getElementById("no-results");
+        resultsDiv.innerHTML = "";
 
-{lesson:"gospel", lessonLabel:"Lesson 3: The Gospel of Jesus Christ",
-  title:"The Gospel of Jesus Christ Blesses All of God's Children",
-  points:[
-    "The gospel is for everyone, regardless of background, culture, or past.",
-    "Living the gospel brings practical blessings &mdash; to individuals and families &mdash; in this life.",
-    "The gospel also offers the hope of eternal blessings, connecting back to the Plan of Salvation."
-  ],
-  scriptures:[
-    "Gospel for all: Acts 10:34-35 (\"God is no respecter of persons\"); 2 Nephi 26:33 (\"all are alike unto God\")",
-    "Blessings in this life: Malachi 3:10 (windows of heaven); Mosiah 2:41 (\"temporally and spiritually\")"
-  ],
-  breakdown:"As a closing principle, this can become a generic summary (\"the gospel is good, it blesses everyone\") rather than a specific, personal reflection on what's been taught across Lessons 1-3. Missionaries sometimes don't tie it back to the *specific* things this particular person has expressed needing or wanting.",
-  questions:[
-    {q:"\"This all sounds nice, but how does it actually help someone like me, specifically?\"",
-     a:"This is the moment to connect everything back to what the person has shared throughout your visits &mdash; their specific hopes, struggles, or family situation. Avoid a generic answer; name the specific thing they've mentioned and show how a principle from Lessons 1-3 speaks directly to it."}
-  ],
-  connection:"This is the closing principle of the doctrine of Christ section and naturally opens the door to Lesson 4 (Becoming Lifelong Disciples) &mdash; if the gospel blesses all of God's children, the natural next question is: what does living it look like day to day?",
-  testimony:"Share how the gospel has blessed you in a way that connects to something this specific person has shared with you."
-},
-];
+        let total = 0;
+        lessonOrder.forEach((lessonKey) => {
+          if (currentFilter !== "all" && currentFilter !== lessonKey) return;
+          const items = data.filter(
+            (d) => d.lesson === lessonKey && matches(d, query),
+          );
+          if (items.length === 0) return;
 
-const lessonOrder = ["restoration","pos","gospel"];
-let currentFilter = "all";
+          const group = document.createElement("div");
+          group.className = "lesson-group";
+          const groupTitle = document.createElement("div");
+          groupTitle.className = "lesson-group-title";
+          const totalInLesson = data.filter(
+            (d) => d.lesson === lessonKey,
+          ).length;
+          groupTitle.textContent =
+            items[0].lessonLabel +
+            " (" +
+            items.length +
+            (items.length !== totalInLesson ? " of " + totalInLesson : "") +
+            ")";
+          group.appendChild(groupTitle);
 
-function render(){
-  const query = document.getElementById('search').value.trim().toLowerCase();
-  const resultsDiv = document.getElementById('results');
-  const noResults = document.getElementById('no-results');
-  resultsDiv.innerHTML = "";
+          items.forEach((item) => {
+            total++;
+            const principleDiv = document.createElement("div");
+            principleDiv.className = "principle";
 
-  let total = 0;
-  lessonOrder.forEach(lessonKey => {
-    if(currentFilter !== "all" && currentFilter !== lessonKey) return;
-    const items = data.filter(d => d.lesson === lessonKey && matches(d, query));
-    if(items.length === 0) return;
+            const head = document.createElement("div");
+            head.className = "principle-head";
+            head.innerHTML =
+              "<h3>" + item.title + '</h3><span class="arrow">&#9656;</span>';
+            head.addEventListener("click", () => {
+              head.classList.toggle("open");
+              body.classList.toggle("open");
+            });
 
-    const group = document.createElement('div');
-    group.className = 'lesson-group';
-    const groupTitle = document.createElement('div');
-    groupTitle.className = 'lesson-group-title';
-    const totalInLesson = data.filter(d=>d.lesson===lessonKey).length;
-    groupTitle.textContent = items[0].lessonLabel + " (" + items.length + (items.length !== totalInLesson ? " of " + totalInLesson : "") + ")";
-    group.appendChild(groupTitle);
+            const body = document.createElement("div");
+            body.className = "principle-body";
 
-    items.forEach(item => {
-      total++;
-      const principleDiv = document.createElement('div');
-      principleDiv.className = 'principle';
+            let pointsHtml =
+              "<ul>" +
+              item.points.map((p) => "<li>" + p + "</li>").join("") +
+              "</ul>";
+            let scripturesHtml =
+              "<ul>" +
+              item.scriptures
+                .map((s) => '<li class="ref">' + s + "</li>")
+                .join("") +
+              "</ul>";
+            let questionsHtml = item.questions
+              .map(
+                (qa) =>
+                  '<div class="question-box"><span class="q">' +
+                  qa.q +
+                  "</span>" +
+                  qa.a +
+                  "</div>",
+              )
+              .join("");
 
-      const head = document.createElement('div');
-      head.className = 'principle-head';
-      head.innerHTML = '<h3>' + item.title + '</h3><span class="arrow">&#9656;</span>';
-      head.addEventListener('click', () => {
-        head.classList.toggle('open');
-        body.classList.toggle('open');
-      });
-
-      const body = document.createElement('div');
-      body.className = 'principle-body';
-
-      let pointsHtml = '<ul>' + item.points.map(p => '<li>' + p + '</li>').join('') + '</ul>';
-      let scripturesHtml = '<ul>' + item.scriptures.map(s => '<li class="ref">' + s + '</li>').join('') + '</ul>';
-      let questionsHtml = item.questions.map(qa =>
-        '<div class="question-box"><span class="q">' + qa.q + '</span>' + qa.a + '</div>'
-      ).join('');
-
-      body.innerHTML = `
+            body.innerHTML = `
         <div class="block">
           <span class="label">What to Help Them Understand</span>
           ${pointsHtml}
@@ -819,36 +1060,55 @@ function render(){
         </div>
       `;
 
-      principleDiv.appendChild(head);
-      principleDiv.appendChild(body);
-      group.appendChild(principleDiv);
-    });
+            principleDiv.appendChild(head);
+            principleDiv.appendChild(body);
+            group.appendChild(principleDiv);
+          });
 
-    resultsDiv.appendChild(group);
-  });
+          resultsDiv.appendChild(group);
+        });
 
-  document.getElementById('result-count').textContent = total + " principle" + (total === 1 ? "" : "s") + " shown of 22 total (Lessons 1-3)";
-  noResults.style.display = total === 0 ? 'block' : 'none';
-}
+        document.getElementById("result-count").textContent =
+          total +
+          " principle" +
+          (total === 1 ? "" : "s") +
+          " shown of 22 total (Lessons 1-3)";
+        noResults.style.display = total === 0 ? "block" : "none";
+      }
 
-function matches(item, query){
-  if(!query) return true;
-  const haystack = (item.title + " " + item.points.join(" ") + " " + item.scriptures.join(" ") + " " + item.breakdown + " " + item.questions.map(q=>q.q+" "+q.a).join(" ") + " " + item.connection + " " + item.testimony).toLowerCase();
-  return haystack.includes(query);
-}
+      function matches(item, query) {
+        if (!query) return true;
+        const haystack = (
+          item.title +
+          " " +
+          item.points.join(" ") +
+          " " +
+          item.scriptures.join(" ") +
+          " " +
+          item.breakdown +
+          " " +
+          item.questions.map((q) => q.q + " " + q.a).join(" ") +
+          " " +
+          item.connection +
+          " " +
+          item.testimony
+        ).toLowerCase();
+        return haystack.includes(query);
+      }
 
-document.getElementById('search').addEventListener('input', render);
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter = btn.dataset.lesson;
-    render();
-  });
-});
+      document.getElementById("search").addEventListener("input", render);
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.dataset.lesson;
+          render();
+        });
+      });
 
-render();
-</script>
-
-</body>
+      render();
+    </script>
+  </body>
 </html>

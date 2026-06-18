@@ -1,408 +1,474 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Welcome &mdash; Nigeria Uyo Mission Training</title>
-<style>
-  :root{
-    --green:#0b4d2c;
-    --green-dark:#073a20;
-    --gold:#c9a227;
-    --gold-light:#f4e6c1;
-    --cream:#fbf8f1;
-    --ink:#222;
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    font-family: Georgia, 'Times New Roman', serif;
-    background:var(--cream);
-    color:var(--ink);
-    line-height:1.7;
-  }
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Welcome &mdash; Nigeria Uyo Mission Training</title>
+    <style>
+      :root {
+        --green: #0b4d2c;
+        --green-dark: #073a20;
+        --gold: #c9a227;
+        --gold-light: #f4e6c1;
+        --cream: #fbf8f1;
+        --ink: #222;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        background: var(--cream);
+        color: var(--ink);
+        line-height: 1.7;
+      }
 
-  .hero{
-    background:var(--green);
-    color:var(--cream);
-    padding:3.5rem 1.5rem 3rem;
-    text-align:center;
-    border-bottom:6px solid var(--gold);
-  }
-  .hero .eyebrow{
-    font-family:'Trebuchet MS', sans-serif;
-    letter-spacing:.3em;
-    text-transform:uppercase;
-    font-size:.75rem;
-    color:var(--gold-light);
-    margin-bottom:.8rem;
-  }
-  .hero h1{
-    margin:0 0 .5rem;
-    font-size:2.2rem;
-    font-weight:700;
-    line-height:1.2;
-  }
-  .hero .subtitle{
-    font-family:'Trebuchet MS', sans-serif;
-    font-size:1rem;
-    color:var(--gold-light);
-    max-width:500px;
-    margin:.6rem auto 0;
-  }
-  .hero .mission-name{
-    display:inline-block;
-    margin-top:1.2rem;
-    background:var(--gold);
-    color:var(--green-dark);
-    font-family:'Trebuchet MS', sans-serif;
-    font-weight:bold;
-    font-size:.85rem;
-    padding:.4rem 1.1rem;
-    border-radius:20px;
-    letter-spacing:.05em;
-  }
+      .hero {
+        background: var(--green);
+        color: var(--cream);
+        padding: 3.5rem 1.5rem 3rem;
+        text-align: center;
+        border-bottom: 6px solid var(--gold);
+      }
+      .hero .eyebrow {
+        font-family: "Trebuchet MS", sans-serif;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        color: var(--gold-light);
+        margin-bottom: 0.8rem;
+      }
+      .hero h1 {
+        margin: 0 0 0.5rem;
+        font-size: 2.2rem;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+      .hero .subtitle {
+        font-family: "Trebuchet MS", sans-serif;
+        font-size: 1rem;
+        color: var(--gold-light);
+        max-width: 500px;
+        margin: 0.6rem auto 0;
+      }
+      .hero .mission-name {
+        display: inline-block;
+        margin-top: 1.2rem;
+        background: var(--gold);
+        color: var(--green-dark);
+        font-family: "Trebuchet MS", sans-serif;
+        font-weight: bold;
+        font-size: 0.85rem;
+        padding: 0.4rem 1.1rem;
+        border-radius: 20px;
+        letter-spacing: 0.05em;
+      }
 
-  main{ max-width:740px; margin:0 auto; padding:2.5rem 1.25rem 4rem; }
+      main {
+        max-width: 740px;
+        margin: 0 auto;
+        padding: 2.5rem 1.25rem 4rem;
+      }
 
-  .welcome-letter{
-    background:#fff;
-    border:1px solid #e6decf;
-    border-left:5px solid var(--green);
-    border-radius:8px;
-    padding:2rem 2rem 1.5rem;
-    margin-bottom:2rem;
-    box-shadow:0 1px 4px rgba(0,0,0,.04);
-    font-size:1rem;
-  }
-  .welcome-letter .salutation{
-    font-size:1.1rem;
-    font-weight:bold;
-    color:var(--green-dark);
-    margin-bottom:1rem;
-  }
-  .welcome-letter p{ margin:.7rem 0; }
-  .welcome-letter .signature{
-    margin-top:1.5rem;
-    font-family:'Trebuchet MS', sans-serif;
-    font-size:.9rem;
-    color:var(--green-dark);
-    border-top:1px solid #e6decf;
-    padding-top:1rem;
-  }
-  .welcome-letter .signature strong{ display:block; font-size:1rem; }
+      .welcome-letter {
+        background: #fff;
+        border: 1px solid #e6decf;
+        border-left: 5px solid var(--green);
+        border-radius: 8px;
+        padding: 2rem 2rem 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+        font-size: 1rem;
+      }
+      .welcome-letter .salutation {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: var(--green-dark);
+        margin-bottom: 1rem;
+      }
+      .welcome-letter p {
+        margin: 0.7rem 0;
+      }
+      .welcome-letter .signature {
+        margin-top: 1.5rem;
+        font-family: "Trebuchet MS", sans-serif;
+        font-size: 0.9rem;
+        color: var(--green-dark);
+        border-top: 1px solid #e6decf;
+        padding-top: 1rem;
+      }
+      .welcome-letter .signature strong {
+        display: block;
+        font-size: 1rem;
+      }
 
-  .scripture-block{
-    background:var(--gold-light);
-    border-left:5px solid var(--gold);
-    border-radius:6px;
-    padding:1.2rem 1.5rem;
-    margin-bottom:2rem;
-    font-style:italic;
-    font-size:.97rem;
-  }
-  .scripture-block .ref{
-    display:block;
-    margin-top:.5rem;
-    font-style:normal;
-    font-family:'Trebuchet MS', sans-serif;
-    font-size:.78rem;
-    text-transform:uppercase;
-    letter-spacing:.08em;
-    color:var(--green-dark);
-  }
+      .scripture-block {
+        background: var(--gold-light);
+        border-left: 5px solid var(--gold);
+        border-radius: 6px;
+        padding: 1.2rem 1.5rem;
+        margin-bottom: 2rem;
+        font-style: italic;
+        font-size: 0.97rem;
+      }
+      .scripture-block .ref {
+        display: block;
+        margin-top: 0.5rem;
+        font-style: normal;
+        font-family: "Trebuchet MS", sans-serif;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--green-dark);
+      }
 
-  h2{
-    font-family:'Trebuchet MS', sans-serif;
-    color:var(--green-dark);
-    font-size:1.2rem;
-    margin-bottom:.6rem;
-    margin-top:0;
-  }
+      h2 {
+        font-family: "Trebuchet MS", sans-serif;
+        color: var(--green-dark);
+        font-size: 1.2rem;
+        margin-bottom: 0.6rem;
+        margin-top: 0;
+      }
 
-  .section-card{
-    background:#fff;
-    border:1px solid #e6decf;
-    border-radius:8px;
-    padding:1.4rem 1.5rem;
-    margin-bottom:1rem;
-    box-shadow:0 1px 3px rgba(0,0,0,.04);
-  }
+      .section-card {
+        background: #fff;
+        border: 1px solid #e6decf;
+        border-radius: 8px;
+        padding: 1.4rem 1.5rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      }
 
-  .path-card{
-    display:flex;
-    gap:1rem;
-    align-items:flex-start;
-    background:#fff;
-    border:1px solid #e6decf;
-    border-radius:8px;
-    padding:1.1rem 1.3rem;
-    margin-bottom:.9rem;
-    box-shadow:0 1px 3px rgba(0,0,0,.03);
-    text-decoration:none;
-    color:var(--ink);
-    transition:.18s;
-  }
-  .path-card:hover{
-    border-color:var(--green);
-    transform:translateX(3px);
-  }
-  .path-num{
-    flex:0 0 auto;
-    width:44px;
-    height:44px;
-    border-radius:50%;
-    background:var(--green);
-    color:var(--gold-light);
-    font-family:'Trebuchet MS', sans-serif;
-    font-weight:bold;
-    font-size:1rem;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  .path-text h3{
-    margin:0 0 .2rem;
-    font-family:'Trebuchet MS', sans-serif;
-    font-size:1rem;
-    color:var(--green-dark);
-  }
-  .path-text p{
-    margin:0;
-    font-size:.88rem;
-    color:#5c5648;
-  }
-  .path-text .timing{
-    display:inline-block;
-    margin-top:.3rem;
-    font-family:'Trebuchet MS', sans-serif;
-    font-size:.75rem;
-    color:var(--gold);
-    font-weight:bold;
-  }
-  .path-arrow{
-    margin-left:auto;
-    color:var(--gold);
-    font-size:1.3rem;
-    align-self:center;
-  }
+      .path-card {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+        background: #fff;
+        border: 1px solid #e6decf;
+        border-radius: 8px;
+        padding: 1.1rem 1.3rem;
+        margin-bottom: 0.9rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+        text-decoration: none;
+        color: var(--ink);
+        transition: 0.18s;
+      }
+      .path-card:hover {
+        border-color: var(--green);
+        transform: translateX(3px);
+      }
+      .path-num {
+        flex: 0 0 auto;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--green);
+        color: var(--gold-light);
+        font-family: "Trebuchet MS", sans-serif;
+        font-weight: bold;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .path-text h3 {
+        margin: 0 0 0.2rem;
+        font-family: "Trebuchet MS", sans-serif;
+        font-size: 1rem;
+        color: var(--green-dark);
+      }
+      .path-text p {
+        margin: 0;
+        font-size: 0.88rem;
+        color: #5c5648;
+      }
+      .path-text .timing {
+        display: inline-block;
+        margin-top: 0.3rem;
+        font-family: "Trebuchet MS", sans-serif;
+        font-size: 0.75rem;
+        color: var(--gold);
+        font-weight: bold;
+      }
+      .path-arrow {
+        margin-left: auto;
+        color: var(--gold);
+        font-size: 1.3rem;
+        align-self: center;
+      }
 
-  .expectation-list{
-    padding-left:1.2rem;
-    margin:.4rem 0;
-  }
-  .expectation-list li{
-    margin-bottom:.5rem;
-    font-size:.95rem;
-  }
+      .expectation-list {
+        padding-left: 1.2rem;
+        margin: 0.4rem 0;
+      }
+      .expectation-list li {
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+      }
 
-  .divider{
-    text-align:center;
-    color:var(--gold);
-    font-size:1.3rem;
-    margin:1.8rem 0;
-    letter-spacing:.4em;
-  }
+      .divider {
+        text-align: center;
+        color: var(--gold);
+        font-size: 1.3rem;
+        margin: 1.8rem 0;
+        letter-spacing: 0.4em;
+      }
 
-  .note-box{
-    background:#f6f3ec;
-    border-left:4px solid var(--green);
-    border-radius:4px;
-    padding:.9rem 1.1rem;
-    font-size:.93rem;
-    margin-bottom:1.5rem;
-  }
+      .note-box {
+        background: #f6f3ec;
+        border-left: 4px solid var(--green);
+        border-radius: 4px;
+        padding: 0.9rem 1.1rem;
+        font-size: 0.93rem;
+        margin-bottom: 1.5rem;
+      }
 
-  footer{
-    background:var(--green-dark);
-    color:var(--gold-light);
-    text-align:center;
-    padding:.9rem 1rem;
-    font-family:'Trebuchet MS', sans-serif;
-    font-size:.8rem;
-    letter-spacing:.04em;
-    margin-top:2rem;
-  }
-  
-</style>
-</head>
-<body>
-
-<div class="hero">
-  <div class="eyebrow">Nigeria Uyo Mission</div>
-  <h1>Welcome, Elder / Sister.</h1>
-  <p class="subtitle">You have been called of God. This training will help you fulfil that calling with clarity, compassion, and power.</p>
-  <span class="mission-name">Teaching with Clarity &amp; Compassion &mdash; New Missionary Training</span>
-</div>
-
-<main>
-
-  <div class="welcome-letter">
-    <div class="salutation">Dear Elder / Sister,</div>
-    <p>
-      Welcome to the Nigeria Uyo Mission. You are here because God called you, and that call
-      is real. The work ahead of you matters more than you may yet understand &mdash; because
-      the people you will teach are being prepared right now to hear what you have to share.
-    </p>
-    <p>
-      One of the most important things you will do as a missionary is teach. Not just share
-      information &mdash; but teach in a way that helps people feel the Spirit, understand
-      clearly, and take steps toward Jesus Christ. That is a skill. And like every skill,
-      it improves with the right guidance and practice.
-    </p>
-    <p>
-      This training module was built specifically for you &mdash; a new missionary in this
-      mission. It will not replace your study of Preach My Gospel. It will make that study
-      come alive in your actual teaching conversations.
-    </p>
-    <p>
-      Go through it in the order below. Bring it to your virtual training meetings.
-      Apply one thing from each section in your very next lesson. That is all that is
-      asked of you right now &mdash; one step at a time.
-    </p>
-    <p>
-      God will magnify your effort. He always does.
-    </p>
-    <div class="signature">
+      footer {
+        background: var(--green-dark);
+        color: var(--gold-light);
+        text-align: center;
+        padding: 0.9rem 1rem;
+        font-family: "Trebuchet MS", sans-serif;
+        font-size: 0.8rem;
+        letter-spacing: 0.04em;
+        margin-top: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero">
+      <div class="eyebrow">Nigeria Uyo Mission</div>
+      <h1>Welcome, Elder / Sister.</h1>
+      <p class="subtitle">
+        You have been called of God. This training will help you fulfil that
+        calling with clarity, compassion, and power.
+      </p>
+      <span class="mission-name">
+        Teaching with Clarity &amp; Compassion &mdash; New Missionary Training
+      </span>
+    </div>
+    <main>
+      <div class="welcome-letter">
+        <div class="salutation">Dear Elder / Sister,</div>
+        <p>
+          Welcome to the Nigeria Uyo Mission. You are here because God called
+          you, and that call is real. The work ahead of you matters more than
+          you may yet understand &mdash; because the people you will teach are
+          being prepared right now to hear what you have to share.
+        </p>
+        <p>
+          One of the most important things you will do as a missionary is teach.
+          Not just share information &mdash; but teach in a way that helps
+          people feel the Spirit, understand clearly, and take steps toward
+          Jesus Christ. That is a skill. And like every skill, it improves with
+          the right guidance and practice.
+        </p>
+        <p>
+          This training module was built specifically for you &mdash; a new
+          missionary in this mission. It will not replace your study of Preach
+          My Gospel. It will make that study come alive in your actual teaching
+          conversations.
+        </p>
+        <p>
+          Go through it in the order below. Bring it to your virtual training
+          meetings. Apply one thing from each section in your very next lesson.
+          That is all that is asked of you right now &mdash; one step at a time.
+        </p>
+        <p>God will magnify your effort. He always does.</p>
+        <div class="signature">
+          <strong>Elder ThankGod Andrew</strong>
+          Assistant to the President &mdash; Nigeria Uyo Mission
+        </div>
+      </div>
+      <div class="scripture-block">
+        "Seek not to declare my word, but first seek to obtain my word, and then
+        shall your tongue be loosed; then, if you desire, you shall have my
+        Spirit and my word, yea, the power of God unto the convincing of men."
+        <span class="ref">D&amp;C 11:21</span>
+      </div>
+      <div class="section-card">
+        <h2>What This Training Is</h2>
+        <p style="font-size: 0.95rem; margin: 0">
+          This is a four-section foundational skills course, followed by an
+          in-depth doctrinal companion for all four PMG lessons. It is designed
+          to be used alongside your virtual training meetings, which are held
+          two to three times a week. Each section focuses on one specific
+          teaching skill that will directly improve your lessons with
+          investigators.
+        </p>
+      </div>
+      <div class="divider">&bull; &bull; &bull;</div>
+      <h2>Your Training Path &mdash; Go in This Order</h2>
+      <a class="path-card" href="section1.html">
+        <div class="path-num">1</div>
+        <div class="path-text">
+          <h3>Section 1: One Principle, Clearly Taught</h3>
+          <p>
+            Learn to stay focused on one idea at a time &mdash; and return to it
+            when lessons drift.
+          </p>
+          <span class="timing">
+            ⏱ 15-20 min self-study &bull; Meeting: Week 1
+          </span>
+        </div>
+        <div class="path-arrow">&rarr;</div>
+      </a>
+      <a class="path-card" href="section2.html">
+        <div class="path-num">2</div>
+        <div class="path-text">
+          <h3>Section 2: Questions That Open the Heart</h3>
+          <p>
+            Ask one simple, focused question at a time &mdash; then make space
+            to listen.
+          </p>
+          <span class="timing">
+            ⏱ 15-20 min self-study &bull; Meeting: Week 1
+          </span>
+        </div>
+        <div class="path-arrow">&rarr;</div>
+      </a>
+      <a class="path-card" href="section3.html">
+        <div class="path-num">3</div>
+        <div class="path-text">
+          <h3>Section 3: Commitments That Lead to Christ</h3>
+          <p>
+            Extend invitations that flow from the principle taught, and follow
+            through.
+          </p>
+          <span class="timing">
+            ⏱ 15-20 min self-study &bull; Meeting: Week 2
+          </span>
+        </div>
+        <div class="path-arrow">&rarr;</div>
+      </a>
+      <a class="path-card" href="section4.html">
+        <div class="path-num">4</div>
+        <div class="path-text">
+          <h3>Section 4: The Heart of Each Lesson</h3>
+          <p>
+            Distil the one core message of each PMG lesson and build complete
+            lesson moments.
+          </p>
+          <span class="timing">
+            ⏱ 15-20 min self-study &bull; Meeting: Week 2
+          </span>
+        </div>
+        <div class="path-arrow">&rarr;</div>
+      </a>
+      <div class="divider">&bull; &bull; &bull;</div>
+      <h2>After Sections 1-4 &mdash; Go Deeper</h2>
+      <a class="path-card" href="deep-dive.html">
+        <div
+          class="path-num"
+          style="background: var(--gold); color: var(--green-dark)"
+        >
+          5
+        </div>
+        <div class="path-text">
+          <h3>Deep Dive: Lessons 1-3</h3>
+          <p>
+            Doctrinal points, Bible &amp; Book of Mormon scriptures, real
+            investigator questions, and how each principle connects &mdash; for
+            all 22 principles in Lessons 1-3.
+          </p>
+          <span class="timing">
+            ⏱ Study over Weeks 3-4 &bull; Use in every lesson prep
+          </span>
+        </div>
+        <div class="path-arrow">&rarr;</div>
+      </a>
+      <a class="path-card" href="deep-dive-lesson4.html">
+        <div
+          class="path-num"
+          style="background: var(--gold); color: var(--green-dark)"
+        >
+          6
+        </div>
+        <div class="path-text">
+          <h3>Deep Dive: Lesson 4</h3>
+          <p>
+            The same depth for all 17 principles of Becoming Lifelong Disciples,
+            with sensitivity notes for the harder conversations.
+          </p>
+          <span class="timing">
+            ⏱ Study over Weeks 5-6 &bull; Use in every lesson prep
+          </span>
+        </div>
+        <div class="path-arrow">&rarr;</div>
+      </a>
+      <a class="path-card" href="reference.html">
+        <div
+          class="path-num"
+          style="background: var(--gold); color: var(--green-dark)"
+        >
+          7
+        </div>
+        <div class="path-text">
+          <h3>Quick Reference Companion</h3>
+          <p>
+            All 39 principles in a searchable format. Use this during lesson
+            prep or when you need a quick reminder of the core message,
+            question, and commitment for any principle.
+          </p>
+          <span class="timing">
+            ⏱ Use anytime &bull; Keep this open during prep
+          </span>
+        </div>
+        <div class="path-arrow">&rarr;</div>
+      </a>
+      <div class="divider">&bull; &bull; &bull;</div>
+      <div class="section-card">
+        <h2>What Is Expected of You</h2>
+        <ul class="expectation-list">
+          <li>
+            Attend every virtual training meeting &mdash; two to three times per
+            week.
+          </li>
+          <li>Study the assigned section or deep dive before each meeting.</li>
+          <li>
+            Participate in role-plays during meetings &mdash; this is where the
+            real learning happens.
+          </li>
+          <li>
+            Apply one specific thing from each session in your very next
+            teaching visit.
+          </li>
+          <li>
+            Come to the next meeting ready to share what you tried and what
+            happened.
+          </li>
+        </ul>
+      </div>
+      <div class="note-box">
+        <strong>A note on scripture study:</strong>
+        This training uses scriptures from the Bible and Book of Mormon when
+        teaching investigators. The Doctrine &amp; Covenants is referenced for
+        your own study and understanding as a missionary, but is not typically
+        used directly with investigators. The Deep Dive sections will always
+        indicate which scriptures are for which purpose.
+      </div>
+      <div
+        class="section-card"
+        style="
+          border-left: 5px solid var(--gold);
+          background: var(--gold-light);
+        "
+      >
+        <h2 style="color: var(--green-dark)">One Last Thing</h2>
+        <p style="margin: 0; font-size: 0.95rem">
+          No training system makes a great missionary. The Spirit does. What
+          this training does is clear away the habits and gaps that can get in
+          the way of the Spirit working through you. Study it, apply it, and
+          then trust God to do what only He can do. The people of this mission
+          are waiting for you.
+        </p>
+      </div>
+    </main>
+    <footer>
+      Developed by
       <strong>Elder ThankGod Andrew</strong>
-      Assistant to the President &mdash; Nigeria Uyo Mission
-    </div>
-  </div>
-
-  <div class="scripture-block">
-    "Seek not to declare my word, but first seek to obtain my word, and then shall your tongue
-    be loosed; then, if you desire, you shall have my Spirit and my word, yea, the power of
-    God unto the convincing of men."
-    <span class="ref">D&amp;C 11:21</span>
-  </div>
-
-  <div class="section-card">
-    <h2>What This Training Is</h2>
-    <p style="font-size:.95rem; margin:0;">
-      This is a four-section foundational skills course, followed by an in-depth doctrinal
-      companion for all four PMG lessons. It is designed to be used alongside your virtual
-      training meetings, which are held two to three times a week. Each section focuses on
-      one specific teaching skill that will directly improve your lessons with investigators.
-    </p>
-  </div>
-
-  <div class="divider">&#8226; &#8226; &#8226;</div>
-
-  <h2>Your Training Path &mdash; Go in This Order</h2>
-
-  <a class="path-card" href="section1.html">
-    <div class="path-num">1</div>
-    <div class="path-text">
-      <h3>Section 1: One Principle, Clearly Taught</h3>
-      <p>Learn to stay focused on one idea at a time &mdash; and return to it when lessons drift.</p>
-      <span class="timing">&#9201; 15-20 min self-study &bull; Meeting: Week 1</span>
-    </div>
-    <div class="path-arrow">&#8594;</div>
-  </a>
-
-  <a class="path-card" href="section2.html">
-    <div class="path-num">2</div>
-    <div class="path-text">
-      <h3>Section 2: Questions That Open the Heart</h3>
-      <p>Ask one simple, focused question at a time &mdash; then make space to listen.</p>
-      <span class="timing">&#9201; 15-20 min self-study &bull; Meeting: Week 1</span>
-    </div>
-    <div class="path-arrow">&#8594;</div>
-  </a>
-
-  <a class="path-card" href="section3.html">
-    <div class="path-num">3</div>
-    <div class="path-text">
-      <h3>Section 3: Commitments That Lead to Christ</h3>
-      <p>Extend invitations that flow from the principle taught, and follow through.</p>
-      <span class="timing">&#9201; 15-20 min self-study &bull; Meeting: Week 2</span>
-    </div>
-    <div class="path-arrow">&#8594;</div>
-  </a>
-
-  <a class="path-card" href="section4.html">
-    <div class="path-num">4</div>
-    <div class="path-text">
-      <h3>Section 4: The Heart of Each Lesson</h3>
-      <p>Distil the one core message of each PMG lesson and build complete lesson moments.</p>
-      <span class="timing">&#9201; 15-20 min self-study &bull; Meeting: Week 2</span>
-    </div>
-    <div class="path-arrow">&#8594;</div>
-  </a>
-
-  <div class="divider">&#8226; &#8226; &#8226;</div>
-
-  <h2>After Sections 1-4 &mdash; Go Deeper</h2>
-
-  <a class="path-card" href="deep-dive.html">
-    <div class="path-num" style="background:var(--gold); color:var(--green-dark);">5</div>
-    <div class="path-text">
-      <h3>Deep Dive: Lessons 1-3</h3>
-      <p>Doctrinal points, Bible &amp; Book of Mormon scriptures, real investigator questions,
-         and how each principle connects &mdash; for all 22 principles in Lessons 1-3.</p>
-      <span class="timing">&#9201; Study over Weeks 3-4 &bull; Use in every lesson prep</span>
-    </div>
-    <div class="path-arrow">&#8594;</div>
-  </a>
-
-  <a class="path-card" href="deep-dive-lesson4.html">
-    <div class="path-num" style="background:var(--gold); color:var(--green-dark);">6</div>
-    <div class="path-text">
-      <h3>Deep Dive: Lesson 4</h3>
-      <p>The same depth for all 17 principles of Becoming Lifelong Disciples, with sensitivity
-         notes for the harder conversations.</p>
-      <span class="timing">&#9201; Study over Weeks 5-6 &bull; Use in every lesson prep</span>
-    </div>
-    <div class="path-arrow">&#8594;</div>
-  </a>
-
-  <a class="path-card" href="reference.html">
-    <div class="path-num" style="background:var(--gold); color:var(--green-dark);">7</div>
-    <div class="path-text">
-      <h3>Quick Reference Companion</h3>
-      <p>All 39 principles in a searchable format. Use this during lesson prep or when
-         you need a quick reminder of the core message, question, and commitment for any principle.</p>
-      <span class="timing">&#9201; Use anytime &bull; Keep this open during prep</span>
-    </div>
-    <div class="path-arrow">&#8594;</div>
-  </a>
-
-  <div class="divider">&#8226; &#8226; &#8226;</div>
-
-  <div class="section-card">
-    <h2>What Is Expected of You</h2>
-    <ul class="expectation-list">
-      <li>Attend every virtual training meeting &mdash; two to three times per week.</li>
-      <li>Study the assigned section or deep dive before each meeting.</li>
-      <li>Participate in role-plays during meetings &mdash; this is where the real learning happens.</li>
-      <li>Apply one specific thing from each session in your very next teaching visit.</li>
-      <li>Come to the next meeting ready to share what you tried and what happened.</li>
-    </ul>
-  </div>
-
-  <div class="note-box">
-    <strong>A note on scripture study:</strong> This training uses scriptures from the
-    Bible and Book of Mormon when teaching investigators. The Doctrine &amp; Covenants
-    is referenced for your own study and understanding as a missionary, but is not
-    typically used directly with investigators. The Deep Dive sections will always
-    indicate which scriptures are for which purpose.
-  </div>
-
-  <div class="section-card" style="border-left:5px solid var(--gold); background:var(--gold-light);">
-    <h2 style="color:var(--green-dark);">One Last Thing</h2>
-    <p style="margin:0; font-size:.95rem;">
-      No training system makes a great missionary. The Spirit does. What this training
-      does is clear away the habits and gaps that can get in the way of the Spirit working
-      through you. Study it, apply it, and then trust God to do what only He can do.
-      The people of this mission are waiting for you.
-    </p>
-  </div>
-
-</main>
-
-<footer>
-  Developed by <strong>Elder ThankGod Andrew</strong> &mdash; Assistant to the President &mdash; Nigeria Uyo Mission
-</footer>
-
-</body>
+      &mdash; Assistant to the President &mdash; Nigeria Uyo Mission
+    </footer>
+  </body>
 </html>
