@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course Survey &mdash; Nigeria Uyo Mission</title>
+<style>
+  :root{
+    --green:#0b4d2c;
+    --green-dark:#073a20;
+    --gold:#c9a227;
+    --gold-light:#f4e6c1;
+    --cream:#fbf8f1;
+    --ink:#222;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family: Georgia, 'Times New Roman', serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  header{
+    background:var(--green);
+    color:var(--cream);
+    padding:2rem 1.2rem 1.8rem;
+    text-align:center;
+    border-bottom:5px solid var(--gold);
+  }
+  header .eyebrow{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.75rem;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--gold-light);
+    margin-bottom:.4rem;
+  }
+  header h1{ margin:0; font-size:1.6rem; }
+  header p{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.88rem;
+    color:var(--gold-light);
+    margin-top:.5rem;
+    max-width:420px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  main{ max-width:640px; margin:0 auto; padding:1.8rem 1.1rem 4rem; }
+
+  .intro-card{
+    background:#fff;
+    border:1px solid #e6decf;
+    border-left:5px solid var(--green);
+    border-radius:6px;
+    padding:1.1rem 1.3rem;
+    margin-bottom:1.8rem;
+    font-size:.93rem;
+  }
+
+  .question{
+    background:#fff;
+    border:1px solid #e6decf;
+    border-radius:8px;
+    padding:1.2rem 1.3rem;
+    margin-bottom:1.2rem;
+    box-shadow:0 1px 3px rgba(0,0,0,.03);
+  }
+  .question .q-label{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.72rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--gold);
+    display:block;
+    margin-bottom:.4rem;
+  }
+  .question .q-text{
+    font-size:.97rem;
+    font-weight:bold;
+    color:var(--green-dark);
+    margin-bottom:.9rem;
+    display:block;
+  }
+
+  /* Star rating */
+  .stars{
+    display:flex;
+    gap:.4rem;
+    flex-wrap:wrap;
+  }
+  .stars input{ display:none; }
+  .stars label{
+    font-size:2rem;
+    cursor:pointer;
+    color:#ddd;
+    transition:color .15s;
+    line-height:1;
+  }
+  .stars input:checked ~ label,
+  .stars label:hover,
+  .stars label:hover ~ label{ color:#ddd; }
+  .stars input:checked + label,
+  .stars label:hover{ color:var(--gold); }
+
+  /* Emoji rating */
+  .emoji-row{
+    display:flex;
+    gap:.5rem;
+    flex-wrap:wrap;
+  }
+  .emoji-row input{ display:none; }
+  .emoji-row label{
+    font-size:1.8rem;
+    cursor:pointer;
+    opacity:.4;
+    transition:opacity .15s, transform .15s;
+    line-height:1;
+  }
+  .emoji-row input:checked + label{
+    opacity:1;
+    transform:scale(1.25);
+  }
+
+  /* Scale buttons */
+  .scale-row{
+    display:flex;
+    gap:.4rem;
+    flex-wrap:wrap;
+  }
+  .scale-row input{ display:none; }
+  .scale-row label{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    border:2px solid #e6decf;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.9rem;
+    cursor:pointer;
+    transition:.15s;
+    background:#fff;
+    color:#7a7158;
+  }
+  .scale-row input:checked + label{
+    background:var(--green);
+    color:#fff;
+    border-color:var(--green);
+  }
+  .scale-ends{
+    display:flex;
+    justify-content:space-between;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.75rem;
+    color:#a99a6f;
+    margin-top:.3rem;
+  }
+
+  /* Multi-select pills */
+  .pills{
+    display:flex;
+    gap:.5rem;
+    flex-wrap:wrap;
+  }
+  .pills input{ display:none; }
+  .pills label{
+    padding:.4rem .9rem;
+    border:1px solid var(--green);
+    border-radius:20px;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.82rem;
+    cursor:pointer;
+    color:var(--green);
+    background:#fff;
+    transition:.15s;
+  }
+  .pills input:checked + label{
+    background:var(--green);
+    color:#fff;
+  }
+
+  textarea{
+    width:100%;
+    font-family:inherit;
+    font-size:.93rem;
+    padding:.7rem;
+    border:1px solid #ccc;
+    border-radius:6px;
+    resize:vertical;
+    min-height:90px;
+    background:#fafaf8;
+  }
+  textarea:focus{ outline:2px solid var(--green); border-color:transparent; }
+
+  input[type=text]{
+    width:100%;
+    font-family:inherit;
+    font-size:.95rem;
+    padding:.65rem .8rem;
+    border:1px solid #ccc;
+    border-radius:6px;
+    background:#fafaf8;
+  }
+  input[type=text]:focus{ outline:2px solid var(--green); border-color:transparent; }
+
+  .submit-btn{
+    width:100%;
+    background:var(--green);
+    color:#fff;
+    border:none;
+    padding:1rem;
+    border-radius:8px;
+    font-family:'Trebuchet MS', sans-serif;
+    font-weight:bold;
+    font-size:1rem;
+    cursor:pointer;
+    margin-top:1rem;
+    transition:background .2s;
+  }
+  .submit-btn:hover{ background:var(--green-dark); }
+
+  /* Result screen */
+  .result-screen{
+    display:none;
+    background:#fff;
+    border:1px solid #e6decf;
+    border-radius:8px;
+    padding:1.5rem;
+    margin-top:1rem;
+  }
+  .result-screen h2{
+    font-family:'Trebuchet MS', sans-serif;
+    color:var(--green-dark);
+    margin-top:0;
+    font-size:1.15rem;
+  }
+  .result-screen p{ font-size:.93rem; margin:.4rem 0; }
+  .summary-box{
+    background:#f6f3ec;
+    border:1px solid #e6decf;
+    border-radius:6px;
+    padding:1rem;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.83rem;
+    white-space:pre-wrap;
+    margin:1rem 0;
+    line-height:1.6;
+  }
+  .copy-btn{
+    background:var(--gold);
+    color:var(--green-dark);
+    border:none;
+    padding:.7rem 1.3rem;
+    border-radius:6px;
+    font-family:'Trebuchet MS', sans-serif;
+    font-weight:bold;
+    font-size:.9rem;
+    cursor:pointer;
+    margin-right:.5rem;
+    margin-bottom:.5rem;
+  }
+  .wa-btn{
+    background:#25D366;
+    color:#fff;
+    border:none;
+    padding:.7rem 1.3rem;
+    border-radius:6px;
+    font-family:'Trebuchet MS', sans-serif;
+    font-weight:bold;
+    font-size:.9rem;
+    cursor:pointer;
+    margin-bottom:.5rem;
+    display:inline-flex;
+    align-items:center;
+    gap:.4rem;
+  }
+  .error-msg{
+    color:#8b1a1a;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.85rem;
+    margin-top:.8rem;
+    display:none;
+  }
+
+  footer{
+    background:var(--green-dark);
+    color:var(--gold-light);
+    text-align:center;
+    padding:.9rem 1rem;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.8rem;
+    letter-spacing:.04em;
+    margin-top:2rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Nigeria Uyo Mission</div>
+  <h1>Course Feedback Survey</h1>
+  <p>Teaching with Clarity &amp; Compassion &mdash; 6-Week Course Evaluation</p>
+</header>
+
+<main>
+
+  <div class="intro-card">
+    This survey takes about <strong>5 minutes</strong>. Your honest feedback helps improve
+    this training for the missionaries who come after you. There are no wrong answers &mdash;
+    just share what you actually experienced.
+  </div>
+
+  <form id="survey">
+
+    <!-- Q0: Name -->
+    <div class="question">
+      <span class="q-label">About You</span>
+      <span class="q-text">What is your name?</span>
+      <input type="text" id="name" placeholder="Elder / Sister ..." required>
+    </div>
+
+    <!-- Q1: Overall rating -->
+    <div class="question">
+      <span class="q-label">Question 1 of 8</span>
+      <span class="q-text">Overall, how would you rate this training course?</span>
+      <div class="emoji-row">
+        <input type="radio" name="overall" id="o1" value="Poor">
+        <label for="o1" title="Poor">😕</label>
+        <input type="radio" name="overall" id="o2" value="Fair">
+        <label for="o2" title="Fair">🙂</label>
+        <input type="radio" name="overall" id="o3" value="Good">
+        <label for="o3" title="Good">😊</label>
+        <input type="radio" name="overall" id="o4" value="Very Good">
+        <label for="o4" title="Very Good">😄</label>
+        <input type="radio" name="overall" id="o5" value="Excellent">
+        <label for="o5" title="Excellent">🤩</label>
+      </div>
+      <div style="font-family:'Trebuchet MS',sans-serif; font-size:.75rem; color:#a99a6f; margin-top:.4rem;">Tap an emoji to rate</div>
+    </div>
+
+    <!-- Q2: Confidence -->
+    <div class="question">
+      <span class="q-label">Question 2 of 8</span>
+      <span class="q-text">How much more confident do you feel teaching the gospel after this course?</span>
+      <div class="scale-row">
+        <input type="radio" name="confidence" id="c1" value="1"><label for="c1">1</label>
+        <input type="radio" name="confidence" id="c2" value="2"><label for="c2">2</label>
+        <input type="radio" name="confidence" id="c3" value="3"><label for="c3">3</label>
+        <input type="radio" name="confidence" id="c4" value="4"><label for="c4">4</label>
+        <input type="radio" name="confidence" id="c5" value="5"><label for="c5">5</label>
+      </div>
+      <div class="scale-ends"><span>Not much</span><span>A lot more</span></div>
+    </div>
+
+    <!-- Q3: Most helpful section -->
+    <div class="question">
+      <span class="q-label">Question 3 of 8</span>
+      <span class="q-text">Which part of the training helped you the most? (Select all that apply)</span>
+      <div class="pills">
+        <input type="checkbox" name="helpful" id="h1" value="Section 1: One Principle"><label for="h1">Section 1: One Principle</label>
+        <input type="checkbox" name="helpful" id="h2" value="Section 2: Questions"><label for="h2">Section 2: Questions</label>
+        <input type="checkbox" name="helpful" id="h3" value="Section 3: Commitments"><label for="h3">Section 3: Commitments</label>
+        <input type="checkbox" name="helpful" id="h4" value="Section 4: Heart of Each Lesson"><label for="h4">Section 4: Heart of Each Lesson</label>
+        <input type="checkbox" name="helpful" id="h5" value="Deep Dive: Lessons 1-3"><label for="h5">Deep Dive: Lessons 1-3</label>
+        <input type="checkbox" name="helpful" id="h6" value="Deep Dive: Lesson 4"><label for="h6">Deep Dive: Lesson 4</label>
+        <input type="checkbox" name="helpful" id="h7" value="Role-Plays in Meetings"><label for="h7">Role-Plays in Meetings</label>
+        <input type="checkbox" name="helpful" id="h8" value="Quick Reference Companion"><label for="h8">Quick Reference Companion</label>
+      </div>
+    </div>
+
+    <!-- Q4: Virtual meetings -->
+    <div class="question">
+      <span class="q-label">Question 4 of 8</span>
+      <span class="q-text">How valuable were the virtual training meetings?</span>
+      <div class="scale-row">
+        <input type="radio" name="meetings" id="m1" value="1"><label for="m1">1</label>
+        <input type="radio" name="meetings" id="m2" value="2"><label for="m2">2</label>
+        <input type="radio" name="meetings" id="m3" value="3"><label for="m3">3</label>
+        <input type="radio" name="meetings" id="m4" value="4"><label for="m4">4</label>
+        <input type="radio" name="meetings" id="m5" value="5"><label for="m5">5</label>
+      </div>
+      <div class="scale-ends"><span>Not very</span><span>Very valuable</span></div>
+    </div>
+
+    <!-- Q5: Impact in the field -->
+    <div class="question">
+      <span class="q-label">Question 5 of 8</span>
+      <span class="q-text">Have you noticed a difference in how your investigators respond since this training?</span>
+      <div class="pills">
+        <input type="radio" name="impact" id="i1" value="Yes, definitely"><label for="i1">Yes, definitely</label>
+        <input type="radio" name="impact" id="i2" value="A little bit"><label for="i2">A little bit</label>
+        <input type="radio" name="impact" id="i3" value="Not yet, but I'm still applying it"><label for="i3">Not yet, still applying it</label>
+        <input type="radio" name="impact" id="i4" value="Hard to tell"><label for="i4">Hard to tell</label>
+      </div>
+    </div>
+
+    <!-- Q6: One thing that changed -->
+    <div class="question">
+      <span class="q-label">Question 6 of 8</span>
+      <span class="q-text">What is one thing you do differently when teaching now?</span>
+      <textarea id="change" placeholder="e.g. I ask one question at a time and wait for the answer before speaking..."></textarea>
+    </div>
+
+    <!-- Q7: What to improve -->
+    <div class="question">
+      <span class="q-label">Question 7 of 8</span>
+      <span class="q-text">What would you change or add to make this course better?</span>
+      <textarea id="improve" placeholder="e.g. More role-play examples, shorter sections, a video component..."></textarea>
+    </div>
+
+    <!-- Q8: Final word -->
+    <div class="question">
+      <span class="q-label">Question 8 of 8</span>
+      <span class="q-text">Any final message or encouragement for the next group of new missionaries?</span>
+      <textarea id="message" placeholder="Optional — but it means a lot to those who come after you."></textarea>
+    </div>
+
+    <div class="error-msg" id="error-msg">Please answer all required questions before submitting.</div>
+    <button type="button" class="submit-btn" onclick="submitSurvey()">Generate My Summary &#8594;</button>
+
+  </form>
+
+  <!-- Result screen -->
+  <div class="result-screen" id="result-screen">
+    <h2>Thank you, <span id="result-name"></span>! 🙏</h2>
+    <p>Your feedback has been compiled below. Please <strong>copy it and send it to Elder ThankGod Andrew on WhatsApp</strong> so it can be used to improve the course.</p>
+    <div class="summary-box" id="summary-box"></div>
+    <button class="copy-btn" onclick="copySummary()">📋 Copy Summary</button>
+    <button class="wa-btn" onclick="sendWhatsApp()">&#128172; Send on WhatsApp</button>
+    <p style="font-size:.85rem; font-family:'Trebuchet MS',sans-serif; color:#7a7158; margin-top:1rem;">
+      May God bless your service in this mission. The people you teach are changed because you came.
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  Developed by <strong>Elder ThankGod Andrew</strong> &mdash; Assistant to the President &mdash; Nigeria Uyo Mission
+</footer>
+
+<script>
+function submitSurvey(){
+  const name = document.getElementById('name').value.trim();
+  const overall = document.querySelector('input[name="overall"]:checked');
+  const confidence = document.querySelector('input[name="confidence"]:checked');
+  const meetings = document.querySelector('input[name="meetings"]:checked');
+  const impact = document.querySelector('input[name="impact"]:checked');
+  const change = document.getElementById('change').value.trim();
+  const improve = document.getElementById('improve').value.trim();
+
+  const errorMsg = document.getElementById('error-msg');
+
+  if(!name || !overall || !confidence || !meetings || !impact || !change){
+    errorMsg.style.display = 'block';
+    errorMsg.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+  errorMsg.style.display = 'none';
+
+  const helpful = Array.from(document.querySelectorAll('input[name="helpful"]:checked')).map(c => c.value);
+  const message = document.getElementById('message').value.trim();
+  const date = new Date().toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'});
+
+  const summary =
+`📋 COURSE FEEDBACK — NIGERIA UYO MISSION
+Teaching with Clarity & Compassion
+━━━━━━━━━━━━━━━━━━━━━━━━
+Missionary: ${name}
+Date: ${date}
+
+⭐ Overall Rating: ${overall.value}
+💪 Confidence Gained (1-5): ${confidence.value}
+📅 Meeting Value (1-5): ${meetings.value}
+🌍 Field Impact: ${impact.value}
+
+✅ Most Helpful Sections:
+${helpful.length > 0 ? helpful.map(h => '• ' + h).join('\n') : '• (None selected)'}
+
+🔄 What I Now Do Differently:
+${change}
+
+💡 Suggestions to Improve:
+${improve || '(No suggestions)'}
+
+💬 Message to Future Missionaries:
+${message || '(No message left)'}
+━━━━━━━━━━━━━━━━━━━━━━━━`;
+
+  document.getElementById('result-name').textContent = name;
+  document.getElementById('summary-box').textContent = summary;
+  document.getElementById('result-screen').style.display = 'block';
+  document.getElementById('survey').style.display = 'none';
+  document.getElementById('result-screen').scrollIntoView({behavior:'smooth'});
+}
+
+function copySummary(){
+  const text = document.getElementById('summary-box').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = '📋 Copy Summary', 2000);
+  });
+}
+
+function sendWhatsApp(){
+  const text = encodeURIComponent(document.getElementById('summary-box').textContent);
+  window.open('https://wa.me/?text=' + text, '_blank');
+}
+</script>
+
+</body>
+</html>
