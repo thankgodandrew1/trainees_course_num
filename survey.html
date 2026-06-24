@@ -262,8 +262,8 @@
     margin-right:.5rem;
     margin-bottom:.5rem;
   }
-  .wa-btn{
-    background:#25D366;
+  .email-btn{
+    background:#1a73e8;
     color:#fff;
     border:none;
     padding:.7rem 1.3rem;
@@ -313,7 +313,7 @@
     just share what you actually experienced.
   </div>
 
-  <form id="survey">
+  <form id="survey" onsubmit="return false;">
 
     <!-- Q0: Name -->
     <div class="question">
@@ -419,17 +419,17 @@
     </div>
 
     <div class="error-msg" id="error-msg">Please answer all required questions before submitting.</div>
-    <button type="button" class="submit-btn" onclick="submitSurvey()">Generate My Summary &#8594;</button>
+    <button id="generate-btn" type="button" class="submit-btn" onclick="submitSurvey()">Generate My Summary &#8594;</button>
 
   </form>
 
   <!-- Result screen -->
   <div class="result-screen" id="result-screen">
     <h2>Thank you, <span id="result-name"></span>! 🙏</h2>
-    <p>Your feedback has been compiled below. Please <strong>copy it and send it to Elder ThankGod Andrew on WhatsApp</strong> so it can be used to improve the course.</p>
+    <p>Your feedback has been compiled below. Please <strong>copy it and send it by email</strong> so it can be used to improve the course.</p>
     <div class="summary-box" id="summary-box"></div>
     <button class="copy-btn" onclick="copySummary()">📋 Copy Summary</button>
-    <button class="wa-btn" onclick="sendWhatsApp()">&#128172; Send on WhatsApp</button>
+    <button class="email-btn" onclick="sendEmail()">✉️ Send by Email</button>
     <p style="font-size:.85rem; font-family:'Trebuchet MS',sans-serif; color:#7a7158; margin-top:1rem;">
       May God bless your service in this mission. The people you teach are changed because you came.
     </p>
@@ -442,7 +442,12 @@
 </footer>
 
 <script>
+let isSubmitting = false;
 function submitSurvey(){
+  if (isSubmitting) return;
+  isSubmitting = true;
+
+  const submitButton = document.getElementById('generate-btn');
   const name = document.getElementById('name').value.trim();
   const overall = document.querySelector('input[name="overall"]:checked');
   const confidence = document.querySelector('input[name="confidence"]:checked');
@@ -456,9 +461,14 @@ function submitSurvey(){
   if(!name || !overall || !confidence || !meetings || !impact || !change){
     errorMsg.style.display = 'block';
     errorMsg.scrollIntoView({behavior:'smooth', block:'center'});
+    isSubmitting = false;
     return;
   }
   errorMsg.style.display = 'none';
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.textContent = 'Generating...';
+  }
 
   const helpful = Array.from(document.querySelectorAll('input[name="helpful"]:checked')).map(c => c.value);
   const message = document.getElementById('message').value.trim();
@@ -505,9 +515,10 @@ function copySummary(){
   });
 }
 
-function sendWhatsApp(){
+function sendEmail(){
   const text = encodeURIComponent(document.getElementById('summary-box').textContent);
-  window.open('https://wa.me/?text=' + text, '_blank');
+  const subject = encodeURIComponent('Course Feedback — Nigeria Uyo Mission');
+  window.open('mailto:?subject=' + subject + '&body=' + text, '_blank');
 }
 </script>
 
