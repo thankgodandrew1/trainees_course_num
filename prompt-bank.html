@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WhatsApp Prompt Bank &mdash; Nigeria Uyo Mission</title>
+<style>
+  :root{
+    --green:#0b4d2c;
+    --green-dark:#073a20;
+    --gold:#c9a227;
+    --gold-light:#f4e6c1;
+    --cream:#fbf8f1;
+    --ink:#222;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family: Georgia, 'Times New Roman', serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  header{
+    background:var(--green);
+    color:var(--cream);
+    padding:2.2rem 1.5rem 1.8rem;
+    text-align:center;
+    border-bottom:6px solid var(--gold);
+  }
+  header .eyebrow{
+    font-family:'Trebuchet MS', sans-serif;
+    letter-spacing:.25em;
+    text-transform:uppercase;
+    font-size:.75rem;
+    color:var(--gold-light);
+    margin-bottom:.5rem;
+  }
+  header h1{ margin:0; font-size:1.8rem; font-weight:700; }
+  header p{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.9rem;
+    color:var(--gold-light);
+    margin-top:.5rem;
+    max-width:520px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  main{ max-width:780px; margin:0 auto; padding:2rem 1.1rem 4rem; }
+
+  .intro-card{
+    background:#fff;
+    border:1px solid #e6decf;
+    border-left:5px solid var(--green);
+    border-radius:6px;
+    padding:1.2rem 1.4rem;
+    margin-bottom:1.8rem;
+    font-size:.93rem;
+  }
+  .intro-card strong{ color:var(--green-dark); }
+
+  .controls{
+    position:sticky;
+    top:0;
+    background:var(--cream);
+    z-index:40;
+    padding:.8rem 0;
+    border-bottom:1px solid #e6decf;
+    margin-bottom:1.2rem;
+  }
+  #search{
+    width:100%;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.95rem;
+    padding:.65rem .9rem;
+    border:1px solid #ccc;
+    border-radius:6px;
+    margin-bottom:.6rem;
+  }
+  .filter-row{ display:flex; gap:.4rem; flex-wrap:wrap; }
+  .filter-btn{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.78rem;
+    padding:.35rem .8rem;
+    border:1px solid var(--green);
+    background:#fff;
+    color:var(--green);
+    border-radius:20px;
+    cursor:pointer;
+  }
+  .filter-btn.active{ background:var(--green); color:#fff; }
+  .result-count{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.78rem;
+    color:#7a7158;
+    margin-top:.5rem;
+  }
+
+  .week-group{ margin-bottom:1.8rem; }
+  .week-title{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.85rem;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--green-dark);
+    border-bottom:2px solid var(--gold);
+    padding-bottom:.3rem;
+    margin-bottom:.8rem;
+  }
+
+  .prompt-card{
+    background:#fff;
+    border:1px solid #e6decf;
+    border-radius:6px;
+    margin-bottom:.8rem;
+    overflow:hidden;
+  }
+  .prompt-head{
+    padding:.8rem 1.1rem;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:.8rem;
+  }
+  .prompt-head .title-col{
+    display:flex;
+    flex-direction:column;
+    gap:.25rem;
+  }
+  .prompt-head .type-badge{
+    display:inline-block;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.68rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    padding:.15rem .5rem;
+    border-radius:10px;
+    width:fit-content;
+  }
+  .badge-scenario{ background:#e6f2e9; color:var(--green-dark); }
+  .badge-question{ background:#f6f3ec; color:#7a5c00; }
+  .badge-reflection{ background:#eef0fb; color:#2c3e7a; }
+  .badge-scripture{ background:#fdf0e6; color:#7a3a00; }
+  .badge-challenge{ background:#fde8e8; color:#7a1a1a; }
+
+  .prompt-head h3{
+    margin:0;
+    font-size:.97rem;
+    color:var(--green-dark);
+    font-family:'Trebuchet MS', sans-serif;
+  }
+  .prompt-head .arrow{
+    color:var(--gold);
+    flex:0 0 auto;
+    transition:transform .2s;
+    margin-top:.2rem;
+  }
+  .prompt-head.open .arrow{ transform:rotate(90deg); }
+
+  .prompt-body{
+    display:none;
+    padding:.2rem 1.1rem 1.1rem;
+    font-size:.93rem;
+  }
+  .prompt-body.open{ display:block; }
+
+  .wa-box{
+    background:#f6f3ec;
+    border-left:3px solid var(--green);
+    border-radius:4px;
+    padding:.8rem 1rem;
+    font-size:.92rem;
+    white-space:pre-wrap;
+    margin:.5rem 0 .8rem;
+    line-height:1.65;
+  }
+  .copy-btn{
+    background:var(--green);
+    color:#fff;
+    border:none;
+    padding:.5rem 1rem;
+    border-radius:5px;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.82rem;
+    cursor:pointer;
+    transition:background .2s;
+  }
+  .copy-btn:hover{ background:var(--green-dark); }
+  .copy-btn.copied{ background:var(--gold); color:var(--green-dark); }
+
+  .hint{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.78rem;
+    color:#7a7158;
+    margin-top:.6rem;
+    font-style:italic;
+  }
+
+  .no-results{
+    text-align:center;
+    color:#a99a6f;
+    font-family:'Trebuchet MS', sans-serif;
+    padding:2rem 0;
+  }
+
+  footer{
+    background:var(--green-dark);
+    color:var(--gold-light);
+    text-align:center;
+    padding:.9rem 1rem;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.8rem;
+    letter-spacing:.04em;
+    margin-top:2rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Nigeria Uyo Mission &mdash; TWCC Training</div>
+  <h1>WhatsApp Prompt Bank</h1>
+  <p>6 weeks of daily prompts to drip into the group between meetings. Tap any prompt to expand, then copy and paste directly into WhatsApp.</p>
+</header>
+
+<main>
+
+  <div class="intro-card">
+    <strong>How to use this:</strong> Drop one prompt into the group every 1-2 days between meetings.
+    Mix the types — scenarios, questions, reflections, scriptures, and challenges — to keep
+    missionaries engaged without it feeling like homework. Each prompt is pre-formatted for
+    WhatsApp and ready to copy with one tap.
+  </div>
+
+  <div class="controls">
+    <input type="text" id="search" placeholder="Search prompts (e.g. 'drift', 'repentance', 'question')...">
+    <div class="filter-row">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="week1">Week 1</button>
+      <button class="filter-btn" data-filter="week2">Week 2</button>
+      <button class="filter-btn" data-filter="week3">Week 3</button>
+      <button class="filter-btn" data-filter="week4">Week 4</button>
+      <button class="filter-btn" data-filter="week5">Week 5</button>
+      <button class="filter-btn" data-filter="week6">Week 6</button>
+      <button class="filter-btn" data-filter="scenario">Scenarios</button>
+      <button class="filter-btn" data-filter="question">Questions</button>
+      <button class="filter-btn" data-filter="reflection">Reflections</button>
+      <button class="filter-btn" data-filter="scripture">Scriptures</button>
+      <button class="filter-btn" data-filter="challenge">Challenges</button>
+    </div>
+    <div class="result-count" id="result-count"></div>
+  </div>
+
+  <div id="results"></div>
+  <div class="no-results" id="no-results" style="display:none;">No prompts match. Try a different search or filter.</div>
+
+</main>
+
+<footer>
+  Developed by <strong>Elder Andrew</strong> &mdash; Assistant to the President &mdash; Nigeria Uyo Mission
+</footer>
+
+<script>
+const prompts = [
+
+// ===== WEEK 1: SECTION 1 & 2 — ONE PRINCIPLE + QUESTIONS =====
+{week:"week1", type:"scenario", title:"The Drifting Lesson",
+ hint:"Section 1 — staying on one principle",
+ message:`🌿 *TWCC Daily Prompt — Week 1*
+
+📌 *Scenario:*
+You're teaching the Restoration. You start with Heavenly Father's love, then smoothly transition into Joseph Smith, then somehow end up explaining the kingdoms of glory — all in one visit.
+
+Your investigator looks a little lost.
+
+*Question:* At what point did the lesson drift, and what one sentence could you have used to stay anchored?
+
+Drop your answer below 👇`},
+
+{week:"week1", type:"question", title:"What Is Your One Sentence?",
+ hint:"Section 1 — distilling the core message",
+ message:`🌿 *TWCC Daily Prompt — Week 1*
+
+✏️ *Quick Exercise:*
+Pick ONE of these principles and write its core message in a single sentence — no more:
+
+1️⃣ The Restoration
+2️⃣ The Plan of Salvation
+3️⃣ Repentance
+4️⃣ The Gift of the Holy Ghost
+
+Reply with the principle you chose and your one sentence. Let's see how sharp we can make it 🎯`},
+
+{week:"week1", type:"reflection", title:"When Did You Feel the Drift?",
+ hint:"Section 1 — self-awareness",
+ message:`🌿 *TWCC Daily Prompt — Week 1*
+
+💭 *Reflection:*
+Think of a lesson you taught this week.
+
+Be honest with yourself — was there a moment where you started explaining something that wasn't the main principle for that visit?
+
+You don't have to share details. Just answer: *Yes, I drifted* or *No, I stayed focused* — and if yes, what pulled you off track?
+
+This isn't about judgment. It's about awareness 🙏`},
+
+{week:"week1", type:"scenario", title:"The Compound Question",
+ hint:"Section 2 — simple questions",
+ message:`🌿 *TWCC Daily Prompt — Week 1*
+
+📌 *Scenario:*
+A missionary asks their investigator:
+
+_"Do you believe God answers prayers, and if He does, do you think He could answer yours about the Book of Mormon, and are you willing to find out?"_
+
+The investigator says: _"I don't know..."_ and goes quiet.
+
+*Question:* What went wrong, and how would you rewrite that as ONE simple question?
+
+Reply below 👇`},
+
+{week:"week1", type:"challenge", title:"The 7-Second Silence Challenge",
+ hint:"Section 2 — listening and silence",
+ message:`🌿 *TWCC Daily Prompt — Week 1*
+
+🎯 *Field Challenge:*
+In your very next lesson, after you ask a question — count silently to 7 before you say anything else.
+
+That's it.
+
+Come back and tell us: What happened in that silence? Did the investigator speak? Did it feel uncomfortable? What did you learn?
+
+This one is simple but powerful 🔥`},
+
+{week:"week1", type:"scripture", title:"D&C 11:21 — Obtain Before You Declare",
+ hint:"Section 2 — the foundation of good questions",
+ message:`🌿 *TWCC Daily Prompt — Week 1*
+
+📖 *Scripture Moment:*
+_"Seek not to declare my word, but first seek to obtain my word..."_
+— D&C 11:21
+
+This scripture is for missionaries, not investigators.
+
+*Question:* How does "seeking to obtain" before declaring apply to how we ask questions in a lesson? What does it look like in practice?
+
+Share one thought 👇`},
+
+// ===== WEEK 2: SECTION 3 & 4 — COMMITMENTS + HEART OF EACH LESSON =====
+{week:"week2", type:"scenario", title:"The Disconnected Commitment",
+ hint:"Section 3 — commitments that flow from the principle",
+ message:`🌿 *TWCC Daily Prompt — Week 2*
+
+📌 *Scenario:*
+A missionary finishes teaching Repentance beautifully. The investigator seems moved. Then the missionary says:
+
+_"Great — so will you come to church this Sunday?"_
+
+The investigator agrees but looks confused.
+
+*Question:* What's wrong with that commitment, and what would a more natural one look like for Repentance specifically?
+
+Reply below 👇`},
+
+{week:"week2", type:"question", title:"Match the Commitment",
+ hint:"Section 3 — natural commitments",
+ message:`🌿 *TWCC Daily Prompt — Week 2*
+
+✏️ *Quick Exercise:*
+Match each principle to the commitment that flows most naturally from it:
+
+*Principles:*
+A. The Restoration
+B. The Atonement of Jesus Christ
+C. The Book of Mormon
+D. Prayer
+
+*Commitments:*
+1. Pray this week about one specific thing you'd like Christ to help you change
+2. Read a recent message from a living prophet
+3. Read 3 Nephi 11 and pray about what you felt
+4. Pray with real intent and notice how you feel after
+
+Reply with your matches: A-?, B-?, C-?, D-? 👇`},
+
+{week:"week2", type:"scenario", title:"Handling Hesitation",
+ hint:"Section 3 — responding to hesitation warmly",
+ message:`🌿 *TWCC Daily Prompt — Week 2*
+
+📌 *Scenario:*
+You invite an investigator to be baptized. They say:
+
+_"I want to... but I'm just not ready yet."_
+
+*Question:* How do you respond? What do you say next, and how do you still lock in a specific follow-up before leaving?
+
+Write out what you'd actually say 👇`},
+
+{week:"week2", type:"reflection", title:"The Heart of Each Lesson",
+ hint:"Section 4 — distilling the one thing",
+ message:`🌿 *TWCC Daily Prompt — Week 2*
+
+💭 *Reflection:*
+If an investigator could only remember ONE thing from each lesson — one sentence that changed how they see God, themselves, or their life — what would it be?
+
+Finish this sentence for each:
+
+1️⃣ From Lesson 1, I want them to know: ___
+2️⃣ From Lesson 2, I want them to know: ___
+3️⃣ From Lesson 3, I want them to know: ___
+4️⃣ From Lesson 4, I want them to know: ___
+
+No wrong answers. Just think 🙏`},
+
+{week:"week2", type:"challenge", title:"Write It Before You Teach It",
+ hint:"Section 1 + 4 combined — preparation",
+ message:`🌿 *TWCC Daily Prompt — Week 2*
+
+🎯 *Field Challenge:*
+Before your next lesson — write down on paper:
+
+✏️ The ONE principle I'm teaching today is: ___
+✏️ The one sentence I want them to walk away with: ___
+✏️ The one question I'll ask: ___
+✏️ The commitment I'll extend: ___
+
+Keep it in front of you during the lesson.
+
+Come back and tell us — did you stay on track? What happened? 👇`},
+
+{week:"week2", type:"scripture", title:"Alma 32:27 — Even a Desire",
+ hint:"Week 2 — faith as a starting point",
+ message:`🌿 *TWCC Daily Prompt — Week 2*
+
+📖 *Scripture Moment:*
+_"Even if ye can no more than desire to believe, let this desire work in you..."_
+— Alma 32:27
+
+*Question:* Think of an investigator who says "I want to believe but I just can't seem to."
+
+How does this scripture change how you respond to them?
+
+One thought below 👇`},
+
+// ===== WEEK 3: DEEP DIVE — LESSON 1 RESTORATION =====
+{week:"week3", type:"scenario", title:"The Godhead Question",
+ hint:"Deep Dive Lesson 1 — God's nature, the Godhead",
+ message:`🌿 *TWCC Daily Prompt — Week 3*
+
+📌 *Scenario:*
+You're teaching "God Is Our Loving Heavenly Father." Your investigator stops you and says:
+
+_"But I believe God, Jesus, and the Holy Spirit are all one person — the Trinity. Are you saying that's wrong?"_
+
+*Question:* How do you respond using Matthew 3:16-17 — without making them feel attacked or dismissed?
+
+Write out your response 👇`},
+
+{week:"week3", type:"question", title:"Why Did God Need Joseph Smith?",
+ hint:"Deep Dive Lesson 1 — Restoration pattern",
+ message:`🌿 *TWCC Daily Prompt — Week 3*
+
+✏️ *Question:*
+An investigator asks: _"Why would God use a young farmer in America to restore His church? Why not someone already in a major religion?"_
+
+How would you answer that in a way that connects to the pattern of prophets throughout scripture?
+
+Reply below 👇`},
+
+{week:"week3", type:"reflection", title:"Teaching the Apostasy With Grace",
+ hint:"Deep Dive Lesson 1 — The Apostasy",
+ message:`🌿 *TWCC Daily Prompt — Week 3*
+
+💭 *Reflection:*
+Teaching the Apostasy is one of the most sensitive moments in Lesson 1 — especially when someone's grandmother was a devoted Christian her whole life.
+
+*Question:* How do you teach that truth was lost from the earth without making the investigator feel like their family's faith meant nothing?
+
+Share your approach 🙏`},
+
+{week:"week3", type:"scenario", title:"The Book of Mormon Challenge",
+ hint:"Deep Dive Lesson 1 — Book of Mormon",
+ message:`🌿 *TWCC Daily Prompt — Week 3*
+
+📌 *Scenario:*
+After you share the Book of Mormon, your investigator says:
+
+_"I already have the Bible. Why do I need another book?"_
+
+*Question:* Using Ezekiel 37:15-17 or 2 Corinthians 13:1, how would you explain the Book of Mormon as a second witness — not a replacement?
+
+Write your response 👇`},
+
+{week:"week3", type:"challenge", title:"Teach It in 60 Seconds",
+ hint:"Week 3 — clarity and brevity",
+ message:`🌿 *TWCC Daily Prompt — Week 3*
+
+🎯 *Challenge:*
+Pick any principle from Lesson 1 and teach it — out loud, to your companion or alone — in 60 seconds or less.
+
+✅ One clear idea
+✅ One scripture reference
+✅ One sentence summary at the end
+
+Then ask yourself: *Was that clear enough that a child could understand it?*
+
+Come back and tell us which principle you chose and how it went 👇`},
+
+{week:"week3", type:"scripture", title:"James 1:5 — The Foundation of the Restoration",
+ hint:"Week 3 — Restoration anchor scripture",
+ message:`🌿 *TWCC Daily Prompt — Week 3*
+
+📖 *Scripture Moment:*
+_"If any of you lack wisdom, let him ask of God..."_
+— James 1:5
+
+This scripture opened the door to the entire Restoration.
+
+*Question:* How do you use this scripture to invite an investigator to seek their own personal answer — not just accept what you've told them?
+
+One thought below 👇`},
+
+// ===== WEEK 4: DEEP DIVE — LESSON 2 PLAN OF SALVATION =====
+{week:"week4", type:"scenario", title:"If God Loves Me, Why Is Life So Hard?",
+ hint:"Deep Dive Lesson 2 — Our Life on Earth",
+ message:`🌿 *TWCC Daily Prompt — Week 4*
+
+📌 *Scenario:*
+You're teaching the Plan of Salvation. Your investigator, who recently lost a job, says:
+
+_"If God really loves me, why is my life this hard right now?"_
+
+*Question:* How do you respond in a way that acknowledges the pain first — before you explain the doctrine?
+
+Write what you'd actually say 👇`},
+
+{week:"week4", type:"question", title:"The Fall Was Not a Tragedy",
+ hint:"Deep Dive Lesson 2 — The Fall of Adam and Eve",
+ message:`🌿 *TWCC Daily Prompt — Week 4*
+
+✏️ *Question:*
+Most people grow up thinking the Fall of Adam and Eve was a disaster — the moment everything went wrong.
+
+How would you explain to an investigator that it was actually a necessary step forward, using 2 Nephi 2:25?
+
+Keep it simple enough that they'd say _"Oh — I never thought of it that way."_ 👇`},
+
+{week:"week4", type:"reflection", title:"What About My Loved One Who Died?",
+ hint:"Deep Dive Lesson 2 — The Spirit World",
+ message:`🌿 *TWCC Daily Prompt — Week 4*
+
+💭 *Reflection:*
+Almost every investigator has lost someone they love. When you teach the Spirit World, that person comes to mind.
+
+*Question:* How do you teach this principle in a way that brings real hope — not just doctrinal information — to someone who is quietly grieving?
+
+Share your thoughts 🙏`},
+
+{week:"week4", type:"scenario", title:"The Atonement — Which Aspect Do You Teach?",
+ hint:"Deep Dive Lesson 2 — The Atonement",
+ message:`🌿 *TWCC Daily Prompt — Week 4*
+
+📌 *Scenario:*
+The Atonement has three aspects: forgiveness, resurrection, and healing of pain and sorrow.
+
+Your investigator is a woman who has made serious mistakes and carries a lot of shame.
+
+*Question:* Which ONE aspect of the Atonement is most relevant to her right now, and why? How would you teach it without overwhelming her with all three at once?
+
+Reply below 👇`},
+
+{week:"week4", type:"challenge", title:"The Plan of Salvation in 2 Minutes",
+ hint:"Week 4 — distilling the full plan",
+ message:`🌿 *TWCC Daily Prompt — Week 4*
+
+🎯 *Challenge:*
+Teach the entire Plan of Salvation to your companion in 2 minutes — from premortal life to exaltation.
+
+Rules:
+✅ Hit every major stop on the timeline
+✅ Keep the core message central: families can be together forever
+✅ End with one invitation
+
+Come back and tell us: What did you have to leave out? What was hardest to compress? 👇`},
+
+{week:"week4", type:"scripture", title:"1 Corinthians 15:22 — Resurrection for All",
+ hint:"Week 4 — Resurrection anchor",
+ message:`🌿 *TWCC Daily Prompt — Week 4*
+
+📖 *Scripture Moment:*
+_"For as in Adam all die, even so in Christ shall all be made alive."_
+— 1 Corinthians 15:22
+
+*Question:* How do you use this scripture to comfort an investigator who is afraid of death — or who has lost someone and wonders if they'll ever see them again?
+
+One thought below 👇`},
+
+// ===== WEEK 5: DEEP DIVE — LESSON 3 GOSPEL OF JESUS CHRIST =====
+{week:"week5", type:"scenario", title:"I Was Already Baptized",
+ hint:"Deep Dive Lesson 3 — Baptism",
+ message:`🌿 *TWCC Daily Prompt — Week 5*
+
+📌 *Scenario:*
+You extend the baptismal invitation. Your investigator says:
+
+_"I was baptized as a baby in my church. I don't see why I need to do it again."_
+
+*Question:* How do you acknowledge the meaning of their first baptism while explaining why this one matters — without being dismissive of their faith background?
+
+Write your response 👇`},
+
+{week:"week5", type:"question", title:"Faith Is Not Certainty",
+ hint:"Deep Dive Lesson 3 — Faith",
+ message:`🌿 *TWCC Daily Prompt — Week 5*
+
+✏️ *Question:*
+An investigator says: _"I want to have faith but I keep waiting to feel completely sure before I commit to anything."_
+
+How do you use Alma 32:27 to help them understand that faith doesn't start with certainty — it starts with desire?
+
+Reply below 👇`},
+
+{week:"week5", type:"reflection", title:"Repentance Is Relief, Not Punishment",
+ hint:"Deep Dive Lesson 3 — Repentance",
+ message:`🌿 *TWCC Daily Prompt — Week 5*
+
+💭 *Reflection:*
+Many investigators hear the word "repentance" and immediately feel shame or guilt — like they're being told they're bad people.
+
+*Question:* How do you reframe repentance as a gift — something God gives us because He loves us — right from the very first time you mention it?
+
+Share your approach 🙏`},
+
+{week:"week5", type:"scenario", title:"The Holy Ghost vs. Conscience",
+ hint:"Deep Dive Lesson 3 — Gift of the Holy Ghost",
+ message:`🌿 *TWCC Daily Prompt — Week 5*
+
+📌 *Scenario:*
+After you teach about the Gift of the Holy Ghost, your investigator says:
+
+_"I already feel spiritual things sometimes. How is what you're describing any different from just having a good conscience?"_
+
+*Question:* How do you explain the difference between feeling the Spirit's influence as an investigator and receiving the gift of the Holy Ghost after baptism?
+
+Reply below 👇`},
+
+{week:"week5", type:"challenge", title:"The Full Lesson 3 Loop",
+ hint:"Week 5 — doctrine of Christ in one conversation",
+ message:`🌿 *TWCC Daily Prompt — Week 5*
+
+🎯 *Challenge:*
+With your companion, run through the full doctrine of Christ — Faith → Repentance → Baptism → Holy Ghost → Endure — in one connected conversation.
+
+Each step should flow naturally into the next. No jumping around.
+
+✅ Keep each step to 2-3 sentences
+✅ End with a natural baptismal invitation
+
+Come back and tell us: Which transition was hardest to make feel natural? 👇`},
+
+{week:"week5", type:"scripture", title:"Isaiah 1:18 — Come Let Us Reason Together",
+ hint:"Week 5 — repentance and forgiveness",
+ message:`🌿 *TWCC Daily Prompt — Week 5*
+
+📖 *Scripture Moment:*
+_"Though your sins be as scarlet, they shall be as white as snow..."_
+— Isaiah 1:18
+
+*Question:* How do you use this scripture with an investigator who feels like their past is too serious for God to forgive?
+
+One thought below 👇`},
+
+// ===== WEEK 6: DEEP DIVE — LESSON 4 + REVIEW =====
+{week:"week6", type:"scenario", title:"The Tithing Challenge",
+ hint:"Deep Dive Lesson 4 — Law of Tithing",
+ message:`🌿 *TWCC Daily Prompt — Week 6*
+
+📌 *Scenario:*
+You teach tithing to an investigator who is struggling financially. They say:
+
+_"I can barely feed my family. How can I give away 10% of what little I have?"_
+
+*Question:* How do you respond with compassion and honesty — without making the promise of blessings sound like a formula or a guarantee?
+
+Write your response 👇`},
+
+{week:"week6", type:"question", title:"Commandments as Love",
+ hint:"Deep Dive Lesson 4 — Two Great Commandments",
+ message:`🌿 *TWCC Daily Prompt — Week 6*
+
+✏️ *Question:*
+An investigator says: _"All these commandments feel like a long list of things I'm not allowed to do."_
+
+How do you help them see that every commandment in Lesson 4 is an expression of love — for God or for others — using Matthew 22:36-40?
+
+Reply below 👇`},
+
+{week:"week6", type:"reflection", title:"What Has Changed in You?",
+ hint:"Week 6 — personal review and testimony",
+ message:`🌿 *TWCC Daily Prompt — Week 6*
+
+💭 *Reflection — This One Is Personal:*
+You're three weeks into this training.
+
+*Question:* What is ONE thing you do differently when you teach now compared to before this course started?
+
+Not what you learned — what you actually *do* differently. In the lesson. With the investigator.
+
+Share it here. Your answer will encourage someone else 🙏`},
+
+{week:"week6", type:"scenario", title:"Tying It All Together",
+ hint:"Week 6 — connecting all four lessons",
+ message:`🌿 *TWCC Daily Prompt — Week 6*
+
+📌 *Scenario:*
+An investigator has been through all four lessons. At the end they say:
+
+_"I've learned a lot — but I'm still not sure if this is for me."_
+
+*Question:* Using what you know about their personal situation and what has resonated most across the four lessons, what do you say next?
+
+This isn't about a script. It's about knowing the person in front of you 👇`},
+
+{week:"week6", type:"challenge", title:"Write a Letter to the Next Cohort",
+ hint:"Week 6 — passing it forward",
+ message:`🌿 *TWCC Daily Prompt — Week 6*
+
+🎯 *Final Challenge:*
+Write 3-5 sentences to the next group of missionaries who will go through this training after you.
+
+What do you wish someone had told you before you started?
+What made the biggest difference?
+What should they not skip?
+
+Post it here. These words may be exactly what someone needs to hear 🌿`},
+
+{week:"week6", type:"scripture", title:"Moroni 7:45 — Charity Never Faileth",
+ hint:"Week 6 — the ultimate goal of teaching",
+ message:`🌿 *TWCC Daily Prompt — Week 6*
+
+📖 *Final Scripture Moment:*
+_"Charity suffereth long, and is kind... charity never faileth..."_
+— Moroni 7:45
+
+Every skill in this course — clarity, focused questions, meaningful commitments — exists for one reason: to help you love the people you teach more effectively.
+
+*Final question:* Think of one investigator you've taught during these six weeks. How has this training helped you serve them better?
+
+Share one thought to close out our six weeks together 🙏`},
+
+];
+
+const weekLabels = {
+  week1:"Week 1 — Section 1 & 2: One Principle + Questions",
+  week2:"Week 2 — Section 3 & 4: Commitments + Heart of Each Lesson",
+  week3:"Week 3 — Deep Dive: Lesson 1 (Restoration)",
+  week4:"Week 4 — Deep Dive: Lesson 2 (Plan of Salvation)",
+  week5:"Week 5 — Deep Dive: Lesson 3 (Gospel of Jesus Christ)",
+  week6:"Week 6 — Deep Dive: Lesson 4 + Course Review"
+};
+
+const weekOrder = ["week1","week2","week3","week4","week5","week6"];
+let currentFilter = "all";
+
+function render(){
+  const query = document.getElementById('search').value.trim().toLowerCase();
+  const resultsDiv = document.getElementById('results');
+  const noResults = document.getElementById('no-results');
+  resultsDiv.innerHTML = "";
+  let total = 0;
+
+  const isTypeFilter = ['scenario','question','reflection','scripture','challenge'].includes(currentFilter);
+  const isWeekFilter = weekOrder.includes(currentFilter);
+
+  weekOrder.forEach(wk => {
+    if(isWeekFilter && currentFilter !== wk) return;
+
+    const items = prompts.filter(p => {
+      const matchWeek = !isWeekFilter || p.week === wk;
+      const matchType = !isTypeFilter || p.type === currentFilter;
+      const matchQuery = !query || (p.title + p.message + p.hint).toLowerCase().includes(query);
+      return matchWeek && matchType && matchQuery && (currentFilter === 'all' || matchWeek || matchType);
+    }).filter(p => {
+      if(currentFilter === 'all') return p.week === wk;
+      if(isWeekFilter) return p.week === wk;
+      if(isTypeFilter) return p.type === currentFilter && p.week === wk;
+      return false;
+    }).filter(p => !query || (p.title + p.message + p.hint).toLowerCase().includes(query));
+
+    if(items.length === 0) return;
+
+    const group = document.createElement('div');
+    group.className = 'week-group';
+    const groupTitle = document.createElement('div');
+    groupTitle.className = 'week-title';
+    groupTitle.textContent = weekLabels[wk] + " (" + items.length + ")";
+    group.appendChild(groupTitle);
+
+    items.forEach((item, idx) => {
+      total++;
+      const card = document.createElement('div');
+      card.className = 'prompt-card';
+
+      const badgeClass = {
+        scenario:'badge-scenario',
+        question:'badge-question',
+        reflection:'badge-reflection',
+        scripture:'badge-scripture',
+        challenge:'badge-challenge'
+      }[item.type] || '';
+
+      const typeLabel = item.type.charAt(0).toUpperCase() + item.type.slice(1);
+
+      const head = document.createElement('div');
+      head.className = 'prompt-head';
+      head.innerHTML = `
+        <div class="title-col">
+          <span class="type-badge ${badgeClass}">${typeLabel}</span>
+          <h3>${item.title}</h3>
+        </div>
+        <span class="arrow">&#9656;</span>`;
+
+      const body = document.createElement('div');
+      body.className = 'prompt-body';
+      const uid = 'p_' + wk + '_' + idx;
+      body.innerHTML = `
+        <div class="wa-box" id="msg_${uid}">${item.message}</div>
+        <button class="copy-btn" onclick="copyPrompt('msg_${uid}', this)">📋 Copy for WhatsApp</button>
+        <div class="hint">💡 ${item.hint}</div>`;
+
+      head.addEventListener('click', () => {
+        head.classList.toggle('open');
+        body.classList.toggle('open');
+      });
+
+      card.appendChild(head);
+      card.appendChild(body);
+      group.appendChild(card);
+    });
+
+    resultsDiv.appendChild(group);
+  });
+
+  // Handle type filter across all weeks
+  if(isTypeFilter && !isWeekFilter){
+    resultsDiv.innerHTML = "";
+    total = 0;
+    const group = document.createElement('div');
+    group.className = 'week-group';
+    const items = prompts.filter(p => p.type === currentFilter && (!query || (p.title + p.message + p.hint).toLowerCase().includes(query)));
+    if(items.length > 0){
+      const gt = document.createElement('div');
+      gt.className = 'week-title';
+      gt.textContent = currentFilter.charAt(0).toUpperCase() + currentFilter.slice(1) + "s (" + items.length + ")";
+      group.appendChild(gt);
+      items.forEach((item, idx) => {
+        total++;
+        const card = document.createElement('div');
+        card.className = 'prompt-card';
+        const badgeClass = {scenario:'badge-scenario',question:'badge-question',reflection:'badge-reflection',scripture:'badge-scripture',challenge:'badge-challenge'}[item.type]||'';
+        const head = document.createElement('div');
+        head.className = 'prompt-head';
+        head.innerHTML = `<div class="title-col"><span class="type-badge ${badgeClass}">${item.type}</span><h3>${item.title}</h3><span style="font-family:'Trebuchet MS',sans-serif;font-size:.75rem;color:#a99a6f;">${weekLabels[item.week].split('—')[0].trim()}</span></div><span class="arrow">&#9656;</span>`;
+        const body = document.createElement('div');
+        body.className = 'prompt-body';
+        const uid = 'tf_' + idx;
+        body.innerHTML = `<div class="wa-box" id="msg_${uid}">${item.message}</div><button class="copy-btn" onclick="copyPrompt('msg_${uid}', this)">📋 Copy for WhatsApp</button><div class="hint">💡 ${item.hint}</div>`;
+        head.addEventListener('click', () => { head.classList.toggle('open'); body.classList.toggle('open'); });
+        card.appendChild(head); card.appendChild(body); group.appendChild(card);
+      });
+      resultsDiv.appendChild(group);
+    }
+  }
+
+  document.getElementById('result-count').textContent = total + " prompt" + (total===1?"":"s") + " shown of " + prompts.length + " total";
+  noResults.style.display = total === 0 ? 'block' : 'none';
+}
+
+function copyPrompt(id, btn){
+  const text = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✅ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 Copy for WhatsApp'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+document.getElementById('search').addEventListener('input', render);
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    render();
+  });
+});
+
+render();
+</script>
+</body>
+</html>
