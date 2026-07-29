@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Do Not Look Beyond the Mark &mdash; Nigeria Uyo Mission</title>
+<style>
+  :root{
+    --green:#0b4d2c;
+    --green-dark:#073a20;
+    --gold:#c9a227;
+    --gold-light:#f4e6c1;
+    --cream:#fbf8f1;
+    --ink:#222;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family: Georgia, 'Times New Roman', serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.8;
+  }
+  header{
+    background:var(--green);
+    color:var(--cream);
+    padding:2.5rem 1.5rem 2rem;
+    text-align:center;
+    border-bottom:6px solid var(--gold);
+  }
+  header .eyebrow{
+    font-family:'Trebuchet MS', sans-serif;
+    letter-spacing:.25em;
+    text-transform:uppercase;
+    font-size:.75rem;
+    color:var(--gold-light);
+    margin-bottom:.5rem;
+  }
+  header h1{ margin:0; font-size:1.9rem; font-weight:700; }
+  header .sub{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.92rem;
+    color:var(--gold-light);
+    margin-top:.5rem;
+  }
+
+  main{ max-width:760px; margin:0 auto; padding:2rem 1.25rem 4rem; }
+
+  .president-note{
+    background:var(--gold-light);
+    border-left:5px solid var(--gold);
+    border-radius:6px;
+    padding:1.1rem 1.4rem;
+    margin-bottom:2rem;
+    font-size:.93rem;
+    font-family:'Trebuchet MS', sans-serif;
+  }
+  .president-note strong{ color:var(--green-dark); }
+
+  .anchor{
+    background:var(--green-dark);
+    color:var(--gold-light);
+    border-radius:8px;
+    padding:1.6rem 1.8rem;
+    margin-bottom:2rem;
+    text-align:center;
+  }
+  .anchor .verse{
+    font-style:italic;
+    font-size:1.05rem;
+    line-height:1.8;
+  }
+  .anchor .ref{
+    display:block;
+    margin-top:.6rem;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.8rem;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--gold);
+  }
+
+  h2{
+    font-family:'Trebuchet MS', sans-serif;
+    color:var(--green-dark);
+    font-size:1.2rem;
+    border-bottom:2px solid var(--gold);
+    padding-bottom:.3rem;
+    margin-top:2.2rem;
+    margin-bottom:.9rem;
+  }
+
+  p{ margin:.6rem 0; font-size:.97rem; }
+
+  .scripture{
+    background:#f6f3ec;
+    border-left:4px solid var(--green);
+    padding:.9rem 1.1rem;
+    border-radius:4px;
+    font-style:italic;
+    font-size:.95rem;
+    margin:.9rem 0;
+  }
+  .scripture .ref{
+    display:block;
+    margin-top:.4rem;
+    font-style:normal;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--green-dark);
+  }
+
+  .quote{
+    background:#fff;
+    border:1px solid #e6decf;
+    border-left:5px solid var(--gold);
+    border-radius:6px;
+    padding:1.1rem 1.3rem;
+    margin:.9rem 0;
+    font-style:italic;
+    font-size:.95rem;
+  }
+  .quote .attribution{
+    display:block;
+    margin-top:.5rem;
+    font-style:normal;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.8rem;
+    color:var(--green-dark);
+    font-weight:bold;
+  }
+
+  .card{
+    background:#fff;
+    border:1px solid #e6decf;
+    border-left:5px solid var(--green);
+    border-radius:6px;
+    padding:1.2rem 1.4rem;
+    margin-bottom:1rem;
+    font-size:.95rem;
+  }
+  .card strong{ color:var(--green-dark); }
+
+  .discussion-card{
+    background:var(--green);
+    color:var(--cream);
+    border-radius:8px;
+    padding:1.2rem 1.4rem;
+    margin:.8rem 0;
+  }
+  .discussion-card .d-label{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.72rem;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--gold-light);
+    display:block;
+    margin-bottom:.5rem;
+  }
+  .discussion-card .d-question{
+    font-size:1rem;
+    font-family:'Trebuchet MS', sans-serif;
+  }
+
+  .closing-anchor{
+    background:var(--green-dark);
+    color:var(--gold-light);
+    border-radius:8px;
+    padding:1.4rem 1.6rem;
+    margin-top:2rem;
+    text-align:center;
+    font-style:italic;
+    font-size:1rem;
+    line-height:1.8;
+  }
+
+  .closing{
+    background:var(--gold-light);
+    border-left:5px solid var(--gold);
+    border-radius:6px;
+    padding:1.3rem 1.5rem;
+    margin-top:1.5rem;
+    font-size:.97rem;
+  }
+  .closing strong{ color:var(--green-dark); }
+
+  footer{
+    background:var(--green-dark);
+    color:var(--gold-light);
+    text-align:center;
+    padding:.9rem 1rem;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:.8rem;
+    letter-spacing:.04em;
+    margin-top:2rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Nigeria Uyo Mission &mdash; Closing Discussion</div>
+  <h1>Do Not Look Beyond the Mark</h1>
+  <div class="sub">A discussion for you &mdash; by direction of President Richard Paapa Dadzie</div>
+</header>
+
+<main>
+
+  <div class="president-note">
+    <strong>President Dadzie's Direction:</strong> This closing discussion would be
+    included in every training gathering. It is not only about how we teach —
+    it is about how we live, how we think, how we carry ourselves, and how we
+    represent Jesus Christ in every interaction we have as His disciples.
+  </div>
+
+  <div class="anchor">
+    <div class="verse">
+      "But behold, the Jews were a stiffnecked people; and they despised the words of
+      plainness, and killed the prophets, and sought for things that they could not
+      understand. Wherefore, because of their blindness, which blindness came by
+      looking beyond the mark, they must needs fall."
+    </div>
+    <span class="ref">Jacob 4:14</span>
+  </div>
+
+  <h2>The Mark Is Christ</h2>
+  <p>
+    Jacob's warning was not given to wicked people. It was given to people who believed
+    in God — people who read scripture, who prayed, who considered themselves
+    spiritually serious. Yet they fell. Not because they stopped looking, but because
+    they looked in the wrong direction. They looked past the simplicity of Christ —
+    the mark — and sought for something more complicated, more impressive, or more
+    self-determined. And in doing so, they stumbled.
+  </p>
+  <p>
+    The mark, in every dispensation, has always been the same: Jesus Christ. His
+    gospel. His example. His word. Everything a missionary needs — for teaching,
+    for living, for making decisions, for interacting with others — is found within
+    that mark. The moment we step outside it, even with good intentions, we
+    put ourselves in danger.
+  </p>
+
+  <div class="scripture">
+    "Look unto me in every thought; doubt not, fear not."
+    <span class="ref">D&amp;C 6:36</span>
+  </div>
+
+  <h2>This Is Bigger Than Teaching</h2>
+  <p>
+    Looking beyond the mark is not only a teaching problem. It is a life problem.
+    It shows up in how a missionary thinks, learns, and conducts themselves every
+    single day of their mission.
+  </p>
+
+  <div class="card">
+    <strong>It shows up in how you learn.</strong><br>
+    A missionary who looks beyond the mark is not satisfied learning what has been
+    given. They chase after deeper mysteries, speculative ideas, or the opinions of
+    others — rather than rooting themselves in the plain and precious truths of the
+    restored gospel. Intelligence is a gift from God. But intelligence that is not
+    anchored in the Spirit and in revealed truth leads us away from the mark, not
+    toward it.
+  </div>
+
+  <div class="card">
+    <strong>It shows up in how you observe others.</strong><br>
+    In the mission field, you will encounter many kinds of missionaries. Some
+    will inspire you. Some will disappoint you. A missionary who looks beyond
+    the mark learns their habits, their shortcuts, and their compromises from
+    those around them — especially from poor examples — and calls it experience.
+    A true disciple of Christ does not learn discipleship from whoever is nearest.
+    They learn it from Christ.
+  </div>
+
+  <div class="card">
+    <strong>It shows up in how you handle what you don't understand.</strong><br>
+    Every missionary will encounter doctrinal questions, life situations, and
+    personal struggles they cannot fully explain. A missionary who looks beyond
+    the mark reaches for speculation, for human wisdom, or for the philosophies
+    of the world to fill the gap. A wise missionary says what Nephi said: <em>"I
+    know that he loveth his children; nevertheless I do not know the meaning of all
+    things."</em> Humility before God is never weakness. It is the mark.
+  </div>
+
+  <div class="card">
+    <strong>It shows up in how you present yourself.</strong><br>
+    Looking beyond the mark can also mean looking beyond your calling — trying to
+    be more than a representative of Jesus Christ. The missionary who performs,
+    impresses, or seeks recognition has looked past the mark. The missionary who
+    simply and purely serves, teaches, and loves has stayed exactly where God needs them.
+  </div>
+
+  <div class="scripture">
+    "For I determined not to know any thing among you, save Jesus Christ,
+    and him crucified."
+    <span class="ref">1 Corinthians 2:2</span>
+  </div>
+
+  <h2>Learn From Christ, Not From the Field</h2>
+  <p>
+    One of the most subtle dangers of mission life is this: you will be surrounded
+    by fellow missionaries for two years, and without realising it, you will begin
+    to learn what a missionary looks like from those around you — rather than from
+    Christ Himself.
+  </p>
+  <p>
+    Some missionaries cut corners on study. Some are unkind to their companions.
+    Some are prideful in how they teach. Some are casual about the sacred covenants
+    they made. If you are not careful, these patterns begin to look normal — and you
+    absorb them not by choosing to, but simply by being near them long enough.
+  </p>
+  <p>
+    God did not send you to become what the field made you. He sent you to become
+    what He intended when He called you. Stay close to that original calling.
+    Return to it every day in your personal study, your prayer, and your character.
+  </p>
+
+  <div class="scripture">
+    "Come unto Christ, and be perfected in him, and deny yourselves of all ungodliness."
+    <span class="ref">Moroni 10:32</span>
+  </div>
+
+  <div class="scripture">
+    "Be thou an example of the believers, in word, in conversation, in charity,
+    in spirit, in faith, in purity."
+    <span class="ref">1 Timothy 4:12</span>
+  </div>
+
+  <h2>What Church Leaders Have Said</h2>
+
+  <div class="quote">
+    "There is a beauty and clarity that comes from simplicity that we sometimes
+    do not appreciate in our thirst for intricate solutions."
+    <span class="attribution">— Elder Dieter F. Uchtdorf, "Of Things That Matter Most,"
+    General Conference, October 2010</span>
+  </div>
+
+  <div class="quote">
+    "Some people seem to be embarrassed by the simplicity of the Savior's message.
+    &hellip; We look beyond the mark when we refuse to accept simple gospel truths
+    for what they are."
+    <span class="attribution">— Elder Quentin L. Cook, "Looking beyond the Mark,"
+    Ensign, March 2003</span>
+  </div>
+
+  <div class="quote">
+    "They must have reveled in speculative and theoretical matters that obscured
+    for them the fundamental spiritual truths."
+    <span class="attribution">— Elder Dean L. Larsen, "Looking beyond the Mark,"
+    General Conference, October 1987</span>
+  </div>
+
+  <div class="quote">
+    "He will teach in simplicity, according to the true needs of the people, basic
+    gospel doctrines like faith, repentance, and prayer, which all men — all men —
+    can apply. He will not look beyond the mark by exaggerating, by teaching in the
+    fringe areas, by expanding on the scriptures, or by teaching exotic extremes in
+    any principle&hellip;"
+    <span class="attribution">— Elder Gene R. Cook, "Spiritual Guides for Teachers of
+    Righteousness," General Conference, April 1982</span>
+  </div>
+
+  <div class="quote">
+    "These few individuals let their minds seek to run far ahead of their
+    confirming behavior. For them, exciting exploration is preferred to plodding
+    implementation. Speculation and argumentation are more fun than consecration
+    for these individuals."
+    <span class="attribution">— Elder Neal A. Maxwell, "The Inexhaustible Gospel,"
+    BYU devotional address, August 18, 1992</span>
+  </div>
+
+  <h2>Three Questions to Ask Yourself Daily</h2>
+
+  <div class="card">
+    <strong>1. Am I learning from Christ — or from whoever is nearest?</strong><br>
+    Your study, your habits, and your character should reflect the Savior — not the
+    strongest personality in your zone or district.
+  </div>
+
+  <div class="card">
+    <strong>2. Am I seeking what has been revealed — or what I wish were revealed?</strong><br>
+    God has given us everything we need. Contentment with His word is not
+    spiritual laziness. It is faith.
+  </div>
+
+  <div class="card">
+    <strong>3. Am I standing as a true disciple — or performing for an audience?</strong><br>
+    The mark is not how others see you. The mark is who you are when no one
+    is watching.
+  </div>
+
+  <div class="scripture">
+    "Trust in the Lord with all thine heart; and lean not unto thine own
+    understanding. In all thy ways acknowledge him, and he shall direct thy paths."
+    <span class="ref">Proverbs 3:5-6</span>
+  </div>
+
+  <h2>Closing Discussion Questions</h2>
+
+  <div class="discussion-card">
+    <span class="d-label">Discussion 1</span>
+    <div class="d-question">
+      Have you noticed yourself picking up habits or attitudes from missionaries
+      around you — rather than from the Savior? What were they, and what do you
+      want to do about it?
+    </div>
+  </div>
+
+  <div class="discussion-card">
+    <span class="d-label">Discussion 2</span>
+    <div class="d-question">
+      Where in your daily life — not just your teaching — are you most tempted
+      to look beyond the mark? What pulls you there?
+    </div>
+  </div>
+
+  <div class="discussion-card">
+    <span class="d-label">Discussion 3</span>
+    <div class="d-question">
+      What would it look like for you, specifically, to stay with the mark this
+      week — in your study, your interactions, your companionship, and your character?
+    </div>
+  </div>
+
+  <div class="closing-anchor">
+    "The mark is not a destination you arrive at once.<br>
+    It is a direction you choose every single day.<br>
+    And the mark has always been, and will always be, Jesus Christ."
+  </div>
+
+  <div class="closing">
+    <strong>A final word for you:</strong><br><br>
+    You were not sent here to figure out your own version of discipleship. You
+    were sent here to find Christ — and then to become what finding Him does to
+    a person. That is the mark. Stay there. Come back to it when you drift.
+    Teach from it. Live from it. And when you go home, take it with you for
+    the rest of your life.
+  </div>
+
+</main>
+
+<footer>
+  Developed by <strong>Elder Andrew</strong> &mdash; Assistant to the President &mdash; Nigeria Uyo Mission
+</footer>
+
+</body>
+</html>
